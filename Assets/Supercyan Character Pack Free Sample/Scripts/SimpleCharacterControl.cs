@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Collections;
 
 public class SimpleCharacterControl : MonoBehaviour {
 
@@ -37,6 +38,8 @@ public class SimpleCharacterControl : MonoBehaviour {
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
 
+    private Transform m_target;
+
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint[] contactPoints = collision.contacts;
@@ -50,7 +53,7 @@ public class SimpleCharacterControl : MonoBehaviour {
                 m_isGrounded = true;
             }
         }
-    }
+    }        
 
     private void OnCollisionStay(Collision collision)
     {
@@ -187,22 +190,22 @@ public class SimpleCharacterControl : MonoBehaviour {
 
                 if (hit.transform.GetComponent<TappableObject>() != null)
                 {
-                    Debug.Log("Start moving");
-                    StartCoroutine(Turn(hit.transform));
+                    m_target = hit.transform;
+                    StartCoroutine(Turn());
                 }
             }
         }
     }
 
-    IEnumerator Turn(Transform target)
+    IEnumerator Turn()
     {
-        var localTarget = transform.InverseTransformPoint(target.position);
+        var localTarget = transform.InverseTransformPoint(m_target.position);
      
         var angle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
         
         while (angle < -5 || angle > 5)
         {  
-            localTarget = transform.InverseTransformPoint(target.position);
+            localTarget = transform.InverseTransformPoint(m_target.position);
      
             angle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
             
@@ -210,15 +213,14 @@ public class SimpleCharacterControl : MonoBehaviour {
             var deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime );
             m_rigidBody.MoveRotation(m_rigidBody.rotation * deltaRotation);
             
-            yield return new WaitForSeconds(0.01f);
-            
+            yield return new WaitForSeconds(0.01f);            
         }        
         
-        MoveTowardsTarget(target);
+        MoveTowardsTarget();
         yield return null;
     }
 
-    private void MoveTowardsTarget(Transform target)
+    private void MoveTowardsTarget()
     {
         m_currentV = m_moveSpeed;
         
@@ -226,7 +228,7 @@ public class SimpleCharacterControl : MonoBehaviour {
         
         if(direction != Vector3.zero)
         {
-            StartCoroutine(MoveObject(transform.position, target.position, 3.0f));
+            StartCoroutine(MoveObject(transform.position, m_target.position, 3.0f));
             
             m_animator.SetFloat("MoveSpeed", direction.magnitude);
         }

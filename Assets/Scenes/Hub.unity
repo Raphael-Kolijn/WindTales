@@ -154,56 +154,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114367025151790472, guid: db039d86b97faaf4eaf8ea0e145c12a8,
         type: 2}
-      propertyPath: LockedPopup
-      value: 
-      objectReference: {fileID: 444952029}
-    - target: {fileID: 1883039503771828, guid: db039d86b97faaf4eaf8ea0e145c12a8, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114170675448761206, guid: db039d86b97faaf4eaf8ea0e145c12a8,
-        type: 2}
-      propertyPath: _rotationSpeed
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085720029527116, guid: db039d86b97faaf4eaf8ea0e145c12a8, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085720029527116, guid: db039d86b97faaf4eaf8ea0e145c12a8, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085720029527116, guid: db039d86b97faaf4eaf8ea0e145c12a8, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085720029527116, guid: db039d86b97faaf4eaf8ea0e145c12a8, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085720029527116, guid: db039d86b97faaf4eaf8ea0e145c12a8, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 114367025151790472, guid: db039d86b97faaf4eaf8ea0e145c12a8,
-        type: 2}
       propertyPath: IsUnlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114367025151790472, guid: db039d86b97faaf4eaf8ea0e145c12a8,
-        type: 2}
-      propertyPath: IsOpen
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db039d86b97faaf4eaf8ea0e145c12a8, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &444952029 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1658199843276354, guid: db039d86b97faaf4eaf8ea0e145c12a8,
-    type: 2}
-  m_PrefabInternal: {fileID: 444952028}
 --- !u!1 &518245682 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 10472e999d1e03d4eaa583e018ed1247, type: 2}

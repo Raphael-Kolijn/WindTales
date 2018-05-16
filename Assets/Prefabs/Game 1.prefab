@@ -67,20 +67,20 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4085720029527116
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1658199843276354}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 7, z: 0}
   m_LocalScale: {x: 3, y: 0.042928, z: 3}
   m_Children: []
   m_Father: {fileID: 4699001031178042}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!4 &4612299719653768
 Transform:
   m_ObjectHideFlags: 1
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3cb408c7a561ae4199a50d5dc699710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 0
+  _rotationSpeed: 80
 --- !u!114 &114367025151790472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,12 +268,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enterRadius: 7
-  IsUnlocked: 0
-  IsOpen: 0
+  IsUnlocked: 1
+  IsOpen: 1
   Name: Test game
   GameScene: gamescene1
   ClosedPopup: {fileID: 1883039503771828}
-  LockedPopup: {fileID: 0}
+  LockedPopup: {fileID: 1658199843276354}
 --- !u!114 &114641625777817874
 MonoBehaviour:
   m_ObjectHideFlags: 1

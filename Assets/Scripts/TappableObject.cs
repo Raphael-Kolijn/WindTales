@@ -12,7 +12,7 @@ public class TappableObject : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
+		InitialiseTrigger();
 	}
 	
 	// Draw the trigger radius in editor

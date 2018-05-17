@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shop : TappableObject {
-
-	// Use this for initialization
+public class Shop : TappableObject
+{
+	public ShopItem[] items;
+	public GameObject shopItemUi;
+	
 	void Start () {
 		InitialiseTrigger();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void OpenUi()
+	{
+		_uiInstance.SetActive(true);
+		foreach (var shopItem in items)
+		{
+			
+		}
 	}
-	
-	
 }

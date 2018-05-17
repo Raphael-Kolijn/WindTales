@@ -13,7 +13,7 @@ public class Shop : TappableObject
 
 	public void OpenUi()
 	{
-		_uiInstance.SetActive(true);
+	//	_uiInstance.SetActive(true);
 		foreach (var shopItem in items)
 		{
 			

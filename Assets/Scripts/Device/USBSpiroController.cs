@@ -13,7 +13,7 @@ using System;
 public class USBSpiroController : SpiroController
 {
 
-    private string portName = "COM17";
+    private string portName = "COM3";
     private SerialPort port;
     private Thread myThread;
 
@@ -30,7 +30,7 @@ public class USBSpiroController : SpiroController
     {
         Debug.Log("Connecting USB Controller");
         //SerialPort p = new SerialPort("\\\\.\\COM17", 9600);
-        portName = PlayerPrefs.GetString("portName", "COM17");
+        portName = PlayerPrefs.GetString("portName", "COM3");
         DisconnectDevice();
         //stop if we are already connected or if the port is unavailable
         if ((port != null && port.IsOpen) || !PortIsAvailable())
@@ -62,8 +62,7 @@ public class USBSpiroController : SpiroController
 
         //write to the port to start data transmission
         port.Write("w");
-        port.Write("w");
-        Debug.Log("Before threading TEST");
+        port.Write("w");        
         myThread = new Thread(GetData);
         myThread.Start();
 	
@@ -80,7 +79,6 @@ public class USBSpiroController : SpiroController
             if (portNameCurr == portName)
             {
                 Debug.Log("Port name correct!");
-                Debug.Log("Port name correct!");
                 portFound = true;
                 break;
             }
@@ -96,13 +94,13 @@ public class USBSpiroController : SpiroController
 
     public override void UpdateSpiroController()
     {
-        
     }
 
     private void GetData()
     {
         while (myThread.IsAlive)
         {
+            Debug.Log("Thread alive");
             if (port != null && port.IsOpen)
             {
 
@@ -112,13 +110,10 @@ public class USBSpiroController : SpiroController
                     string[] data = indata.Split(new[] { ';' });
 
                     Debug.Log(indata);
-                    if (indata == "Done")
-                    {
-                        Debug.Log("WAAROM KOMT HIER DONE UIT DE DATA");
-                    }
+
                     try
                     {
-                        cleanFlow = Convert.ToDouble(data[1]);
+                        cleanFlow = Convert.ToDouble(data[0]);
                         flow = cleanFlow * flowMultiplier;
 						DeviceManager.Instance.FlowLMin = (flow / 78.123f);
                     }

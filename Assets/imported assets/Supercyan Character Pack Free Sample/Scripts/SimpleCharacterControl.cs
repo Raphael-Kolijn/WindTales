@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Collections;
+using UnityEngine.EventSystems;
 
 public class SimpleCharacterControl : MonoBehaviour {
 
@@ -181,21 +182,24 @@ public class SimpleCharacterControl : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit hit;
-            Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                Transform objectHit = hit.transform;
-                m_target = hit.point;
-                StopMoving();
-                if (hit.transform.GetComponent<TappableObject>() != null)
+                RaycastHit hit;
+                Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit))
                 {
-                    m_target = hit.transform.position;
+                    Transform objectHit = hit.transform;
+                    m_target = hit.point;
+                    StopMoving();
+                    if (hit.transform.GetComponent<TappableObject>() != null)
+                    {
+                        m_target = hit.transform.position;
+                        StartCoroutine(Turn());
+                    }
+
                     StartCoroutine(Turn());
                 }
-
-                StartCoroutine(Turn());
             }
         }
     }
@@ -276,6 +280,8 @@ public class SimpleCharacterControl : MonoBehaviour {
         Debug.Log(other.gameObject.name);
         
         StopMoving();
+
+        other.GetComponent<TappableObject>().OpenUi();
     }
 
     private void StopMoving()

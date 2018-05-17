@@ -23,8 +23,8 @@ namespace UnityStandardAssets._2D
         private void Awake()
         {
             // Setting up references.
-            m_GroundCheck = transform.Find("GroundCheck");
-            m_CeilingCheck = transform.Find("CeilingCheck");
+            m_GroundCheck = transform.GetChild(0); //transform.Find("GroundCheck");
+            m_CeilingCheck = transform.GetChild(1);  //transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
         }

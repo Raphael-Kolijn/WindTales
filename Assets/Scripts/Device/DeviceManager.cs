@@ -78,37 +78,43 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
     public delegate void DeviceStateChanged(FlowState state);
     public DeviceStateChanged onDeviceStateChanged;
 
-    private bool debug = false; 
+    private bool debug = false;
 
     void Start()
     {
         Init();
     }
-     /// <summary>
-     /// Initializes the SpiroController, cancels existing spirometer connection (if any) and connects to a device of the specified device type.
-     /// </summary>
-    public void Init()
+
+    /// <summary>
+    /// Initializes the SpiroController, cancels existing spirometer connection (if any) and connects to a device of the specified device type.
+    /// </summary>
+    private void Init()
     {
         Debug.Log("Init device manager");
         InitMinMax();
 
-		if (spiroController != null) //Disconnect with current device before establishing new connection
+        if (spiroController != null) //Disconnect with current device before establishing new connection
         {
-			spiroController.DisconnectDevice ();
-			Invoke("Init",0.5f);
-			return;
-		}
-
-		if (deviceType == DeviceType.AIRNEXT)
-		{
-			spiroController = new BLESpiroController ();
+            Debug.Log("return want spiro is niet null");
+            spiroController.DisconnectDevice();
+            Invoke("Init", 0.5f); //Call init again after 0.5 seconds (delay to make sure device has time to disconnect)
+            return;
+        }
+        Debug.Log("Ik ga langs de if statements");
+        if (deviceType == DeviceType.AIRNEXT)
+        {
+            Debug.Log("Ik ben een airnext");
+            spiroController = new BLESpiroController();
         }
         if (deviceType == DeviceType.CONTROLLER)
         {
+            Debug.Log("Ik ben een controller");
             spiroController = new SimulatedSpiroController();
         }
+
         if (deviceType == DeviceType.KUEFFNER)
         {
+            Debug.Log("Ik ben een spiro");
             spiroController = new USBSpiroController();
         }
 
@@ -119,7 +125,6 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
     {
         if (spiroController == null)
         {
-            Init();
             return;
         }
 
@@ -145,7 +150,7 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
 
         //Show/Hide disconnect screen if connection state changes
         currentConnectionState = spiroController.IsConnected;
-        if(currentConnectionState != lastConnectionState)
+        if (currentConnectionState != lastConnectionState)
         {
             lastConnectionState = currentConnectionState;
             if (deviceType == DeviceType.AIRNEXT)
@@ -153,7 +158,7 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
                 Time.timeScale = 1; //Establishing bluetooth connection to spirometer does not work when timescale is 0!
             }
         }
-        
+
     }
 
     public void SetDeviceType(DeviceType deviceType)
@@ -161,10 +166,13 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
         //disconnect previous device if the device type has changed
         if (deviceType != this.deviceType)
         {
+            Debug.Log("parameter devicetype is niet gelijk aan this.devicetype");
             DisconnectSpirometer();
         }
-
         this.deviceType = deviceType;
+
+        Debug.Log("Na het setten ben ik" + Convert.ToString(deviceType));
+        Debug.Log("ik ben nu wel parameter devicetype");
     }
 
     public void ConnectSpirometer()
@@ -199,7 +207,8 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
     {
         if (spiroController != null)
         {
-            Debug.Log("Shut down device");
+
+
             spiroController.DisconnectDevice();
             spiroController = null;
         }

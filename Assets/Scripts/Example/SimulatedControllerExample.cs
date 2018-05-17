@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
 
 [RequireComponent(typeof(Text))]
 public class SimulatedControllerExample : MonoBehaviour
 {
 
+    [SerializeField]
+    private DeviceManager.DeviceType deviceType;
+
     private Text text;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
     {
         text = GetComponent<Text>();
-
-        DeviceManager.Instance.SetDeviceType(DeviceManager.DeviceType.CONTROLLER);
-        DeviceManager.Instance.Init();
-	}
+        DeviceManager.Instance.SetDeviceType(DeviceManager.DeviceType.KUEFFNER);
+    }
 	
 	// Update is called once per frame
 	void Update ()

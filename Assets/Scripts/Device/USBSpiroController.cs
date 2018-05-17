@@ -13,7 +13,7 @@ using System;
 public class USBSpiroController : SpiroController
 {
 
-    private string portName = "COM3";
+    private string portName = "COM17";
     private SerialPort port;
     private Thread myThread;
 
@@ -28,20 +28,20 @@ public class USBSpiroController : SpiroController
 
     public override void ConnectDevice()
     {
-        portName = PlayerPrefs.GetString("portName", "COM3");
-
+        Debug.Log("Connecting USB Controller");
+        //SerialPort p = new SerialPort("\\\\.\\COM17", 9600);
+        portName = PlayerPrefs.GetString("portName", "COM17");
         DisconnectDevice();
-
         //stop if we are already connected or if the port is unavailable
         if ((port != null && port.IsOpen) || !PortIsAvailable())
         {
             Debug.LogError("Port " + portName + " unavailable.");
             return;
         }
-
-        port = new SerialPort(portName);
+        
+        port = new SerialPort("\\\\.\\" + portName);
         port.Encoding = Encoding.Default;
-        port.BaudRate = 115200;
+        port.BaudRate = 9600;
         port.ReadBufferSize = 10000;
         port.ReadTimeout = 100;
         port.Handshake = Handshake.None;
@@ -55,12 +55,15 @@ public class USBSpiroController : SpiroController
         catch (IOException ex)
         {
             Debug.LogError("ERROR - Device not connected, port NOT OPEN!");
+            Debug.LogError(ex.ToString());
+
             return;
         }
 
         //write to the port to start data transmission
         port.Write("w");
         port.Write("w");
+        Debug.Log("Before threading TEST");
         myThread = new Thread(GetData);
         myThread.Start();
 	
@@ -102,13 +105,20 @@ public class USBSpiroController : SpiroController
         {
             if (port != null && port.IsOpen)
             {
+
                 try
                 {
                     string indata = port.ReadLine();
                     string[] data = indata.Split(new[] { ';' });
+
+                    Debug.Log(indata);
+                    if (indata == "Done")
+                    {
+                        Debug.Log("WAAROM KOMT HIER DONE UIT DE DATA");
+                    }
                     try
                     {
-                        cleanFlow = Convert.ToDouble(data[0]);
+                        cleanFlow = Convert.ToDouble(data[1]);
                         flow = cleanFlow * flowMultiplier;
 						DeviceManager.Instance.FlowLMin = (flow / 78.123f);
                     }
@@ -127,6 +137,8 @@ public class USBSpiroController : SpiroController
 
     public override void DisconnectDevice()
     {
+        Debug.Log("Disconnecting device");
+
 		isConnected = false;
         if (port != null && port.IsOpen)
         {

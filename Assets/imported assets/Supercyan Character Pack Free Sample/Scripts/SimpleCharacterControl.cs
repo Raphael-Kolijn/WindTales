@@ -38,7 +38,7 @@ public class SimpleCharacterControl : MonoBehaviour {
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
 
-    private Transform m_target;
+    private Vector3 m_target;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -187,25 +187,28 @@ public class SimpleCharacterControl : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 Transform objectHit = hit.transform;
-
+                m_target = hit.point;
+                StopMoving();
                 if (hit.transform.GetComponent<TappableObject>() != null)
                 {
-                    m_target = hit.transform;
+                    m_target = hit.transform.position;
                     StartCoroutine(Turn());
                 }
+
+                StartCoroutine(Turn());
             }
         }
     }
 
     IEnumerator Turn()
     {
-        var localTarget = transform.InverseTransformPoint(m_target.position);
+        var localTarget = transform.InverseTransformPoint(m_target);
      
         var angle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
         
         while (angle < -5 || angle > 5)
         {  
-            localTarget = transform.InverseTransformPoint(m_target.position);
+            localTarget = transform.InverseTransformPoint(m_target);
      
             angle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
             
@@ -228,7 +231,7 @@ public class SimpleCharacterControl : MonoBehaviour {
         
         if(direction != Vector3.zero)
         {
-            StartCoroutine(MoveObject(transform.position, m_target.position, 3.0f));
+            StartCoroutine(MoveObject(transform.position, m_target, 3.0f));
             
             m_animator.SetFloat("MoveSpeed", direction.magnitude);
         }
@@ -243,6 +246,8 @@ public class SimpleCharacterControl : MonoBehaviour {
             transform.position = Vector3.Lerp(startPos, endPos, i);
             yield return null; 
         }
+        
+        StopMoving();
     }
 
     private void JumpingAndLanding()
@@ -270,6 +275,11 @@ public class SimpleCharacterControl : MonoBehaviour {
     {
         Debug.Log(other.gameObject.name);
         
+        StopMoving();
+    }
+
+    private void StopMoving()
+    {
         StopAllCoroutines();
         
         m_rigidBody.velocity = new Vector3(0,0,0);

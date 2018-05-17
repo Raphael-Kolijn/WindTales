@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/imported assets/Painted HQ 2D Forest Medieval Background.meta
 guid: c8b4df64ef1d7644893488d373120c82
 folderAsset: yes
 timeCreated: 1526551778
+=======
+guid: 0a51282a0c16188419a6b8563e0c7190
+folderAsset: yes
+timeCreated: 1526551386
+>>>>>>> cb158136c04429ecdb495a87c13d3e4c68d9f17d:Assets/imported assets/Painted HQ 2D Forest Medieval Background.meta
 licenseType: Free
 DefaultImporter:
   externalObjects: {}

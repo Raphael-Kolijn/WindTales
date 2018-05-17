@@ -14,7 +14,7 @@ public class SimulatedControllerExample : MonoBehaviour
     {
         text = GetComponent<Text>();
 
-        DeviceManager.Instance.SetDeviceType(DeviceManager.DeviceType.CONTROLLER);
+        DeviceManager.Instance.SetDeviceType(DeviceManager.DeviceType.KUEFFNER);
         DeviceManager.Instance.Init();
 	}
 	

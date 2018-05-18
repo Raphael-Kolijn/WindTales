@@ -20,8 +20,8 @@ namespace UnityStandardAssets._2D
         private void Start()
         {
             m_LastTargetPosition = target.position;
-            //m_OffsetZ = (transform.position - target.position).z;
-            m_OffsetZ = -20;
+            m_OffsetZ = (transform.position - target.position).z;
+            //m_OffsetZ = -20;
             transform.parent = null;
         }
 

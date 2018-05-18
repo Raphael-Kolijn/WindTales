@@ -62,6 +62,10 @@ public class PlayerController2D : MonoBehaviour
             flowRate = DeviceManager.Instance.FlowLMin;
 
             flowRate = System.Math.Round(flowRate, 1);
+            if (deviceType == DeviceManager.DeviceType.KUEFFNER)
+            {
+                flowRate *= -1;
+            }
 
             if (m_Grounded && flowRate >= blowthreshold)
             {

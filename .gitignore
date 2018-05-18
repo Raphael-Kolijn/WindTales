@@ -36,3 +36,4 @@ sysinfo.txt
 # Exclude rider idea data
 .idea
 *.meta
+*.unity.meta~5e72508cd73db791d624b8ca96f8bd1df4e7066b.meta

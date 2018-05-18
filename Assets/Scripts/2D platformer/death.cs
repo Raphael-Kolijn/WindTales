@@ -16,8 +16,12 @@ public class death : MonoBehaviour {
         //Debug.Log(other.name);
         if (other.name == "DeathZone")
         {
-            Debug.Log("DIE!");
+            //Debug.Log("DIE!");
             transform.position = startPos;
+        }
+        else if (other.CompareTag("Waypoint"))
+        {
+            startPos = new Vector3(other.transform.position.x, other.transform.position.y + 1);
         }
     }
 }

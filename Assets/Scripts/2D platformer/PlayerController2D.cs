@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class PlayerController2D : MonoBehaviour {
+public class PlayerController2D : MonoBehaviour
+{
+
+
 
     [SerializeField]
     private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
     [SerializeField]
-    private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
+    [Range(1,2)]
+    private float m_JumpSpeedMultiplier = 1.5f;
     [SerializeField]
-    private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
+    private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
     [SerializeField]
     private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
@@ -25,8 +29,21 @@ public class PlayerController2D : MonoBehaviour {
 
     private bool m_Jump;
 
+    [Header("gameplay options")]
+    [SerializeField]
+    private DeviceManager.DeviceType deviceType;
+
+    double flowRate;
+
+    [SerializeField]
+    [Tooltip("The amount which the player needs to blow in order to jump")]
+    private double blowthreshold;
+
     private void Awake()
     {
+        //setting up the controller
+        DeviceManager.Instance.SetDeviceType(deviceType);
+
         // Setting up references.
         m_GroundCheck = transform.GetChild(0); //transform.Find("GroundCheck");
         m_CeilingCheck = transform.GetChild(1);  //transform.Find("CeilingCheck");
@@ -36,10 +53,20 @@ public class PlayerController2D : MonoBehaviour {
 
     private void Update()
     {
+
         if (!m_Jump)
         {
             // Read the jump input in Update so button presses aren't missed.
             m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+
+            flowRate = DeviceManager.Instance.FlowLMin;
+
+            flowRate = System.Math.Round(flowRate, 1);
+
+            if (m_Grounded && flowRate >= blowthreshold)
+            {
+                m_Jump = true;
+            }
         }
     }
 
@@ -68,29 +95,34 @@ public class PlayerController2D : MonoBehaviour {
     public void Move(float move, bool jump)
     {
 
-        //only control the player if grounded or airControl is turned on
-        if (m_Grounded || m_AirControl)
+        
+
+        // The Speed animator parameter is set to the absolute value of the horizontal input.
+        m_Anim.SetFloat("Speed", Mathf.Abs(move));
+
+        // Move the character
+        if (m_Grounded)
         {
-    
-            // The Speed animator parameter is set to the absolute value of the horizontal input.
-            m_Anim.SetFloat("Speed", Mathf.Abs(move));
-
-            // Move the character
             m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
-
-            // If the input is moving the player right and the player is facing left...
-            if (move > 0 && !m_FacingRight)
-            {
-                // ... flip the player.
-                Flip();
-            }
-            // Otherwise if the input is moving the player left and the player is facing right...
-            else if (move < 0 && m_FacingRight)
-            {
-                // ... flip the player.
-                Flip();
-            }
         }
+        else
+        {
+            m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed * m_JumpSpeedMultiplier, m_Rigidbody2D.velocity.y);
+        }
+
+        // If the input is moving the player right and the player is facing left...
+        if (move > 0 && !m_FacingRight)
+        {
+            // ... flip the player.
+            Flip();
+        }
+        // Otherwise if the input is moving the player left and the player is facing right...
+        else if (move < 0 && m_FacingRight)
+        {
+            // ... flip the player.
+            Flip();
+        }
+        //}
         // If the player should jump...
         if (m_Grounded && jump && m_Anim.GetBool("Ground"))
         {

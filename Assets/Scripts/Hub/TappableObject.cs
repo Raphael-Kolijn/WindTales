@@ -9,7 +9,7 @@ public class TappableObject : MonoBehaviour
 	private CapsuleCollider _enterTrigger;	
 	[SerializeField] [Range(1,20)] private float _enterRadius;
 	[SerializeField] private GameObject _ui;
-	private GameObject _uiInstance = null;
+	public GameObject _uiInstance = null;
 	
 	// Use this for initialization
 	void Start ()

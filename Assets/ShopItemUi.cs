@@ -9,19 +9,39 @@ public class ShopItemUi : MonoBehaviour
 	public Image Thumbnail;
 	public Button BuyButton;
 	public Text BuyText;
-	private ShopItem myItem;
+	private ShopItem _myItem;
+	public CoinScript CoinManager;
+	public ShopUi shopUi;
 
 	public void SetData(ShopItem item)
 	{
-		myItem = item;
+		_myItem = item;
 		ItemTitle.text = item.ItemName;
-		Thumbnail.sprite = item.thumbnail;
+		Thumbnail.sprite = item.Thumbnail;
 		BuyText.text = item.GetCosts().ToString();
-		BuyButton.onClick.AddListener(Buy);
+		
+		if (_myItem.IsUnlocked())
+		{
+			BuyButton.interactable = false;
+		}
+		else
+		{
+			BuyButton.onClick.AddListener(Buy);	
+		}		
 	}
 
 	private void Buy()
 	{
-		myItem.Unlock();
+		if (CoinManager.Pay(_myItem.GetCosts()))
+		{
+			BuyButton.interactable = false;
+			_myItem.Unlock();
+			shopUi.SetCoinText(CoinManager.GetCoinTotal());
+		}
+		else
+		{
+			// Play sound or some shit.
+		}
+		
 	}
 }

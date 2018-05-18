@@ -18,12 +18,16 @@ public class SimulatedControllerExample : MonoBehaviour
 	void Awake ()
     {
         text = GetComponent<Text>();
-        DeviceManager.Instance.SetDeviceType(DeviceManager.DeviceType.KUEFFNER);
+        DeviceManager.Instance.SetDeviceType(deviceType);
     }
 	
 	// Update is called once per frame
 	void Update ()
-    {
-        text.text = "Current flow: " + DeviceManager.Instance.FlowLMin + "; Flow state: " + DeviceManager.Instance.CurrentFlowState;
+	{
+
+		double flowRate = DeviceManager.Instance.FlowLMin;
+
+		flowRate = Math.Round(flowRate, 1);
+        text.text = "Current flow: " + flowRate + "; Flow state: " + DeviceManager.Instance.CurrentFlowState;
 	}
 }

@@ -166,20 +166,17 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
         //disconnect previous device if the device type has changed
         if (deviceType != this.deviceType)
         {
-            Debug.Log("parameter devicetype is niet gelijk aan this.devicetype");
             DisconnectSpirometer();
         }
         this.deviceType = deviceType;
 
-        Debug.Log("Na het setten ben ik" + Convert.ToString(deviceType));
-        Debug.Log("ik ben nu wel parameter devicetype");
     }
 
     public void ConnectSpirometer()
     {
         if (spiroController != null)
         {
-            Debug.Log("Connect device");
+            Debug.Log("Connecting device...");
             spiroController.ConnectDevice();
         }
     }
@@ -207,8 +204,6 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
     {
         if (spiroController != null)
         {
-
-
             spiroController.DisconnectDevice();
             spiroController = null;
         }

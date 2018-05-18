@@ -11,6 +11,7 @@ public class GameStand : TappableObject
 	public bool IsOpen;
 	public string Name;
 	public string GameScene;
+	public Sprite Thumbnail;
 
 	public GameObject ClosedPopup;
 	public GameObject LockedPopup;
@@ -60,5 +61,11 @@ public class GameStand : TappableObject
 		{
 			popup.SetActive(false);
 		}
+	}
+
+	public void OpenUi()
+	{
+		_uiInstance.GetComponent<GameStandUi>().SetInfo(this);
+		_uiInstance.SetActive(true);
 	}
 }

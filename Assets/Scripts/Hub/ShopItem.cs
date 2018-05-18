@@ -9,10 +9,10 @@ public class ShopItem : MonoBehaviour
 	[SerializeField] private bool _isUnlocked = false;
 	public string ItemName;
 	[SerializeField] private int _costs;
-	public Sprite thumbnail;
+	public Sprite Thumbnail;
 	
 	void Start () {
-		if (PlayerPrefs.GetInt(gameObject.name, 0) == 1)
+		if (PlayerPrefs.GetInt(ItemName, 0) == 1)
 		{
 			_isUnlocked = true;
 		}
@@ -25,7 +25,7 @@ public class ShopItem : MonoBehaviour
 	
 	public void Unlock()
 	{
-		PlayerPrefs.SetInt(gameObject.name, 1);
+		PlayerPrefs.SetInt(ItemName, 1);
 		_isUnlocked = true;
 		gameObject.SetActive(_isUnlocked);
 	}
@@ -33,5 +33,10 @@ public class ShopItem : MonoBehaviour
 	public int GetCosts()
 	{
 		return _costs;
+	}
+
+	public bool IsUnlocked()
+	{
+		return _isUnlocked;
 	}
 }

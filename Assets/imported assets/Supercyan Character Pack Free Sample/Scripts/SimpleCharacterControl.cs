@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Collections;
@@ -29,6 +30,7 @@ public class SimpleCharacterControl : MonoBehaviour {
     private readonly float m_walkScale = 0.33f;
     private readonly float m_backwardsWalkScale = 0.16f;
     private readonly float m_backwardRunScale = 0.66f;
+    [SerializeField] [Range(1, 10)] private float m_movementSpeed;
 
     private bool m_wasGrounded;
     private Vector3 m_currentDirection = Vector3.zero;
@@ -191,18 +193,23 @@ public class SimpleCharacterControl : MonoBehaviour {
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    Transform objectHit = hit.transform;
                     m_target = hit.point;
-                    StopMoving();
+                    
                     if (hit.transform.GetComponent<TappableObject>() != null)
                     {
                         m_target = hit.transform.position;
-                        StartCoroutine(Turn());
                     }
 
                     StartCoroutine(Turn());
                 }
             }
+        }
+        
+        if (m_target.y != 0)
+        {
+            m_animator.SetFloat("MoveSpeed", m_movementSpeed);
+            Vector3 direction = (m_target - transform.position).normalized;
+            m_rigidBody.MovePosition(transform.position + direction * m_movementSpeed * Time.deltaTime);        
         }
     }
 
@@ -225,35 +232,8 @@ public class SimpleCharacterControl : MonoBehaviour {
             yield return new WaitForSeconds(0.01f);            
         }        
         
-        MoveTowardsTarget();
+
         yield return null;
-    }
-
-    private void MoveTowardsTarget()
-    {
-        m_currentV = m_moveSpeed;
-        
-        Vector3 direction = m_camera.transform.forward * m_currentV + m_camera.transform.right * m_currentH;
-        
-        if(direction != Vector3.zero)
-        {
-            StartCoroutine(MoveObject(transform.position, m_target, 3.0f));
-            
-            m_animator.SetFloat("MoveSpeed", direction.magnitude);
-        }
-    }   
-
-    IEnumerator MoveObject(Vector3 startPos, Vector3 endPos, float time)
-    {
-        float i = 0.0f;
-        float rate = (float) 1.0/time;
-        while (i < 1.0) {
-            i += Time.deltaTime * rate;
-            transform.position = Vector3.Lerp(startPos, endPos, i);
-            yield return null; 
-        }
-        
-        StopMoving();
     }
 
     private void JumpingAndLanding()
@@ -283,11 +263,30 @@ public class SimpleCharacterControl : MonoBehaviour {
         
         StopMoving();
 
+        try
+        {
+            other.GetComponent<Shop>().OpenUi();
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.Log(e.ToString());
+        }
+        
+        try
+        {
+            other.GetComponent<GameStand>().OpenUi();
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.Log(e.ToString());
+        }
+
         other.GetComponent<TappableObject>().OpenUi();
     }
 
     private void StopMoving()
     {
+        m_target = new Vector3(0, 0, 0);
         StopAllCoroutines();
         
         m_rigidBody.velocity = new Vector3(0,0,0);

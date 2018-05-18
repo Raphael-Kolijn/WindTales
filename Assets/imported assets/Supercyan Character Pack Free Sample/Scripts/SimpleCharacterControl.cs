@@ -43,6 +43,8 @@ public class SimpleCharacterControl : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        StopMoving();
+        
         ContactPoint[] contactPoints = collision.contacts;
         for(int i = 0; i < contactPoints.Length; i++)
         {

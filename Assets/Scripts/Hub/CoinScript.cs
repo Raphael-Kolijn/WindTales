@@ -1,15 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class CoinScript : MonoBehaviour
 {
 	private const string Cointotal = "CoinTotal";
-	private int _mCoinTotal;
+	[SerializeField] private int _mCoinTotal;
+	public UnityEvent CoinChangeEvent;
 
 
-	public void Start()
+	private void Awake()
 	{
+		CoinChangeEvent = new UnityEvent();
 		_mCoinTotal = PlayerPrefs.GetInt(Cointotal, 0);
 	}
 
@@ -22,7 +23,8 @@ public class CoinScript : MonoBehaviour
 		}
 		
 		_mCoinTotal += amount;
-		PlayerPrefs.SetInt(Cointotal, _mCoinTotal);
+		PlayerPrefs.SetInt(Cointotal, _mCoinTotal);		
+		CoinChangeEvent.Invoke();
 	}
 
 	/// <summary>
@@ -30,7 +32,7 @@ public class CoinScript : MonoBehaviour
 	/// Use a postive integer!
 	/// </summary>
 	/// <param name="amount">Non negative integer</param>
-	private void RemoveCoins(int amount)
+	public void RemoveCoins(int amount)
 	{
 		if (amount < 0)
 		{
@@ -40,6 +42,7 @@ public class CoinScript : MonoBehaviour
 		
 		_mCoinTotal -= amount;
 		PlayerPrefs.SetInt(Cointotal, _mCoinTotal);		
+		CoinChangeEvent.Invoke();
 	}
 
 	public bool Pay(int amount)

@@ -30,7 +30,7 @@ public class SimpleCharacterControl : MonoBehaviour {
     private readonly float m_walkScale = 0.33f;
     private readonly float m_backwardsWalkScale = 0.16f;
     private readonly float m_backwardRunScale = 0.66f;
-    private float m_movementSpeed = 5;
+    [SerializeField] [Range(1, 10)] private float m_movementSpeed;
 
     private bool m_wasGrounded;
     private Vector3 m_currentDirection = Vector3.zero;
@@ -266,6 +266,15 @@ public class SimpleCharacterControl : MonoBehaviour {
         try
         {
             other.GetComponent<Shop>().OpenUi();
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.Log(e.ToString());
+        }
+        
+        try
+        {
+            other.GetComponent<GameStand>().OpenUi();
         }
         catch (NullReferenceException e)
         {

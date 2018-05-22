@@ -721,6 +721,11 @@ Prefab:
       propertyPath: m_movementSpeed
       value: 8.02
       objectReference: {fileID: 0}
+    - target: {fileID: 54704068080705314, guid: 16e7451e81164bc4caac73768f16ceb6,
+        type: 2}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 136943970358897604, guid: 16e7451e81164bc4caac73768f16ceb6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 16e7451e81164bc4caac73768f16ceb6, type: 2}

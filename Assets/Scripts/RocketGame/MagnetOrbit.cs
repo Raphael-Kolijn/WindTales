@@ -20,6 +20,11 @@ public class MagnetOrbit : MonoBehaviour
     bool isPressedRight = false;
     float rotateSpeed = 100;
     Transform test;
+    public GameObject target;
+
+
+    float speed = 15.0f;
+
 
     void Awake()
     {
@@ -29,6 +34,7 @@ public class MagnetOrbit : MonoBehaviour
     {
         test = transform.parent;
         //target = GameObject.Find("target");
+        
     }
 
     void Update()
@@ -44,6 +50,8 @@ public class MagnetOrbit : MonoBehaviour
         {
             Rotate(-1);
         }
+
+        Suction();
     }
     public void onPointerDownLeft()
     {
@@ -68,5 +76,17 @@ public class MagnetOrbit : MonoBehaviour
     {
         transform.RotateAround(test.position, new Vector3(0, 0, whichWay), rotateSpeed * Time.deltaTime); // (1 is left) (-1 is right)
        // transform.LookAt(target.transform.position); //Gives nullreferenceexception but still works?
+
+    }
+
+
+
+
+    void Suction()
+    {
+        while (flowRate < -100)
+        {
+            target.transform.position = Vector3.MoveTowards(target.transform.position, transform.position, speed * Time.deltaTime);
+        }
     }
 }

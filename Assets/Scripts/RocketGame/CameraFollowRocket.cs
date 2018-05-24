@@ -22,6 +22,7 @@ namespace UnityStandardAssets._2D
             m_LastTargetPosition = target.position;
             transform.position = target.position;
             m_OffsetZ = (transform.position - target.position).z;
+            //m_OffsetZ = -20;
             transform.parent = null;
         }
 

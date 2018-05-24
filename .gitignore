@@ -25,6 +25,10 @@ ExportedObj/
 
 # Unity3D generated meta files
 *.pidb.meta
+*.pdb.meta
+
+# include meta files
+!*.*.meta
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
@@ -35,5 +39,21 @@ sysinfo.txt
 
 # Exclude rider idea data
 .idea
-*.meta
+/Assets/*.meta
+/Assets/Textures/*.meta
+/Assets/Scripts/*.meta
+/Assets/Scripts/2D platformer/*.meta
+/Assets/Scripts/Device/*.meta
+/Assets/Scripts/Example/*.meta
+/Assets/Scripts/Hub/*.meta
+/Assets/Scripts/RocketGame/*.meta
+/Assets/Scripts/Util/*.meta
+/Assets/Scenes/*.meta
+/Assets/Resources/*.meta
+/Assets/Plugins/*.meta
+/Assets/Materials/*.meta
+/Assets/imported assets/*.meta
+/Assets/HONETi/*.meta
+/Assets/CartoonModelPack/*.meta
+/Assets/Cartoon Town and Farm/*.meta
 *.unity.meta~5e72508cd73db791d624b8ca96f8bd1df4e7066b.meta

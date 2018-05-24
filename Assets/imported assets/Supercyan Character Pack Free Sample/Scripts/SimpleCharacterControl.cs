@@ -266,6 +266,7 @@ public class SimpleCharacterControl : MonoBehaviour {
         try
         {
             other.GetComponent<Shop>().OpenUi();
+            return;
         }
         catch (NullReferenceException e)
         {
@@ -275,6 +276,7 @@ public class SimpleCharacterControl : MonoBehaviour {
         try
         {
             other.GetComponent<GameStand>().OpenUi();
+            return;
         }
         catch (NullReferenceException e)
         {

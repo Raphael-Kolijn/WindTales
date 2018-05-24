@@ -14,6 +14,7 @@ public class Blow : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("hit something");
         if (other.gameObject.CompareTag("Player"))
         {
             StartCoroutine(displayBlowIcon());

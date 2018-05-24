@@ -22,8 +22,7 @@ GameObject:
   - component: {fileID: 33901039563137324}
   - component: {fileID: 65784598580043698}
   - component: {fileID: 23047936767249586}
-  - component: {fileID: 114704729830061038}
-  - component: {fileID: 114424205133307714}
+  - component: {fileID: 114089810432419698}
   m_Layer: 0
   m_Name: Test
   m_TagString: Speed up
@@ -58,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b2fcd3a8af9387a4cb514da7d5cae1ca, type: 2}
+  - {fileID: 2100000, guid: bd1d51490915c3a47b3f001e99b97cdf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114424205133307714
+--- !u!114 &114089810432419698
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -105,20 +104,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1908802581069294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d1e8d18554bcd44fb76195c7da492b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemID: 0
-  itemName: 
---- !u!114 &114704729830061038
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1908802581069294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35809adff3724b14285a08f94a2d4e5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 509d1d45d6d698947b69193941e17a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   blowIcon: {fileID: 0}

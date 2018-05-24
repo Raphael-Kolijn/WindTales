@@ -5,7 +5,7 @@ using UnityEngine;
 public class FieldOfView : MonoBehaviour
 {
     public float viewRadius;
-    [Range(0, 720)]
+    [Range(0, 360)]
     public float viewAngle;
 
     public LayerMask coinMask;

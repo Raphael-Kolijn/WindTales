@@ -25,7 +25,7 @@ ExportedObj/
 
 # Unity3D generated meta files
 *.pidb.meta
-*.gdb.meta
+*.pdb.meta
 
 # include meta files
 !*.*.meta

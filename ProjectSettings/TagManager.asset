@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Canvas
   - Waypoint
+  - Bestuurder
+  - Pick Up
+  - Speed up
   layers:
   - Default
   - TransparentFX

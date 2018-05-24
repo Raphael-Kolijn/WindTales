@@ -366,12 +366,21 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("hit something");
-            if (other.gameObject.CompareTag("Pick Up"))
+            switch(other.gameObject.tag)
             {
-                other.gameObject.SetActive(false);
-                m_Rigidbody.velocity =  35 * m_Rigidbody.velocity.normalized;
-
+                case "Pick Up":
+                    Debug.Log("pick up");
+                    other.GetComponent<Renderer>().enabled = false;
+                    m_Rigidbody.velocity = 35 * m_Rigidbody.velocity.normalized;
+                    break;
+                case "Speed up":
+                    Debug.Log("Speed up");
+                    other.GetComponent<Renderer>().enabled = false;
+                    m_Rigidbody.velocity = 35 * m_Rigidbody.velocity.normalized;
+                    break;
+                default:
+                    Debug.Log("default");
+                    break;
             }
         }
 

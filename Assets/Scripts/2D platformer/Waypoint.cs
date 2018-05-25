@@ -6,19 +6,6 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour {
     BoxCollider2D col;
 
-	// Use this for initialization
-	void Start () {
-        if (!col)
-        {
-            col = GetComponent<BoxCollider2D>();
-        }
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     private void OnDrawGizmos()
     {
         if (!col)

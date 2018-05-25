@@ -12,6 +12,8 @@ public class objectPooling : MonoBehaviour
     [Tooltip("specify the amout of doubles the script needs to create from the objects in pool list")]
     public int doubles;
 
+    public float TileLength = 11.92f;
+
     // Use this for initialization
     void Awake()
     {
@@ -23,7 +25,7 @@ public class objectPooling : MonoBehaviour
         {
             for (int i = 0; i < prefabs.Count; i++)
             {
-                GameObject temp = Instantiate(prefabs[i], Vector3.left * 10, Quaternion.identity, transform) as GameObject;
+                GameObject temp = Instantiate(prefabs[i], Vector3.left * TileLength * 3, Quaternion.identity, transform) as GameObject;
 
                 pool.Add(temp);
                 pool[i].SetActive(false);

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityStandardAssets.Vehicles.Car
@@ -54,6 +56,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public float MaxSpeed{get { return m_Topspeed; }}
         public float Revs { get; private set; }
         public float AccelInput { get; private set; }
+        public ReadBlowInput input;
 
         // Use this for initialization
         private void Start()
@@ -195,12 +198,13 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void ApplyDrive(float accel, float footbrake)
         {
-
             float thrustTorque;
             switch (m_CarDriveType)
             {
                 case CarDriveType.FourWheelDrive:
                     thrustTorque = accel * (m_CurrentTorque / 4f);
+                    thrustTorque = 250;
+                    Debug.Log(thrustTorque);
                     for (int i = 0; i < 4; i++)
                     {
                         m_WheelColliders[i].motorTorque = thrustTorque;
@@ -365,7 +369,7 @@ namespace UnityStandardAssets.Vehicles.Car
         }
 
         private void OnTriggerEnter(Collider other)
-        {
+        {  
             Debug.Log("coliede");
 
             switch(other.gameObject.tag)
@@ -373,16 +377,36 @@ namespace UnityStandardAssets.Vehicles.Car
                 case "Pick Up":
                     Debug.Log("pick up");
                     other.GetComponent<Renderer>().enabled = false;
-                    m_Rigidbody.velocity = 35 * m_Rigidbody.velocity.normalized;
+                    // m_Rigidbody.velocity = 35 * m_Rigidbody.velocity.normalized;
+                    StartCoroutine(WaitForActivation());
                     break;
                 case "Speed up":
                     Debug.Log("Speed up");
                     other.GetComponent<Renderer>().enabled = false;
-                    m_Rigidbody.velocity = 35 * m_Rigidbody.velocity.normalized;
+                    StartCoroutine(WaitForActivation());
+                   // m_Rigidbody.velocity = 35 * m_Rigidbody.velocity.normalized;
+                    break;
+                case "Finish":
+                    Debug.Log("End game");
                     break;
                 default:
                     Debug.Log("default");
                     break;
+            }
+        }
+
+    IEnumerator WaitForActivation()
+        {
+            bool active = true;
+            while(active)
+            {
+                if (input.getFlow() > 50)
+                {
+                    int extraSpeed = ((int)input.getFlow() / 5) + 20; 
+                    m_Rigidbody.velocity = extraSpeed * m_Rigidbody.velocity.normalized;
+                    active = false;
+                }
+                yield return new WaitForFixedUpdate();
             }
         }
     }

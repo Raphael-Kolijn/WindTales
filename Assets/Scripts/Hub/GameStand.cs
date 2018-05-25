@@ -65,7 +65,19 @@ public class GameStand : TappableObject
 
 	public void OpenUi()
 	{
-		_uiInstance.GetComponent<GameStandUi>().SetInfo(this);
-		_uiInstance.SetActive(true);
+
+		if (IsOpen && IsUnlocked)
+		{
+			_uiInstance.GetComponent<GameStandUi>().SetInfo(this);
+			_uiInstance.SetActive(true);
+		} 
+		else if (!IsOpen)
+		{
+			ClosedPopup.Animator.SetBool("PlayAnimation", true);
+		} 
+		else if (!IsUnlocked)
+		{
+			LockedPopup.Animator.SetBool("PlayAnimation", true);	
+		}
 	}
 }

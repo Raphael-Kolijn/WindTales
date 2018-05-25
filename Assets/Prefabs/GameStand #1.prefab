@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 4492983507221296}
   - component: {fileID: 212833127806466440}
   - component: {fileID: 114156954459606312}
+  - component: {fileID: 95359517334443218}
   m_Layer: 0
   m_Name: ClosedPopup
   m_TagString: Untagged
@@ -93,6 +94,7 @@ GameObject:
   - component: {fileID: 4540494659799080}
   - component: {fileID: 212791530783668244}
   - component: {fileID: 114404800873649360}
+  - component: {fileID: 95352961825110866}
   m_Layer: 0
   m_Name: LockedPopup
   m_TagString: Untagged
@@ -316,6 +318,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.3161707, y: 0.39469904, z: 2.2552848}
   m_Center: {x: 0.000000059604645, y: 0.2007716, z: 0.028189838}
+--- !u!95 &95352961825110866
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1941930364207500}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d10db215c11a5204aa792a4ca5b28fdf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95359517334443218
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644140889854804}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d10db215c11a5204aa792a4ca5b28fdf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114156954459606312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -328,6 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationSpeed: 80
+  Animator: {fileID: 95359517334443218}
 --- !u!114 &114404800873649360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -340,6 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationSpeed: 80
+  Animator: {fileID: 95352961825110866}
 --- !u!114 &114653730684870072
 MonoBehaviour:
   m_ObjectHideFlags: 1

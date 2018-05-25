@@ -17,10 +17,14 @@ public class Player : MonoBehaviour
 		
 	}
 
+<<<<<<< HEAD
     void OnTriggerEnter2D(BoxCollider2D other)
+=======
+    void OnTriggerEnter2D(Collider other)
+>>>>>>> 3b5801e347308a491f7d31f4ee6e38131f9aa947
     {
         Debug.Log("OnTriggerEnter2D");
-        AddCoin(other);   
+        AddCoin(other.gameObject);   
     }
 
     void AddCoin(BoxCollider2D coin)

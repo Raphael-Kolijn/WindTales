@@ -9,6 +9,6 @@ public class Popup : MonoBehaviour
 	
 	void Update () {
 		// Rotate the object around its local X axis at 1 degree per second
-		transform.Rotate((Vector3.forward * _rotationSpeed) * Time.deltaTime);
+		transform.Rotate((Vector3.up * _rotationSpeed) * Time.deltaTime);
 	}
 }

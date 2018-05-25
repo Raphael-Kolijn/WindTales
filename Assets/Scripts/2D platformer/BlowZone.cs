@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BlowZone : MonoBehaviour {
 
     public Image blowIcon;
+    private BoxCollider2D col;
 
     private void Start()
     {
@@ -43,5 +44,16 @@ public class BlowZone : MonoBehaviour {
             yield return new WaitForSecondsRealtime(0.3f);
         }
         
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (col == null)
+        {
+            col = GetComponent<BoxCollider2D>();
+        }
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(transform.position + new Vector3(0,col.bounds.size.y/2 + 0.5f), col.bounds.size);
     }
 }

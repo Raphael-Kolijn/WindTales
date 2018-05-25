@@ -13,8 +13,8 @@ public class GameStand : TappableObject
 	public string GameScene;
 	public Sprite Thumbnail;
 
-	public GameObject ClosedPopup;
-	public GameObject LockedPopup;
+	public Popup ClosedPopup;
+	public Popup LockedPopup;
 	
 	// Use this for initialization
 	void Start () {
@@ -51,21 +51,33 @@ public class GameStand : TappableObject
 		}
 	}
 	
-	private void ShowPopup(GameObject popup, bool state)
+	private void ShowPopup(Popup popup, bool state)
 	{
 		if (state)
 		{
-			popup.SetActive(true);
+			popup.gameObject.SetActive(true);
 		}
 		else
 		{
-			popup.SetActive(false);
+			popup.gameObject.SetActive(false);
 		}
 	}
 
 	public void OpenUi()
 	{
-		_uiInstance.GetComponent<GameStandUi>().SetInfo(this);
-		_uiInstance.SetActive(true);
+
+		if (IsOpen && IsUnlocked)
+		{
+			_uiInstance.GetComponent<GameStandUi>().SetInfo(this);
+			_uiInstance.SetActive(true);
+		} 
+		else if (!IsOpen)
+		{
+			ClosedPopup.Animator.SetBool("PlayAnimation", true);
+		} 
+		else if (!IsUnlocked)
+		{
+			LockedPopup.Animator.SetBool("PlayAnimation", true);	
+		}
 	}
 }

@@ -14,37 +14,22 @@ public class Blow : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.transform.name);
-        if (other.gameObject.CompareTag("Bestuurder"))
+        Debug.Log("hit something");
+        if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log(" pieter");
             StartCoroutine(displayBlowIcon());
-        }
-        else
-        {
-            Debug.Log("nopee");
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Bestuurder"))
-        {
-            StopAllCoroutines();
-            blowIcon.enabled = false;
         }
     }
 
     IEnumerator displayBlowIcon()
     {
-        while (true)
+        bool paniek = true;
+        while (paniek)
         {
             blowIcon.enabled = true;
-            Debug.Log("on");
-            yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitForSecondsRealtime(3f);
             blowIcon.enabled = false;
-            Debug.Log("off");
-            yield return new WaitForSecondsRealtime(2f);
+            paniek = false;
         }
 
     }

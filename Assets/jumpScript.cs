@@ -41,7 +41,6 @@ public class jumpScript : MonoBehaviour
     // The target that the spring moves towards when charging
     public Transform targetForGoingDown;
     // The thrust with which the player is launched. 80 = max
-    [Header("max 80")]
     public float launchSpeed;
     // The amount the player is boosted
     public float thrust;
@@ -50,7 +49,9 @@ public class jumpScript : MonoBehaviour
     // The text to show current flowrate
     public Text flowRateText;
     // Text to show the amount being boosted
-    public Text boostText; 
+    public Text boostText;
+    // Text to show the launch strength
+    public Text launchText;
 
     void Start()
     {
@@ -83,12 +84,12 @@ public class jumpScript : MonoBehaviour
     private void getFlowrate()
     {
         flowRate = DeviceManager.Instance.FlowLMin;
-        flowRate = System.Math.Round(flowRate, 1);
-        if (flowRate > 50 || flowRate < -50)
+        flowRate = System.Math.Round(flowRate, 1) * -1;
+        if (flowRate > 10 || flowRate < -10)
         {
             Debug.Log(flowRate.ToString());
         }
-        if (flowRate < -50)
+        if (flowRate < -10)
         {
             inhalePhase = true;
         }
@@ -96,9 +97,9 @@ public class jumpScript : MonoBehaviour
         {
             // While the exhalation continues force is added to the player
             endText.text = ("Exhale!");
-            Vector3 forceToAdd = transform.up * (float)flowRate / 3;
+            Vector3 forceToAdd = transform.up * (float)flowRate / 5;
             player.AddForce(forceToAdd);
-            boostText.text = "Force: " + forceToAdd.y.ToString();
+            boostText.text = "Force: " + System.Math.Round(forceToAdd.y).ToString();
             StartCoroutine(checkForEndPhase());
         }
     }
@@ -119,13 +120,11 @@ public class jumpScript : MonoBehaviour
     // End the game when the exhalationphase ends 
     private void endGame()
     {
-        Debug.Log("The game has ended");
         exhalePhaseStarted = false;
         inhalePhase = false;
         started = false;
         endText.text = "Finished!";
         ended = true;
-        // SceneManager.LoadScene("TrampolineGuy");
     }
 
     // When the game starts countdown and give instructions
@@ -141,20 +140,16 @@ public class jumpScript : MonoBehaviour
         if (inhalePhase)
         {
             Debug.Log("Inhale phase begun");
-            if (flowRate < -50 && spring.transform.position.y > springStartPos - 6)
+            if (flowRate < -10 && spring.transform.position.y > springStartPos - 6)
             {
-                //float amountToLower = (float)flowRate;
-                //Vector3 newSpringPosition = new Vector3(0, amountToLower);
-                //spring.transform.position += newSpringPosition;
-                //float step = springSpeedDown * Time.deltaTime;
-                //Vector3 springMaxPos = new Vector3(spring.transform.position.x, spring.transform.position.y - 6f, 0);
-                //spring.transform.position = Vector3.MoveTowards(spring.transform.position, springMaxPos, step);
                 float step = springSpeedDown * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, targetForGoingDown.position, step);
             }
             if (flowRate > -5 && exhalePhaseStarted == false)
             {
                 // When the player stops inhaling the inhale phase ends and the exhale phase begins
+                launchSpeed = (float)springStartPos - transform.position.y * 11;
+                launchText.text = "Launch speed: " + launchSpeed.ToString();
                 inhalePhase = false;
                 startExhalePhase();
             }
@@ -184,7 +179,6 @@ public class jumpScript : MonoBehaviour
     // The initial launch
     private void launchPlayer()
     {
-        // TODO: base the added force on the spring position
         player.AddForce(transform.up * launchSpeed, ForceMode.Impulse);
     }
 }

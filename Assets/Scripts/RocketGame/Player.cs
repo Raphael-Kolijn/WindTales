@@ -5,11 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private float Coins;
-    BoxCollider2D boxCollider;
+    Collider2D Collider;
 
 	void Start ()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        Collider = GetComponent<Collider2D>();
 	}
 	
 	void Update ()
@@ -17,13 +17,13 @@ public class Player : MonoBehaviour
 		
 	}
 
-    void OnTriggerEnter2D(BoxCollider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("OnTriggerEnter2D");
-        AddCoin(other);   
+        AddCoin(other.gameObject);   
     }
 
-    void AddCoin(BoxCollider2D coin)
+    void AddCoin(GameObject coin)
     {
         Coins++;
         Destroy(coin);

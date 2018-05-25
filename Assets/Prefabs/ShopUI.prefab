@@ -772,7 +772,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114289180816553912}
         m_MethodName: NextPage
         m_Mode: 1
         m_Arguments:
@@ -933,7 +933,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114289180816553912}
         m_MethodName: PreviousPage
         m_Mode: 1
         m_Arguments:

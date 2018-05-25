@@ -10,10 +10,4 @@ public class Coin : MonoBehaviour
     {
         transform.Rotate(new Vector3(0, 75, 00) * Time.deltaTime);
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        coinManager.AddCoins(1);
-        Destroy(this);
-    }
 }

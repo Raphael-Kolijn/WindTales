@@ -26,7 +26,6 @@ public class FieldOfView : MonoBehaviour
     public GameObject FindNearestCoin()
     {
         Collider[] hitCoins = Physics.OverlapSphere(transform.position, viewRadius, coinMask);
-
         GameObject possibleNearest = null;
         for (int i = 0; i < hitCoins.Length; i++)
         {
@@ -36,6 +35,10 @@ public class FieldOfView : MonoBehaviour
                 smallestDist = foundDist;
                 possibleNearest = hitCoins[i].gameObject;
             }
+        }
+        if (possibleNearest != null)
+        {
+            Debug.Log("NOT NULL");
         }
         return possibleNearest;
     }

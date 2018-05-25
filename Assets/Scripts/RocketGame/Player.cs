@@ -17,13 +17,13 @@ public class Player : MonoBehaviour
 		
 	}
 
-    void OnTriggerEnter2D(GameObject other)
+    void OnTriggerEnter2D(BoxCollider2D other)
     {
         Debug.Log("OnTriggerEnter2D");
         AddCoin(other);   
     }
 
-    void AddCoin(GameObject coin)
+    void AddCoin(BoxCollider2D coin)
     {
         Coins++;
         Destroy(coin);

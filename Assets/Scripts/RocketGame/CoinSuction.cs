@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class CoinSuction : MonoBehaviour
 {
-    public MagnetOrbit magnetOrbit;
     public GameObject coin;
     float speed = 2f;
 
-	void Update ()
+	void Update()
     {
-        Move();
+        
 	}
 
-    void Move()
+    void Suction()
     {
         float step = speed * Time.deltaTime;
         coin.transform.position = Vector3.MoveTowards(coin.transform.position, transform.position, step);

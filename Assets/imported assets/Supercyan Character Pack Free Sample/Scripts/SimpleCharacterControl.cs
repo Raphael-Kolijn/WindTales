@@ -263,26 +263,6 @@ public class SimpleCharacterControl : MonoBehaviour {
         
         StopMoving();
 
-        try
-        {
-            other.GetComponent<Shop>().OpenUi();
-            return;
-        }
-        catch (NullReferenceException e)
-        {
-            Debug.Log(e.ToString());
-        }
-        
-        try
-        {
-            other.GetComponent<GameStand>().OpenUi();
-            return;
-        }
-        catch (NullReferenceException e)
-        {
-            Debug.Log(e.ToString());
-        }
-
         other.GetComponent<TappableObject>().OpenUi();
     }
 

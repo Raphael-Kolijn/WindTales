@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TappableObject : MonoBehaviour
+public abstract class TappableObject : MonoBehaviour
 {
 
 	// Trigger when player comes close to the object
@@ -35,10 +35,7 @@ public class TappableObject : MonoBehaviour
 		_enterTrigger.center = new Vector3(0,0,0);
 	}
 
-	public void OpenUi()
-	{
-		_uiInstance.SetActive(true);
-	}
+	public abstract void OpenUi();
 
 	public void CloseUi()
 	{

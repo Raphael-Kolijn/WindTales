@@ -84,7 +84,7 @@ public class GameStand : TappableObject
         }
     }
 
-    public void OpenUi()
+    public override void OpenUi()
     {
         if (IsOpen && IsUnlocked)
         {

@@ -12,7 +12,7 @@ public class Shop : TappableObject
 		InitialiseTrigger();
 	}
 
-	public new void OpenUi()
+	public override void OpenUi()
 	{
 		_uiInstance.GetComponent<ShopUi>().ClearShop();
 		_uiInstance.SetActive(true);

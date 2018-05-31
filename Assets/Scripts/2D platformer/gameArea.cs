@@ -5,7 +5,7 @@ using UnityEngine;
 public class gameArea : MonoBehaviour
 {
 
-    public Vector3 size = new Vector3(30, 5);
+    public Vector3 size = new Vector3(15, 5);
 
     private void OnDrawGizmos()
     {

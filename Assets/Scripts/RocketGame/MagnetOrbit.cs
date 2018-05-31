@@ -20,6 +20,7 @@ public class MagnetOrbit : MonoBehaviour
     bool isPressedRight = false;
     float rotateSpeed = 100;
     Transform test;
+    public FieldOfView fov;
 
     void Awake()
     {
@@ -28,6 +29,7 @@ public class MagnetOrbit : MonoBehaviour
     void Start()
     {
         test = transform.parent;
+        fov = GetComponent<FieldOfView>();
         //target = GameObject.Find("target");
     }
 
@@ -36,32 +38,8 @@ public class MagnetOrbit : MonoBehaviour
         flowRate = DeviceManager.Instance.FlowLMin;
 
         flowRate = System.Math.Round(flowRate, 1);
-        if (isPressedLeft)
-        {
-            Rotate(1);
-        }
-        if (isPressedRight)
-        {
-            Rotate(-1);
-        }
-    }
-    public void onPointerDownLeft()
-    {
-        isPressedLeft = true;
-    }
 
-    public void onPointerUpLeft()
-    {
-        isPressedLeft = false;
-    }
-    public void onPointerDownRight()
-    {
-        isPressedRight = true;
-    }
-
-    public void onPointerUpRight()
-    {
-        isPressedRight = false;
+        
     }
 
     public void Rotate(int whichWay)

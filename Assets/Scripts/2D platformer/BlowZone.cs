@@ -11,6 +11,11 @@ public class BlowZone : MonoBehaviour {
 
     private void Start()
     {
+        if (blowIcon == null)
+        {
+             blowIcon = GameObject.Find("blowIcon").GetComponent<Image>();
+        }
+
         blowIcon.enabled = false;
     }
 

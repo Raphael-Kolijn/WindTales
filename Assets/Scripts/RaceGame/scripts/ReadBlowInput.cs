@@ -14,7 +14,7 @@ public class ReadBlowInput : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         CalculateFlow();
-        Debug.Log("flowrate = " + flowRate);
+      //  Debug.Log("flowrate = " + flowRate);
 	}
 
     void CalculateFlow()

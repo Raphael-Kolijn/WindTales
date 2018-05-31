@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,8 +48,10 @@ namespace UnityStandardAssets.Vehicles.Car
         private Rigidbody m_Rigidbody;
         private const float k_ReversingThreshold = 0.01f;
 
-        int difficulty = 15;
+        int difficulty = 10;
         public Text snelheid;
+
+      
 
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
@@ -230,7 +230,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     break;
 
             }
-
+            
             for (int i = 0; i < 4; i++)
             {
                 if (CurrentSpeed > 5 && Vector3.Angle(transform.forward, m_Rigidbody.velocity) < 50f)
@@ -243,6 +243,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     m_WheelColliders[i].motorTorque = -m_ReverseTorque*footbrake;
                 }
             }
+           
         }
 
 
@@ -383,19 +384,14 @@ namespace UnityStandardAssets.Vehicles.Car
             switch(other.gameObject.tag)
             {
                 case "Pick Up":
-                    Debug.Log("pick up");
                     other.GetComponent<Renderer>().enabled = false;
-                    // m_Rigidbody.velocity = 35 * m_Rigidbody.velocity.normalized;
                     StartCoroutine(WaitForActivation());
                     break;
                 case "Speed up":
                     Debug.Log("Speed up");
                     other.GetComponent<Renderer>().enabled = false;
+                    //int newSpeed = other.GetComponent<boostScript>().speed;
                     StartCoroutine(WaitForActivation());
-                   // m_Rigidbody.velocity = 35 * m_Rigidbody.velocity.normalized;
-                    break;
-                case "Finish":
-                    Debug.Log("End game");
                     break;
                 default:
                     Debug.Log("default");
@@ -410,12 +406,32 @@ namespace UnityStandardAssets.Vehicles.Car
             {
                 if (input.getFlow() > 10)
                 {
-                    Vector3 forceToAdd = transform.forward * (float)input.getFlow() / 8;
+                    Vector3 forceToAdd = transform.forward * (float)input.getFlow() / difficulty;
                     m_Rigidbody.velocity += forceToAdd;
                     active = false;
                 }
                 yield return new WaitForFixedUpdate();
             }
+        }
+
+        public void StopDrive()
+        {
+            float thrustTorque;
+            switch (m_CarDriveType)
+            {
+                case CarDriveType.FourWheelDrive:
+                    thrustTorque = 0;
+         
+                  
+                    for (int i = 0; i < 4; i++)
+                    {
+                        m_WheelColliders[i].motorTorque = thrustTorque;
+                    }
+                    break;
+
+
+            }
+            thrustTorque = 0;
         }
     }
 

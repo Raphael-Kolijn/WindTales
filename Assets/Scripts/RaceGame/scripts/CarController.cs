@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.Vehicles.Car
 {
@@ -49,6 +50,9 @@ namespace UnityStandardAssets.Vehicles.Car
         private Rigidbody m_Rigidbody;
         private const float k_ReversingThreshold = 0.01f;
 
+        int difficulty = 15;
+        public Text snelheid;
+
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
         public float CurrentSteerAngle{ get { return m_SteerAngle; }}
@@ -74,6 +78,10 @@ namespace UnityStandardAssets.Vehicles.Car
             m_CurrentTorque = m_FullTorqueOverAllWheels - (m_TractionControl*m_FullTorqueOverAllWheels);
         }
 
+        private void FixedUpdate()
+        {
+            snelheid.text = "Force: " + m_Rigidbody.velocity.x.ToString();
+        }
 
         private void GearChanging()
         {
@@ -400,14 +408,16 @@ namespace UnityStandardAssets.Vehicles.Car
             bool active = true;
             while(active)
             {
-                if (input.getFlow() > 50)
+                if (input.getFlow() > 10)
                 {
-                    int extraSpeed = ((int)input.getFlow() / 5) + 20; 
-                    m_Rigidbody.velocity = extraSpeed * m_Rigidbody.velocity.normalized;
+                    Vector3 forceToAdd = transform.forward * (float)input.getFlow() / 8;
+                    m_Rigidbody.velocity += forceToAdd;
                     active = false;
                 }
                 yield return new WaitForFixedUpdate();
             }
         }
     }
+
+    
 }

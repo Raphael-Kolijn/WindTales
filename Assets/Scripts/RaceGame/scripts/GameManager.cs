@@ -6,15 +6,23 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     public Text countDown;
+    public GameObject gameOverUI;
+    public static bool RaceEnded;
+
+    
   
 	// Use this for initialization
 	void Start () {
+        RaceEnded = false;
         StartCoroutine(Countdown(3));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown("e"))
+        {
+            EndGame();
+        }
 	}
 
     IEnumerator Countdown(int seconds)
@@ -36,5 +44,11 @@ public class GameManager : MonoBehaviour {
         countDown.text = "";
         Debug.Log("start game");
 
+    }
+
+    void EndGame()
+    {
+        RaceEnded = true;
+        gameOverUI.SetActive(true);
     }
 }

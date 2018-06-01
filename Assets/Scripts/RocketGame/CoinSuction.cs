@@ -43,6 +43,7 @@ public class CoinSuction : MonoBehaviour
     {
         if (col.gameObject.layer == 9)
         {
+            speed = 2f;
             coinManager.AddCoin(coin);
         }
     }

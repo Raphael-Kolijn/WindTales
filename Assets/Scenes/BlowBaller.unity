@@ -429,15 +429,15 @@ Transform:
   m_PrefabParentObject: {fileID: 400020, guid: a213c349dec634c6b81dfc8114650298, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 93407002}
-  m_LocalRotation: {x: -0.00023748583, y: 0.7161188, z: 0.6979783, w: 0.00023146548}
-  m_LocalPosition: {x: 30.183224, y: 39.859035, z: 72.45803}
-  m_LocalScale: {x: -2.227978, y: 0.3383552, z: 1.536013}
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.212976, y: -23.921305, z: -7.2384677}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 620937476}
   - {fileID: 2011656294}
   - {fileID: 246307530}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 872638326}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &105810421
 GameObject:
@@ -1611,7 +1611,7 @@ Transform:
   - {fileID: 816051601}
   - {fileID: 2078152760}
   m_Father: {fileID: 872638326}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &816051600
 GameObject:
@@ -1996,10 +1996,11 @@ Transform:
   m_LocalPosition: {x: 66.3, y: 51.182, z: 80.288}
   m_LocalScale: {x: -2.227978, y: 0.33835527, z: 1.536013}
   m_Children:
+  - {fileID: 93407003}
   - {fileID: 815389196}
   - {fileID: 2065040409}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -88.53001, y: 179.99998, z: -0.038000003}
 --- !u!82 &872638327
 AudioSource:
@@ -2647,7 +2648,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1267060531
 GameObject:
@@ -2990,7 +2991,7 @@ RectTransform:
   - {fileID: 1978979241}
   - {fileID: 306648070}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3898,7 +3899,7 @@ Transform:
   - {fileID: 1007969191}
   - {fileID: 996374289}
   m_Father: {fileID: 872638326}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2065040410
 BoxCollider:

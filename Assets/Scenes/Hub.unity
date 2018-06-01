@@ -1587,7 +1587,7 @@ Prefab:
     - target: {fileID: 114653730684870072, guid: 8b5f85815f3f3944199a5ef38e4ed0bd,
         type: 2}
       propertyPath: IsUnlocked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4540494659799080, guid: 8b5f85815f3f3944199a5ef38e4ed0bd, type: 2}
       propertyPath: m_LocalScale.x
@@ -1607,6 +1607,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1655926165498892, guid: 347c2007d2f971f44a71587965633566,
         type: 2}
+    - target: {fileID: 114653730684870072, guid: 8b5f85815f3f3944199a5ef38e4ed0bd,
+        type: 2}
+      propertyPath: GameScene
+      value: TrampolineGuy
+      objectReference: {fileID: 0}
+    - target: {fileID: 114653730684870072, guid: 8b5f85815f3f3944199a5ef38e4ed0bd,
+        type: 2}
+      propertyPath: MaxDailyPlayCount
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b5f85815f3f3944199a5ef38e4ed0bd, type: 2}
   m_IsPrefabParent: 0
@@ -7155,9 +7165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isUnlocked: 0
-  ItemName: Farm
-  _costs: 200
-  Thumbnail: {fileID: 21300000, guid: b241e005732991d4fb2036c4c2f44879, type: 3}
+  ItemName: 
+  _costs: 0
+  Thumbnail: {fileID: 0}
 --- !u!4 &1038317578 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 2ef87432090094d43ada8c3983b97240, type: 2}
@@ -8524,9 +8534,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isUnlocked: 0
-  ItemName: Chicken
-  _costs: 300
-  Thumbnail: {fileID: 21300000, guid: beb5ab37d91c16245ab5d51d7398726c, type: 3}
+  ItemName: 
+  _costs: 0
+  Thumbnail: {fileID: 0}
 --- !u!114 &1215074953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8538,7 +8548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9be9b4454762746985410fac8e6c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 1215074950}
+  audio: {fileID: 0}
 --- !u!65 &1215074955
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9265,8 +9275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isUnlocked: 0
-  ItemName: Rocket
-  _costs: 150
+  ItemName: 
+  _costs: 0
   Thumbnail: {fileID: 0}
 --- !u!4 &1391009228
 Transform:
@@ -11373,9 +11383,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isUnlocked: 0
-  ItemName: Race car
-  _costs: 100
-  Thumbnail: {fileID: 21300000, guid: e92ad77a776dc7645841cb7a3c2d3fa4, type: 3}
+  ItemName: 
+  _costs: 0
+  Thumbnail: {fileID: 0}
 --- !u!1 &1674581235
 GameObject:
   m_ObjectHideFlags: 0
@@ -14652,9 +14662,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isUnlocked: 0
-  ItemName: Basketball
-  _costs: 300
-  Thumbnail: {fileID: 21300000, guid: db6fb26778320154881b681091efe4c6, type: 3}
+  ItemName: 
+  _costs: 0
+  Thumbnail: {fileID: 0}
 --- !u!111 &2083056273
 Animation:
   m_ObjectHideFlags: 0

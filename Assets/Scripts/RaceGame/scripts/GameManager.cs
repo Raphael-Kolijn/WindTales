@@ -7,10 +7,14 @@ public class GameManager : MonoBehaviour {
 
     public Text countDown;
     public GameObject gameOverUI;
-    public static bool RaceEnded;
+    public bool RaceEnded;
+    private int collectedMoney;
+    float time;
+    public Text RaceTime;
+    public Text Money;
 
-    
-  
+    public CoinScript coinScript;
+
 	// Use this for initialization
 	void Start () {
         RaceEnded = false;
@@ -19,6 +23,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        time += Time.deltaTime;
 		if (Input.GetKeyDown("e"))
         {
             EndGame();
@@ -42,13 +47,21 @@ public class GameManager : MonoBehaviour {
     void StartGame()
     {
         countDown.text = "";
-        Debug.Log("start game");
 
     }
 
-    void EndGame()
+    public void EndGame()
     {
         RaceEnded = true;
         gameOverUI.SetActive(true);
+        CalculateMoney();
+        RaceTime.text = time.ToString();
+        Money.text = collectedMoney.ToString();
+        coinScript.AddCoins(collectedMoney);
+    }
+
+    private void CalculateMoney()
+    {
+        collectedMoney = 500 - (int)time; 
     }
 }

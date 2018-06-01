@@ -48,7 +48,7 @@ namespace UnityStandardAssets.Vehicles.Car
         private Rigidbody m_Rigidbody;
         private const float k_ReversingThreshold = 0.01f;
 
-        int difficulty = 10;
+        public int difficulty;
         public Text snelheid;
 
       
@@ -61,6 +61,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public float Revs { get; private set; }
         public float AccelInput { get; private set; }
         public ReadBlowInput input;
+        public GameManager manager;
 
         // Use this for initialization
         private void Start()
@@ -379,7 +380,6 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void OnTriggerEnter(Collider other)
         {  
-            Debug.Log("coliede");
 
             switch(other.gameObject.tag)
             {
@@ -388,10 +388,11 @@ namespace UnityStandardAssets.Vehicles.Car
                     StartCoroutine(WaitForActivation());
                     break;
                 case "Speed up":
-                    Debug.Log("Speed up");
                     other.GetComponent<Renderer>().enabled = false;
-                    //int newSpeed = other.GetComponent<boostScript>().speed;
                     StartCoroutine(WaitForActivation());
+                    break;
+                case "Finish":
+                    manager.EndGame();
                     break;
                 default:
                     Debug.Log("default");

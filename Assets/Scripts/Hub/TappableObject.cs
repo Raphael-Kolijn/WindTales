@@ -41,4 +41,17 @@ public abstract class TappableObject : MonoBehaviour
 	{
 		_uiInstance.SetActive(false);
 	}
+
+	private void OnMouseDown()
+	{
+		Collider[] colliders = Physics.OverlapSphere(transform.position, _enterRadius);
+
+		foreach (var collider1 in colliders)
+		{
+			if (collider1.name.Equals("Player"))
+			{
+				OpenUi();			
+			}
+		}	
+	}
 }

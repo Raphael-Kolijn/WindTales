@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 37265b8b6b846904d8c7c7c258723e20,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -1837,6 +1838,7 @@ MonoBehaviour:
   boostText: {fileID: 710469308}
   launchText: {fileID: 335485783}
   gm: {fileID: 444611623}
+  difficulty: 0
 --- !u!54 &631862052
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7119,7 +7121,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2070727041}
   m_LocalRotation: {x: 0.005846863, y: -0, z: -0, w: 0.9999829}
-  m_LocalPosition: {x: 0.049999952, y: 3.9, z: -19.94}
+  m_LocalPosition: {x: 0.049999952, y: 3.9, z: -16.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1974875580}

@@ -12,8 +12,9 @@ public class GameManager : MonoBehaviour {
     float time;
     public Text RaceTime;
     public Text Money;
-    public GameObject car;
-  
+
+    public CoinScript coinScript;
+
 	// Use this for initialization
 	void Start () {
         RaceEnded = false;
@@ -46,7 +47,6 @@ public class GameManager : MonoBehaviour {
     void StartGame()
     {
         countDown.text = "";
-        Debug.Log("start game");
 
     }
 
@@ -57,10 +57,12 @@ public class GameManager : MonoBehaviour {
         CalculateMoney();
         RaceTime.text = time.ToString();
         Money.text = collectedMoney.ToString();
+        Debug.Log("voeg nu zoveel coins toe : " + collectedMoney.ToString());
+        coinScript.AddCoins(collectedMoney);
     }
 
     private void CalculateMoney()
     {
-        collectedMoney = 300;
+        collectedMoney = 500 - (int)time; 
     }
 }

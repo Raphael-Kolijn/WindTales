@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using UnityEngine.Collections;
 using UnityEngine.EventSystems;
 
-public class SimpleCharacterControl : MonoBehaviour {
-
+public class SimpleCharacterControl : MonoBehaviour
+{
     private enum ControlMode
     {
         Tank,
@@ -19,8 +19,8 @@ public class SimpleCharacterControl : MonoBehaviour {
     [SerializeField] private float m_jumpForce = 4;
     [SerializeField] private Animator m_animator;
     [SerializeField] private Rigidbody m_rigidBody;
-    [SerializeField] private Camera m_camera;    
-    
+    [SerializeField] private Camera m_camera;
+
     [SerializeField] private ControlMode m_controlMode = ControlMode.Direct;
 
     private float m_currentV = 0;
@@ -41,24 +41,28 @@ public class SimpleCharacterControl : MonoBehaviour {
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
 
+    private bool _isAtStand = false;
+
     private Vector3 m_target;
 
     private void OnCollisionEnter(Collision collision)
     {
         StopMoving();
-        
+
         ContactPoint[] contactPoints = collision.contacts;
-        for(int i = 0; i < contactPoints.Length; i++)
+        for (int i = 0; i < contactPoints.Length; i++)
         {
             if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
             {
-                if (!m_collisions.Contains(collision.collider)) {
+                if (!m_collisions.Contains(collision.collider))
+                {
                     m_collisions.Add(collision.collider);
                 }
+
                 m_isGrounded = true;
             }
         }
-    }        
+    }
 
     private void OnCollisionStay(Collision collision)
     {
@@ -68,40 +72,51 @@ public class SimpleCharacterControl : MonoBehaviour {
         {
             if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
             {
-                validSurfaceNormal = true; break;
+                validSurfaceNormal = true;
+                break;
             }
         }
 
-        if(validSurfaceNormal)
+        if (validSurfaceNormal)
         {
             m_isGrounded = true;
             if (!m_collisions.Contains(collision.collider))
             {
                 m_collisions.Add(collision.collider);
             }
-        } else
+        }
+        else
         {
             if (m_collisions.Contains(collision.collider))
             {
                 m_collisions.Remove(collision.collider);
             }
-            if (m_collisions.Count == 0) { m_isGrounded = false; }
+
+            if (m_collisions.Count == 0)
+            {
+                m_isGrounded = false;
+            }
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if(m_collisions.Contains(collision.collider))
+        if (m_collisions.Contains(collision.collider))
         {
             m_collisions.Remove(collision.collider);
         }
-        if (m_collisions.Count == 0) { m_isGrounded = false; }
+
+        if (m_collisions.Count == 0)
+        {
+            m_isGrounded = false;
+        }
     }
 
-	void FixedUpdate () {
+    void FixedUpdate()
+    {
         m_animator.SetBool("Grounded", m_isGrounded);
 
-        switch(m_controlMode)
+        switch (m_controlMode)
         {
             case ControlMode.Direct:
                 DirectUpdate();
@@ -110,11 +125,11 @@ public class SimpleCharacterControl : MonoBehaviour {
             case ControlMode.Tank:
                 TankUpdate();
                 break;
-            
+
             case ControlMode.Tap:
                 TapUpdate();
                 break;
-            
+
             default:
                 Debug.LogError("Unsupported state");
                 break;
@@ -130,10 +145,18 @@ public class SimpleCharacterControl : MonoBehaviour {
 
         bool walk = Input.GetKey(KeyCode.LeftShift);
 
-        if (v < 0) {
-            if (walk) { v *= m_backwardsWalkScale; }
-            else { v *= m_backwardRunScale; }
-        } else if(walk)
+        if (v < 0)
+        {
+            if (walk)
+            {
+                v *= m_backwardsWalkScale;
+            }
+            else
+            {
+                v *= m_backwardRunScale;
+            }
+        }
+        else if (walk)
         {
             v *= m_walkScale;
         }
@@ -169,7 +192,7 @@ public class SimpleCharacterControl : MonoBehaviour {
         direction.y = 0;
         direction = direction.normalized * directionLength;
 
-        if(direction != Vector3.zero)
+        if (direction != Vector3.zero)
         {
             m_currentDirection = Vector3.Slerp(m_currentDirection, direction, Time.deltaTime * m_interpolation);
 
@@ -194,44 +217,60 @@ public class SimpleCharacterControl : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit))
                 {
                     m_target = hit.point;
-                    
+
                     if (hit.transform.GetComponent<TappableObject>() != null)
                     {
                         m_target = hit.transform.position;
+
+                        Debug.Log("Currently at: " + hit.transform.name);
+
+                        Collider[] colliders = Physics.OverlapSphere(transform.position, 2);
+
+                        foreach (var collider1 in colliders)
+                        {
+                            Debug.Log(collider1.name);
+                            if (collider1.name.Equals(hit.transform.name))
+                            {
+                                m_target = new Vector3(0, 0, 0);
+                            }
+                        }
                     }
 
-                    StartCoroutine(Turn());
+                    if (m_target.y != 0)
+                    {
+                        StartCoroutine(Turn());
+                    }
                 }
             }
         }
-        
+
         if (m_target.y != 0)
         {
             m_animator.SetFloat("MoveSpeed", m_movementSpeed);
             Vector3 direction = (m_target - transform.position).normalized;
-            m_rigidBody.MovePosition(transform.position + direction * m_movementSpeed * Time.deltaTime);        
+            m_rigidBody.MovePosition(transform.position + direction * m_movementSpeed * Time.deltaTime);
         }
     }
 
     IEnumerator Turn()
     {
         var localTarget = transform.InverseTransformPoint(m_target);
-     
+
         var angle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
-        
+
         while (angle < -5 || angle > 5)
-        {  
+        {
             localTarget = transform.InverseTransformPoint(m_target);
-     
+
             angle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
-            
-            var eulerAngleVelocity = new Vector3 (0, angle * 5, 0);
-            var deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime );
+
+            var eulerAngleVelocity = new Vector3(0, angle * 5, 0);
+            var deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime);
             m_rigidBody.MoveRotation(m_rigidBody.rotation * deltaRotation);
-            
-            yield return new WaitForSeconds(0.01f);            
-        }        
-        
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
 
         yield return null;
     }
@@ -260,20 +299,27 @@ public class SimpleCharacterControl : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.name);
-        
+
+        _isAtStand = true;
+
         StopMoving();
 
         other.GetComponent<TappableObject>().OpenUi();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _isAtStand = false;
     }
 
     private void StopMoving()
     {
         m_target = new Vector3(0, 0, 0);
         StopAllCoroutines();
-        
-        m_rigidBody.velocity = new Vector3(0,0,0);
-        m_rigidBody.angularVelocity = new Vector3(0,0,0);
-        
+
+        m_rigidBody.velocity = new Vector3(0, 0, 0);
+        m_rigidBody.angularVelocity = new Vector3(0, 0, 0);
+
         m_animator.SetFloat("MoveSpeed", 0);
     }
 }

@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Coin: {fileID: 1359240540}
   Rocket: {fileID: 1352405505}
-  CoinSpawnRate: 200
+  CoinSpawnRate: 5
 --- !u!4 &119699364
 Transform:
   m_ObjectHideFlags: 0
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinManager: {fileID: 744164633}
   coin: {fileID: 0}
-  SuctionSpeed: 0.5
+  SuctionSpeed: 0.4
 --- !u!114 &397711103
 MonoBehaviour:
   m_ObjectHideFlags: 0

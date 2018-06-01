@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour {
 
-    public Text gameOver;
+ //   public Text gameOver;
 
     private void OnEnable()
     {
-        gameOver.text = "time placeholder";
+      //  gameOver.text = "time placeholder";
     }
 
     public void PlayAgain()

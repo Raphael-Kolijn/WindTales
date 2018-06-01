@@ -13,4 +13,16 @@ public class gameArea : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position + offset, size);
     }
+
+    public void OnEnable()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            GameObject temp = transform.GetChild(i).gameObject;
+            if (!temp.activeSelf)
+            {
+                temp.SetActive(true);
+            }
+        }
+    }
 }

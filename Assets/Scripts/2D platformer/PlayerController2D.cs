@@ -11,7 +11,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField]
     private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
     [SerializeField]
-    [Range(1,2)]
+    [Range(1, 2)]
     private float m_JumpSpeedMultiplier = 1.5f;
     [SerializeField]
     private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
@@ -39,6 +39,9 @@ public class PlayerController2D : MonoBehaviour
     [Tooltip("The amount which the player needs to blow in order to jump")]
     private double blowthreshold;
 
+    float originalGravity;
+    private bool isLongJumping = false;
+
     private void Awake()
     {
         //setting up the controller
@@ -49,6 +52,7 @@ public class PlayerController2D : MonoBehaviour
         m_CeilingCheck = transform.GetChild(1);  //transform.Find("CeilingCheck");
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        originalGravity = m_Rigidbody2D.gravityScale;
     }
 
     private void Update()
@@ -57,7 +61,6 @@ public class PlayerController2D : MonoBehaviour
         if (!m_Jump)
         {
             // Read the jump input in Update so button presses aren't missed.
-            m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
 
             flowRate = DeviceManager.Instance.FlowLMin;
 
@@ -65,6 +68,11 @@ public class PlayerController2D : MonoBehaviour
             if (deviceType == DeviceManager.DeviceType.KUEFFNER)
             {
                 flowRate *= -1;
+            }
+
+            if (CrossPlatformInputManager.GetButton("Jump"))
+            {
+                flowRate = 199;
             }
 
             if (m_Grounded && flowRate >= blowthreshold)
@@ -99,7 +107,7 @@ public class PlayerController2D : MonoBehaviour
     public void Move(float move, bool jump)
     {
 
-        
+
 
         // The Speed animator parameter is set to the absolute value of the horizontal input.
         m_Anim.SetFloat("Speed", Mathf.Abs(move));
@@ -111,7 +119,14 @@ public class PlayerController2D : MonoBehaviour
         }
         else
         {
-            m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed * m_JumpSpeedMultiplier, m_Rigidbody2D.velocity.y);
+            if (isLongJumping)
+            {
+                m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed * m_JumpSpeedMultiplier * 3, m_Rigidbody2D.velocity.y);
+            }
+            else
+            {
+                m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed * m_JumpSpeedMultiplier, m_Rigidbody2D.velocity.y);
+            }
         }
 
         // If the input is moving the player right and the player is facing left...
@@ -134,6 +149,7 @@ public class PlayerController2D : MonoBehaviour
             m_Grounded = false;
             m_Anim.SetBool("Ground", false);
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            
         }
     }
 
@@ -148,6 +164,7 @@ public class PlayerController2D : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+    
 
 }
 

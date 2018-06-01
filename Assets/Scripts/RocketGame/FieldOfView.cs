@@ -15,7 +15,7 @@ public class FieldOfView : MonoBehaviour
     LineRenderer lineRenderer = new LineRenderer();
     private Transform coinpos;
     private Collider2D[] coins;
-    private GameObject foundCoin;
+    public GameObject foundCoin;
 
 
     public float foundDist;
@@ -23,23 +23,18 @@ public class FieldOfView : MonoBehaviour
 
     void Start()
     {
-        coinpos = testCoin.transform;
 
     }
-
-
 
     void FixedUpdate()
     {
         Vector3 forward = Magnet.transform.TransformDirection(Vector3.forward) * 10;
         if (foundCoin != null)
         {
-            foundCoin.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            foundCoin.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);  
+            foundCoin.transform.localScale = new Vector3(1, 1, 0.24f);
         }
-        foundCoin = FindNearestCoin(coins).gameObject;
-        foundCoin.transform.localScale = new Vector3(1, 1, 0.24f);
-        
-        
+        foundCoin = FindNearestCoin(coins);
     }
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
@@ -49,12 +44,11 @@ public class FieldOfView : MonoBehaviour
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
     }
 
-    public Transform FindNearestCoin(Collider2D[] coins)
+    public GameObject FindNearestCoin(Collider2D[] coins)
     {
         //Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
         Collider2D[] hitCoins = Physics2D.OverlapCircleAll(this.transform.position, viewRadius, coinMask);
-        Debug.Log("Found: " + hitCoins.Length + " coins");
-        Transform tmin = null;  
+        GameObject tmin = null;  
         float minDist = Mathf.Infinity;
         Vector3 currentpos = transform.position;
         foreach(Collider2D t in hitCoins)
@@ -63,7 +57,7 @@ public class FieldOfView : MonoBehaviour
             float dist = Vector3.Distance(t.gameObject.transform.position ,currentpos);
             if (dist < minDist)
             {
-                tmin = t.gameObject.transform;
+                tmin = t.gameObject;
                 minDist = dist;
             }
             

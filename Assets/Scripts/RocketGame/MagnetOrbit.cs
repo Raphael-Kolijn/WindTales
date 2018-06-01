@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor.SceneManagement;
     
 
 public class MagnetOrbit : MonoBehaviour
@@ -37,14 +38,17 @@ public class MagnetOrbit : MonoBehaviour
     {
         flowRate = DeviceManager.Instance.FlowLMin;
 
-        flowRate = System.Math.Round(flowRate, 1);
-
-        
+        flowRate = System.Math.Round(flowRate, 1)*-1; 
     }
 
     public void Rotate(int whichWay)
     {
         transform.RotateAround(test.position, new Vector3(0, 0, whichWay), rotateSpeed * Time.deltaTime); // (1 is left) (-1 is right)
        // transform.LookAt(target.transform.position); //Gives nullreferenceexception but still works?
+    }
+
+    public void ReturnToHub()
+    {
+        EditorSceneManager.LoadScene(0);
     }
 }

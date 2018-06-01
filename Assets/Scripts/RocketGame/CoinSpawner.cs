@@ -6,21 +6,23 @@ public class CoinSpawner : MonoBehaviour
 {
     public GameObject Coin;
     public GameObject Rocket;
+    public int CoinSpawnRate = 150;
 
     List<GameObject> coins = new List<GameObject>();
     GameObject newCoin;
     Vector3 newPosition;
     bool MaySpawn = true;
 
+
     void Start()
     {
-        newPosition.z -= 0.5f;
+        newPosition.z -= 1f;
         UpdateCoins();
     }
 
 	void Update ()
     {
-        if (Random.Range(0, 100) == 1)
+        if (Random.Range(0, CoinSpawnRate) == 1)
         {
             DeleteCoins();
             MaySpawn = true;
@@ -47,7 +49,7 @@ public class CoinSpawner : MonoBehaviour
 
     void SpawnCoin()
     {
-        newPosition.x = Random.Range(-28f, 28f);
+        newPosition.x = Random.Range(-24f, 24f);
         newPosition.y = Rocket.transform.position.y + 20f;
         newCoin = Instantiate(Coin);
         newCoin.transform.position = newPosition;
@@ -60,9 +62,9 @@ public class CoinSpawner : MonoBehaviour
         List<GameObject> pastCoins = new List<GameObject>();
         foreach (GameObject foundCoin in coins)
         {
-            if (foundCoin.transform.position.y + 20f < Rocket.transform.position.y)
+            if (foundCoin != Coin && foundCoin != null)
             {
-                if (foundCoin != Coin && foundCoin != null)
+                if (foundCoin.transform.position.y + 20f < Rocket.transform.position.y)
                 {
                     pastCoins.Add(foundCoin);
                 }
@@ -72,9 +74,12 @@ public class CoinSpawner : MonoBehaviour
         {
             if (coins.Contains(pastCoin))
             {
-                coins.Remove(pastCoin);
-                Destroy(pastCoin);
-            }
+                if (pastCoin != null)
+                {
+                    coins.Remove(pastCoin);
+                    Destroy(pastCoin);
+                }
+            }   
         }
     }
 }

@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour {
         CalculateMoney();
         RaceTime.text = time.ToString();
         Money.text = collectedMoney.ToString();
-        Debug.Log("voeg nu zoveel coins toe : " + collectedMoney.ToString());
         coinScript.AddCoins(collectedMoney);
     }
 

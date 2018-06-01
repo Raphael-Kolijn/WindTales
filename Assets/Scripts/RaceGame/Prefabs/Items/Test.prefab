@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114089810432419698}
   m_Layer: 0
   m_Name: Test
-  m_TagString: Speed up
+  m_TagString: Pick Up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

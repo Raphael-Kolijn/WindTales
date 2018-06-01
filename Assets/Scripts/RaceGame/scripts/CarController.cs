@@ -1,7 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.Vehicles.Car
 {
@@ -49,6 +48,11 @@ namespace UnityStandardAssets.Vehicles.Car
         private Rigidbody m_Rigidbody;
         private const float k_ReversingThreshold = 0.01f;
 
+        public int difficulty;
+        public Text snelheid;
+
+      
+
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
         public float CurrentSteerAngle{ get { return m_SteerAngle; }}
@@ -57,6 +61,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public float Revs { get; private set; }
         public float AccelInput { get; private set; }
         public ReadBlowInput input;
+        public GameManager manager;
 
         // Use this for initialization
         private void Start()
@@ -74,6 +79,10 @@ namespace UnityStandardAssets.Vehicles.Car
             m_CurrentTorque = m_FullTorqueOverAllWheels - (m_TractionControl*m_FullTorqueOverAllWheels);
         }
 
+        private void FixedUpdate()
+        {
+            snelheid.text = "Force: " + m_Rigidbody.velocity.x.ToString();
+        }
 
         private void GearChanging()
         {
@@ -222,7 +231,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     break;
 
             }
-
+            
             for (int i = 0; i < 4; i++)
             {
                 if (CurrentSpeed > 5 && Vector3.Angle(transform.forward, m_Rigidbody.velocity) < 50f)
@@ -235,6 +244,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     m_WheelColliders[i].motorTorque = -m_ReverseTorque*footbrake;
                 }
             }
+           
         }
 
 
@@ -370,24 +380,19 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void OnTriggerEnter(Collider other)
         {  
-            Debug.Log("coliede");
 
             switch(other.gameObject.tag)
             {
                 case "Pick Up":
-                    Debug.Log("pick up");
                     other.GetComponent<Renderer>().enabled = false;
-                    // m_Rigidbody.velocity = 35 * m_Rigidbody.velocity.normalized;
                     StartCoroutine(WaitForActivation());
                     break;
                 case "Speed up":
-                    Debug.Log("Speed up");
                     other.GetComponent<Renderer>().enabled = false;
                     StartCoroutine(WaitForActivation());
-                   // m_Rigidbody.velocity = 35 * m_Rigidbody.velocity.normalized;
                     break;
                 case "Finish":
-                    Debug.Log("End game");
+                    manager.EndGame();
                     break;
                 default:
                     Debug.Log("default");
@@ -400,14 +405,36 @@ namespace UnityStandardAssets.Vehicles.Car
             bool active = true;
             while(active)
             {
-                if (input.getFlow() > 50)
+                if (input.getFlow() > 10)
                 {
-                    int extraSpeed = ((int)input.getFlow() / 5) + 20; 
-                    m_Rigidbody.velocity = extraSpeed * m_Rigidbody.velocity.normalized;
+                    Vector3 forceToAdd = transform.forward * (float)input.getFlow() / difficulty;
+                    m_Rigidbody.velocity += forceToAdd;
                     active = false;
                 }
                 yield return new WaitForFixedUpdate();
             }
         }
+
+        public void StopDrive()
+        {
+            float thrustTorque;
+            switch (m_CarDriveType)
+            {
+                case CarDriveType.FourWheelDrive:
+                    thrustTorque = 0;
+         
+                  
+                    for (int i = 0; i < 4; i++)
+                    {
+                        m_WheelColliders[i].motorTorque = thrustTorque;
+                    }
+                    break;
+
+
+            }
+            thrustTorque = 0;
+        }
     }
+
+    
 }

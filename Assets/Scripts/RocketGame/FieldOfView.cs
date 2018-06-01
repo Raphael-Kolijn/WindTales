@@ -4,27 +4,42 @@ using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
-    public float viewRadius;
+    public float viewRadius;    
 
     public LayerMask coinMask;
     private float smallestDist = 99999;
     public GameObject Magnet;
+    public Transform MagnetTrans;
     [SerializeField]
     private GameObject testCoin = null;
+    LineRenderer lineRenderer = new LineRenderer();
+    private Transform coinpos;
+    private Collider2D[] coins;
+    private GameObject foundCoin;
+
 
     public float foundDist;
     public float coinDist;
 
-  
+    void Start()
+    {
+        coinpos = testCoin.transform;
+
+    }
 
 
 
     void FixedUpdate()
     {
         Vector3 forward = Magnet.transform.TransformDirection(Vector3.forward) * 10;
-        FindNearestCoin();
-        Magnet.transform.LookAt(testCoin.transform.position);
-        Debug.DrawRay(Magnet.transform.position, testCoin.transform.position*100 , Color.red);
+        if (foundCoin != null)
+        {
+            foundCoin.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        }
+        foundCoin = FindNearestCoin(coins).gameObject;
+        foundCoin.transform.localScale = new Vector3(1, 1, 0.24f);
+        
+        
     }
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
@@ -34,29 +49,26 @@ public class FieldOfView : MonoBehaviour
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
     }
 
-    public void FindNearestCoin()
+    public Transform FindNearestCoin(Collider2D[] coins)
     {
-        Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
-        Collider2D[] hitCoins = Physics2D.OverlapCircleAll(myPos, viewRadius, coinMask);
+        //Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
+        Collider2D[] hitCoins = Physics2D.OverlapCircleAll(this.transform.position, viewRadius, coinMask);
         Debug.Log("Found: " + hitCoins.Length + " coins");
-        for (int i = 0; i <= hitCoins.Length - 1; i++)
+        Transform tmin = null;  
+        float minDist = Mathf.Infinity;
+        Vector3 currentpos = transform.position;
+        foreach(Collider2D t in hitCoins)
         {
-            if (testCoin == null)
-            {
-                testCoin = hitCoins[i].gameObject;
-                Debug.Log("null");
-            }
-             foundDist = Vector3.Distance(transform.position, hitCoins[i].transform.position);
-             coinDist = Vector3.Distance(transform.position , testCoin.transform.position);
-        
 
-            if (foundDist < coinDist)
+            float dist = Vector3.Distance(t.gameObject.transform.position ,currentpos);
+            if (dist < minDist)
             {
-                Debug.Log("object vervangen");
-                testCoin = hitCoins[i].gameObject;
-                return;
-            }    
+                tmin = t.gameObject.transform;
+                minDist = dist;
+            }
+            
         }
-        Debug.Log("niets gevonden");
+        return tmin;
     }
+
 }

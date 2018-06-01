@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Blow : MonoBehaviour {
 
     public Image blowIcon;
+    
 
     private void Start()
     {

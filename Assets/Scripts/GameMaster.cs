@@ -58,7 +58,7 @@ public class GameMaster : MonoBehaviour
         {
             instance = this;
         }
-        DontDestroyOnLoad(this);
+      //  DontDestroyOnLoad(this);
     }
 
     void Start()

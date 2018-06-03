@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class gameArea : MonoBehaviour
 {
-
-    public Vector3 size = new Vector3(15, 5);
+    private static Vector3 size = new Vector3(17.92f, 5); // 14 tiles breed
 
     private void OnDrawGizmos()
     {

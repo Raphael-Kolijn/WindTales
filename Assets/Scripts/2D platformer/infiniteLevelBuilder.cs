@@ -19,8 +19,6 @@ public class infiniteLevelBuilder : MonoBehaviour
     private float safeZone = 11f;
     private int lastPrefabSpawned = 0;
 
-    //objectPooler objPooler;
-
     // Use this for initialization
     void Start()
     {

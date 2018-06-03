@@ -286,6 +286,8 @@ GameObject:
   - component: {fileID: 8195094280175907758}
   - component: {fileID: 3664157344496905860}
   - component: {fileID: 2113883505139716094}
+  - component: {fileID: 50901000990400756}
+  - component: {fileID: 66469599155316790}
   m_Layer: 8
   m_Name: Tilemap
   m_TagString: Untagged
@@ -516,6 +518,26 @@ Transform:
   m_Father: {fileID: 4525349606446640}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50901000990400756
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980936812119610}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61271727855562508
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -566,6 +588,42 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 10}
   m_EdgeRadius: 0
+--- !u!66 &66469599155316790
+CompositeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980936812119610}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths:
+    - - {x: 14.08, y: 3.8399997}
+      - {x: 10.24, y: 3.8399997}
+      - {x: 10.24, y: 2.56}
+      - {x: 14.08, y: 2.56}
+    - - {x: 17.919998, y: 1.28}
+      - {x: 15.360001, y: 1.28}
+      - {x: 15.360001, y: -5.12}
+      - {x: 17.919998, y: -5.12}
+    - - {x: 8.96, y: 1.28}
+      - {x: 7.6800003, y: 1.28}
+      - {x: 7.6800003, y: -5.12}
+      - {x: 8.96, y: -5.12}
+    - - {x: 7.6799994, y: 1.28}
+      - {x: 0, y: 1.28}
+      - {x: 0, y: -5.12}
+      - {x: 7.6799994, y: -5.12}
+  m_VertexDistance: 0.0005
 --- !u!70 &70107543732466596
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -874,7 +932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e439194142a9e40897fad0bd0d93f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 17.92, y: 5, z: 0}
 --- !u!114 &114767694724752572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1393,7 +1450,7 @@ TilemapCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
 --- !u!156049354 &2569400266025687974
 Grid:

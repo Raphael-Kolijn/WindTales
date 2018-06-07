@@ -71,8 +71,6 @@ public class GameMaster : MonoBehaviour
     void FixedUpdate()
     {
         updateSlider();
-        // Debug.Log(DeviceManager.Instance.FlowLMin);
-        // Debug.Log(Input.GetAxis("Player_SimulateBreathingPs4"));
     }
 
     public float getBasketSpeed()

@@ -4,7 +4,7 @@ using System.Collections;
 using System;
 public class Basket : MonoBehaviour
 {
-    public GameObject score;
+    public ParticleSystem coinsystem;
     private bool goRight = true;
     private bool goLeft = false;
     private int currentScore;
@@ -13,7 +13,7 @@ public class Basket : MonoBehaviour
     void OnCollisionEnter()
     {
         currentScore++;
-        score.GetComponent<Text>().text = currentScore.ToString();
+        coinsystem.Play();
         GetComponent<AudioSource>().Play();
     }
 
@@ -38,6 +38,7 @@ public class Basket : MonoBehaviour
 
     public void Reset()
     {
+        coinsystem.Stop();
         transform.position = GameMaster.instance.getBasketStartPosition();
         GameMaster.instance.setMinimumValue(currentScore);
     }

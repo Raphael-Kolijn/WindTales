@@ -16,8 +16,6 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private GameObject basket;
     [SerializeField]
-    private bool movingBasket;
-    [SerializeField]
     private float basketSpeed;
     private Vector3 basketStartPosition;
     [Header("Ball settings")]
@@ -57,7 +55,6 @@ public class GameMaster : MonoBehaviour
         {
             instance = this;
         }
-      //  DontDestroyOnLoad(this);
     }
 
     void Start()
@@ -75,6 +72,10 @@ public class GameMaster : MonoBehaviour
 
     public float getBasketSpeed()
     {
+        if (basketSpeed < 0)
+        {
+            return 0;
+        }
         return basketSpeed;
     }
 
@@ -96,11 +97,6 @@ public class GameMaster : MonoBehaviour
     public Vector3 getBasketStartPosition()
     {
         return basketStartPosition;
-    }
-
-    public bool getMovingBasket()
-    {
-        return movingBasket;
     }
 
     private bool VectorCompare(Vector3 a, Vector3 b)

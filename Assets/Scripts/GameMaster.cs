@@ -19,7 +19,6 @@ public class GameMaster : MonoBehaviour
     private bool movingBasket;
     [SerializeField]
     private float basketSpeed;
-    [SerializeField]
     private Vector3 basketStartPosition;
     [Header("Ball settings")]
     [SerializeField]
@@ -67,6 +66,7 @@ public class GameMaster : MonoBehaviour
         minimumValue = minimumValueStart;
         highestValueReached = 0;
         minimumValueArrow.GetComponent<minimumValueArrow>().changePosition(slider, minimumValue);
+        basketStartPosition = basket.transform.position;
     }
     void FixedUpdate()
     {

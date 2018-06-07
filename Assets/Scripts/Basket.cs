@@ -12,19 +12,21 @@ public class Basket : MonoBehaviour
 
     void OnCollisionEnter()
     {
-        // als je de basket raakt
+        currentScore++;
+        score.GetComponent<Text>().text = currentScore.ToString();
+        GetComponent<AudioSource>().Play();
     }
 
     void Update()
     {
         if (GameMaster.instance.getMovingBasket() == true)
         {
-            if (transform.position.x >= 208)
+            if (transform.position.x >= 200)
             {
                 goRight = false;
                 goLeft = true;
             }
-            else if (transform.position.x <= -71)
+            else if (transform.position.x <= -76)
             {
                 goLeft = false;
                 goRight = true;
@@ -32,13 +34,6 @@ public class Basket : MonoBehaviour
             if (goRight) transform.Translate(-Vector3.right * GameMaster.instance.getBasketSpeed() * Time.deltaTime);
             else if (goLeft) transform.Translate(-Vector3.left * GameMaster.instance.getBasketSpeed() * Time.deltaTime);
         }
-    }
-
-    void OnTriggerEnter()
-    {
-        currentScore++;
-        score.GetComponent<Text>().text = currentScore.ToString();
-        GetComponent<AudioSource>().Play();
     }
 
     public void Reset()

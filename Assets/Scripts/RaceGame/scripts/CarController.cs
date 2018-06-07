@@ -51,7 +51,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public int difficulty;
         public Text snelheid;
 
-      
+        public GameObject boost;
 
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
@@ -379,9 +379,10 @@ namespace UnityStandardAssets.Vehicles.Car
         }
 
         private void OnTriggerEnter(Collider other)
-        {  
-
-            switch(other.gameObject.tag)
+        {
+            Debug.Log("ich collide");
+            Debug.Log(other.GetComponent<Renderer>().material.name);
+            switch (other.gameObject.tag)
             {
                 case "Pick Up":
                     other.GetComponent<Renderer>().enabled = false;
@@ -395,13 +396,14 @@ namespace UnityStandardAssets.Vehicles.Car
                     manager.EndGame();
                     break;
                 default:
-                    Debug.Log("default");
+                   // Debug.Log("default");
                     break;
             }
         }
 
     IEnumerator WaitForActivation()
         {
+     
             bool active = true;
             while(active)
             {

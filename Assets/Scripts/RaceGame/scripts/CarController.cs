@@ -62,10 +62,12 @@ namespace UnityStandardAssets.Vehicles.Car
         public float AccelInput { get; private set; }
         public ReadBlowInput input;
         public GameManager manager;
+        public ParticleSystem ps;
 
         // Use this for initialization
         private void Start()
         {
+   
             m_WheelMeshLocalRotations = new Quaternion[4];
             for (int i = 0; i < 4; i++)
             {
@@ -399,11 +401,12 @@ namespace UnityStandardAssets.Vehicles.Car
                    // Debug.Log("default");
                     break;
             }
+
         }
 
     IEnumerator WaitForActivation()
         {
-     
+            ps.Play();
             bool active = true;
             while(active)
             {
@@ -413,8 +416,14 @@ namespace UnityStandardAssets.Vehicles.Car
                     m_Rigidbody.velocity += forceToAdd;
                     active = false;
                 }
-                yield return new WaitForFixedUpdate();
+
+                //   yield return new WaitForFixedUpdate();
+                yield return new WaitForSeconds(3f);
+                ps.Stop();
+                Debug.Log("stopppp");
             }
+
+     
         }
 
         public void StopDrive()

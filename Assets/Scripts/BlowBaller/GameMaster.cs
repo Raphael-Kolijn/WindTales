@@ -72,7 +72,7 @@ public class GameMaster : MonoBehaviour
 
     public float getBasketSpeed()
     {
-        if (basketSpeed < 0)
+        if (basketSpeed < 0) // negatieve waardes: basket andere kant op, verdwijnd uit beeld
         {
             return 0;
         }

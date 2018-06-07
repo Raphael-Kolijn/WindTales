@@ -4,7 +4,10 @@ using System.Collections;
 using System;
 public class Basket : MonoBehaviour
 {
-    public ParticleSystem coinsystem;
+    [SerializeField]
+    private CoinScript coinManager;
+    [SerializeField]
+    private ParticleSystem coinsystem;
     private bool goRight = true;
     private bool goLeft = false;
     private int currentScore;
@@ -13,6 +16,7 @@ public class Basket : MonoBehaviour
     void OnCollisionEnter()
     {
         currentScore++;
+        coinManager.AddCoins(1);
         coinsystem.Play();
         GetComponent<AudioSource>().Play();
     }

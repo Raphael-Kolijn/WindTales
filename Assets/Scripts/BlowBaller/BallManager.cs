@@ -7,7 +7,7 @@ public class BallManager : MonoBehaviour
 
     IEnumerator ResetWait()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(GameMaster.instance.getResetSec());
         ResetBall();
     }
 

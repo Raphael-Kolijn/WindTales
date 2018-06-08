@@ -32,6 +32,8 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private Slider slider;
     [SerializeField]
+    private int ruisValue;
+    [SerializeField]
     private GameObject minimumValueArrow;
     [SerializeField]
     private float arrowSpeed;
@@ -39,6 +41,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private DeviceManager.DeviceType deviceType;
     private int currentScore;
+    
 
 
 
@@ -159,20 +162,23 @@ public class GameMaster : MonoBehaviour
         {
             slider.value = (float)System.Math.Round(DeviceManager.Instance.FlowLMin, 1) - ((float)System.Math.Round(DeviceManager.Instance.FlowLMin, 1) * 2);
             Debug.Log("slider: " + slider.value);
-            if (slider.value >= highestValueReached)
+            if (slider.value > ruisValue)
             {
-                highestValueReached = (int)slider.value;
-                if (highestValueReached >= minimumValue)
+                if (slider.value >= highestValueReached)
                 {
-                    Debug.Log("raak");
-                    ball.GetComponent<BallManager>().ShootBall(0);
+                    highestValueReached = (int)slider.value;
+                    if (highestValueReached >= minimumValue)
+                    {
+                        Debug.Log("raak");
+                        ball.GetComponent<BallManager>().ShootBall(0);
+                    }
                 }
-            }
-            else if (slider.value < highestValueReached)
-            {
-                
-                Debug.Log("mis");
-                ball.GetComponent<BallManager>().ShootBall(-20);
+                else if (slider.value < highestValueReached)
+                {
+
+                    Debug.Log("mis");
+                    ball.GetComponent<BallManager>().ShootBall(-20);
+                }
             }
 
         }

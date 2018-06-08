@@ -1931,8 +1931,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 872638321}
   m_LocalRotation: {x: -0.00023748583, y: 0.7161188, z: 0.6979783, w: 0.00023146548}
-  m_LocalPosition: {x: 42.9, y: 43.8, z: 80.336}
-  m_LocalScale: {x: -1.4024768, y: 0.33835527, z: 1.4875752}
+  m_LocalPosition: {x: 32, y: 50, z: 80}
+  m_LocalScale: {x: -1.051859, y: 0.33835527, z: 1.1341537}
   m_Children:
   - {fileID: 815389196}
   - {fileID: 2065040409}
@@ -6933,14 +6933,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f272f360da1572e44a8df419f2079c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumValueStart: 75
+  minimumValueStart: 30
   difficulty: 2
+  resetSec: 4
   basket: {fileID: 872638321}
-  basketSpeed: 30
+  basketSpeed: 0
   ball: {fileID: 1462896136}
   ballThrowSpeed: {x: 0, y: 90, z: 50}
   ballGravity: {x: 0, y: -50, z: 0}
   slider: {fileID: 766043574}
+  ruisValue: 10
   minimumValueArrow: {fileID: 1010054778}
   arrowSpeed: 1
   deviceType: 3

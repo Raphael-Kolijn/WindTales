@@ -27,7 +27,7 @@ public class Basket : MonoBehaviour
             goRight = false;
             goLeft = true;
         }
-        else if (transform.position.x <= -76)
+        else if (transform.position.x <= -120)
         {
             goLeft = false;
             goRight = true;

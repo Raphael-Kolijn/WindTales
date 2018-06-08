@@ -419,8 +419,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
             transform.position = target.position;
             transform.eulerAngles = new Vector3(0, 0, 0);
-          //  Vector3 dir = target.position - transform.position;
-           // transform.Translate(dir.normalized * 10f * Time.deltaTime, Space.World);
+
         }
 
         private void Update()

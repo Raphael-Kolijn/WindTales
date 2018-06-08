@@ -10,12 +10,11 @@ public class Basket : MonoBehaviour
     private ParticleSystem coinsystem;
     private bool goRight = true;
     private bool goLeft = false;
-    private int currentScore;
 
 
     void OnCollisionEnter()
     {
-        currentScore++;
+        GameMaster.instance.scorePlusPlus();
         coinManager.AddCoins(1);
         coinsystem.Play();
         GetComponent<AudioSource>().Play();
@@ -28,7 +27,7 @@ public class Basket : MonoBehaviour
             goRight = false;
             goLeft = true;
         }
-        else if (transform.position.x <= -76)
+        else if (transform.position.x <= -120)
         {
             goLeft = false;
             goRight = true;
@@ -39,8 +38,9 @@ public class Basket : MonoBehaviour
 
     public void Reset()
     {
+        GameMaster.instance.setBasketSpeed();
         coinsystem.Stop();
         transform.position = GameMaster.instance.getBasketStartPosition();
-        GameMaster.instance.setMinimumValue(currentScore);
+        GameMaster.instance.setMinimumValue();
     }
 }

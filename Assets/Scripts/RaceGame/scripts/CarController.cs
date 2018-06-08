@@ -213,8 +213,8 @@ namespace UnityStandardAssets.Vehicles.Car
             switch (m_CarDriveType)
             {
                 case CarDriveType.FourWheelDrive:
-                    thrustTorque = accel * (m_CurrentTorque / 4f);
-                    thrustTorque = 250;
+                  //  thrustTorque = accel * (m_CurrentTorque / 4f);
+                    thrustTorque = 200;
                     Debug.Log(thrustTorque);
                     for (int i = 0; i < 4; i++)
                     {
@@ -380,10 +380,14 @@ namespace UnityStandardAssets.Vehicles.Car
             return false;
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log("collision ");
+            Debug.Log(collision.gameObject.name);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("ich collide");
-            Debug.Log(other.GetComponent<Renderer>().material.name);
             switch (other.gameObject.tag)
             {
                 case "Pick Up":
@@ -418,9 +422,9 @@ namespace UnityStandardAssets.Vehicles.Car
                 }
 
                 //   yield return new WaitForFixedUpdate();
-                yield return new WaitForSeconds(3f);
-                ps.Stop();
-                Debug.Log("stopppp");
+                yield return new WaitForFixedUpdate();
+              //  ps.Stop();
+              //  Debug.Log("stopppp");
             }
 
      

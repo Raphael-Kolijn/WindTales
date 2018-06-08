@@ -11,6 +11,7 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
     {
         AIRNEXT,
         CONTROLLER,
+        PSCONTROLLER,
         KUEFFNER
     }
 
@@ -90,31 +91,37 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
     /// </summary>
     private void Init()
     {
-        //Debug.Log("Init device manager");
+        Debug.Log("Init device manager");
         InitMinMax();
 
         if (spiroController != null) //Disconnect with current device before establishing new connection
         {
-            //Debug.Log("return want spiro is niet null");
+            Debug.Log("return want spiro is niet null");
             spiroController.DisconnectDevice();
             Invoke("Init", 0.5f); //Call init again after 0.5 seconds (delay to make sure device has time to disconnect)
             return;
         }
-        //Debug.Log("Ik ga langs de if statements");
+        Debug.Log("Ik ga langs de if statements");
         if (deviceType == DeviceType.AIRNEXT)
         {
-            //Debug.Log("Ik ben een airnext");
+            Debug.Log("Ik ben een airnext");
             spiroController = new BLESpiroController();
         }
         if (deviceType == DeviceType.CONTROLLER)
         {
-            //Debug.Log("Ik ben een controller");
+            Debug.Log("Ik ben een controller");
+            spiroController = new SimulatedSpiroController();
+        }
+
+        if (deviceType == DeviceType.PSCONTROLLER)
+        {
+            Debug.Log("Ik ben een Playstation controller");
             spiroController = new SimulatedSpiroController();
         }
 
         if (deviceType == DeviceType.KUEFFNER)
         {
-            //Debug.Log("Ik ben een spiro");
+            Debug.Log("Ik ben een spiro");
             spiroController = new USBSpiroController();
         }
 
@@ -216,4 +223,10 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
             DisconnectSpirometer();
         }
     }
+
+    public DeviceType GetDeviceType()
+    {
+        return deviceType;
+    }
+      
 }

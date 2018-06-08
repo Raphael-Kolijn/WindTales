@@ -51,7 +51,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public int difficulty;
         public Text snelheid;
 
-      
+        public GameObject boost;
 
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
@@ -62,10 +62,12 @@ namespace UnityStandardAssets.Vehicles.Car
         public float AccelInput { get; private set; }
         public ReadBlowInput input;
         public GameManager manager;
+        public ParticleSystem ps;
 
         // Use this for initialization
         private void Start()
         {
+   
             m_WheelMeshLocalRotations = new Quaternion[4];
             for (int i = 0; i < 4; i++)
             {
@@ -379,9 +381,10 @@ namespace UnityStandardAssets.Vehicles.Car
         }
 
         private void OnTriggerEnter(Collider other)
-        {  
-
-            switch(other.gameObject.tag)
+        {
+            Debug.Log("ich collide");
+            Debug.Log(other.GetComponent<Renderer>().material.name);
+            switch (other.gameObject.tag)
             {
                 case "Pick Up":
                     other.GetComponent<Renderer>().enabled = false;
@@ -395,13 +398,15 @@ namespace UnityStandardAssets.Vehicles.Car
                     manager.EndGame();
                     break;
                 default:
-                    Debug.Log("default");
+                   // Debug.Log("default");
                     break;
             }
+
         }
 
     IEnumerator WaitForActivation()
         {
+            ps.Play();
             bool active = true;
             while(active)
             {
@@ -411,8 +416,14 @@ namespace UnityStandardAssets.Vehicles.Car
                     m_Rigidbody.velocity += forceToAdd;
                     active = false;
                 }
-                yield return new WaitForFixedUpdate();
+
+                //   yield return new WaitForFixedUpdate();
+                yield return new WaitForSeconds(3f);
+                ps.Stop();
+                Debug.Log("stopppp");
             }
+
+     
         }
 
         public void StopDrive()

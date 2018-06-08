@@ -25,7 +25,16 @@ public class SimulatedSpiroController : SpiroController
     public override void UpdateSpiroController()
     {
 #if (!UNITY_ANDROID && !UNITY_IOS) || UNITY_EDITOR
-        DeviceManager.Instance.FlowLMin = DeviceManager.Instance.MaxFlowLMin * -Input.GetAxis("Player_SimulateBreathing");
+        if (DeviceManager.Instance.GetDeviceType() == DeviceManager.DeviceType.PSCONTROLLER)
+        {
+            DeviceManager.Instance.FlowLMin = DeviceManager.Instance.MaxFlowLMin * Input.GetAxis("Player_SimulateBreathingPs4");
+           // Debug.Log(DeviceManager.Instance.FlowLMin);
+        }
+        else
+        {
+            DeviceManager.Instance.FlowLMin = DeviceManager.Instance.MaxFlowLMin * -Input.GetAxis("Player_SimulateBreathing");
+        }
+       
 #else
             if(Input.GetButton("Player_SimulateBreathingMobile") && Input.GetAxisRaw("Player_SimulateBreathingMobile") > 0)
             {

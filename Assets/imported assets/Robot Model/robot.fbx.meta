@@ -1,0 +1,242 @@
+fileFormatVersion: 2
+guid: 3b94e1d7186eb1242bb4d843ce262b7f
+timeCreated: 1528359966
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Camera
+    100002: Cone
+    100004: Cone.001
+    100006: Cube.001
+    100008: Cube.002
+    100010: Cube.003
+    100012: Cube.004
+    100014: Cube.005
+    100016: Cylinder
+    100018: Cylinder.001
+    100020: Cylinder.002
+    100022: Cylinder.003
+    100024: Cylinder.004
+    100026: Cylinder.005
+    100028: Cylinder.006
+    100030: Cylinder.007
+    100032: Cylinder.008
+    100034: Grid
+    100036: kadis
+    100038: kadis.001
+    100040: kadis.002
+    100042: kadis.003
+    100044: kadis.004
+    100046: kadis.005
+    100048: kadis.006
+    100050: kaf
+    100052: Lamp
+    100054: Lamp.001
+    100056: Lamp.002
+    100058: //RootNode
+    100060: Sphere
+    100062: Sphere.001
+    100064: Sphere.002
+    400000: Camera
+    400002: Cone
+    400004: Cone.001
+    400006: Cube.001
+    400008: Cube.002
+    400010: Cube.003
+    400012: Cube.004
+    400014: Cube.005
+    400016: Cylinder
+    400018: Cylinder.001
+    400020: Cylinder.002
+    400022: Cylinder.003
+    400024: Cylinder.004
+    400026: Cylinder.005
+    400028: Cylinder.006
+    400030: Cylinder.007
+    400032: Cylinder.008
+    400034: Grid
+    400036: kadis
+    400038: kadis.001
+    400040: kadis.002
+    400042: kadis.003
+    400044: kadis.004
+    400046: kadis.005
+    400048: kadis.006
+    400050: kaf
+    400052: Lamp
+    400054: Lamp.001
+    400056: Lamp.002
+    400058: //RootNode
+    400060: Sphere
+    400062: Sphere.001
+    400064: Sphere.002
+    2000000: Camera
+    2100000: Material
+    2100002: No Name
+    2100004: Material.001
+    2100006: Material.010
+    2100008: Material.011
+    2100010: Material.009
+    2100012: Material.002
+    2100014: Material.008
+    2100016: Material.007
+    2100018: Material.006
+    2100020: Material.004
+    2100022: Material.005
+    2100024: Material.003
+    2300000: Cone
+    2300002: Cone.001
+    2300004: Cube.001
+    2300006: Cube.002
+    2300008: Cube.003
+    2300010: Cube.004
+    2300012: Cube.005
+    2300014: Cylinder
+    2300016: Cylinder.001
+    2300018: Cylinder.002
+    2300020: Cylinder.003
+    2300022: Cylinder.004
+    2300024: Cylinder.005
+    2300026: Cylinder.006
+    2300028: Cylinder.007
+    2300030: Cylinder.008
+    2300032: Grid
+    2300034: kadis
+    2300036: kadis.001
+    2300038: kadis.002
+    2300040: kadis.003
+    2300042: kadis.004
+    2300044: kadis.005
+    2300046: kadis.006
+    2300048: kaf
+    2300050: Sphere
+    2300052: Sphere.001
+    2300054: Sphere.002
+    3300000: Cone
+    3300002: Cone.001
+    3300004: Cube.001
+    3300006: Cube.002
+    3300008: Cube.003
+    3300010: Cube.004
+    3300012: Cube.005
+    3300014: Cylinder
+    3300016: Cylinder.001
+    3300018: Cylinder.002
+    3300020: Cylinder.003
+    3300022: Cylinder.004
+    3300024: Cylinder.005
+    3300026: Cylinder.006
+    3300028: Cylinder.007
+    3300030: Cylinder.008
+    3300032: Grid
+    3300034: kadis
+    3300036: kadis.001
+    3300038: kadis.002
+    3300040: kadis.003
+    3300042: kadis.004
+    3300044: kadis.005
+    3300046: kadis.006
+    3300048: kaf
+    3300050: Sphere
+    3300052: Sphere.001
+    3300054: Sphere.002
+    4300000: kaf
+    4300002: Grid
+    4300004: Sphere.002
+    4300006: Sphere.001
+    4300008: Cylinder.008
+    4300010: Cone.001
+    4300012: kadis.006
+    4300014: Cube.005
+    4300016: Cube.004
+    4300018: Cylinder.007
+    4300020: Cylinder.006
+    4300022: Cylinder.005
+    4300024: Cube.003
+    4300026: Sphere
+    4300028: Cube.002
+    4300030: Cube.001
+    10800000: Lamp
+    10800002: Lamp.001
+    10800004: Lamp.002
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

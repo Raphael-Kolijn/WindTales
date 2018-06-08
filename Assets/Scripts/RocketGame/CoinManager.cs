@@ -11,8 +11,12 @@ public class CoinManager : MonoBehaviour
     public void AddCoin(GameObject coin)
     {
         coins++;
-        Destroy(coin);
-
+        if (coin)
+        {
+            Destroy(coin);
+        }
         text.text = coins.ToString();
     }
+
+
 }

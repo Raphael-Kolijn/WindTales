@@ -30,6 +30,7 @@ public class PlayerController2D : MonoBehaviour
     private bool m_Jump;
 
     [Header("gameplay options")]
+    public bool useExternalController = false;
     [SerializeField]
     private DeviceManager.DeviceType deviceType;
 
@@ -37,22 +38,22 @@ public class PlayerController2D : MonoBehaviour
 
     [SerializeField]
     [Tooltip("The amount which the player needs to blow in order to jump")]
-    private double blowthreshold;
-
-    float originalGravity;
-    private bool isLongJumping = false;
+    private double blowthreshold = 10f;
+    public bool inBlowZone;
 
     private void Awake()
     {
-        //setting up the controller
-        DeviceManager.Instance.SetDeviceType(deviceType);
+        if (useExternalController)
+        {
+            //setting up the controller
+            DeviceManager.Instance.SetDeviceType(deviceType);
+        }
 
         // Setting up references.
         m_GroundCheck = transform.GetChild(0); //transform.Find("GroundCheck");
         m_CeilingCheck = transform.GetChild(1);  //transform.Find("CeilingCheck");
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
-        originalGravity = m_Rigidbody2D.gravityScale;
     }
 
     private void Update()
@@ -61,18 +62,24 @@ public class PlayerController2D : MonoBehaviour
         if (!m_Jump)
         {
             // Read the jump input in Update so button presses aren't missed.
-
-            flowRate = DeviceManager.Instance.FlowLMin;
-
-            flowRate = System.Math.Round(flowRate, 1);
-            if (deviceType == DeviceManager.DeviceType.KUEFFNER)
+            if (useExternalController)
             {
-                flowRate *= -1;
+                flowRate = DeviceManager.Instance.FlowLMin;
+
+                flowRate = System.Math.Round(flowRate, 1);
+                if (deviceType == DeviceManager.DeviceType.KUEFFNER)
+                {
+                    flowRate *= -1;
+                }
             }
 
             if (CrossPlatformInputManager.GetButton("Jump"))
             {
                 flowRate = 199;
+            }
+            else
+            {
+                flowRate = 0;
             }
 
             if (m_Grounded && flowRate >= blowthreshold)
@@ -113,20 +120,17 @@ public class PlayerController2D : MonoBehaviour
         m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
         // Move the character
-        if (m_Grounded)
+        //if (inBlowZone)
+        //{
+
+        //}
+        /*else*/ if (m_Grounded)
         {
             m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
         }
         else
         {
-            if (isLongJumping)
-            {
-                m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed * m_JumpSpeedMultiplier * 3, m_Rigidbody2D.velocity.y);
-            }
-            else
-            {
-                m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed * m_JumpSpeedMultiplier, m_Rigidbody2D.velocity.y);
-            }
+            m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed * m_JumpSpeedMultiplier, m_Rigidbody2D.velocity.y);
         }
 
         // If the input is moving the player right and the player is facing left...
@@ -149,7 +153,7 @@ public class PlayerController2D : MonoBehaviour
             m_Grounded = false;
             m_Anim.SetBool("Ground", false);
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-            
+
         }
     }
 
@@ -164,7 +168,7 @@ public class PlayerController2D : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
-    
+
 
 }
 

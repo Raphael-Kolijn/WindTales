@@ -8,6 +8,7 @@ public class BlowZone : MonoBehaviour {
 
     public Image blowIcon;
     private BoxCollider2D col;
+    PlayerController2D player;
 
     private void Start()
     {
@@ -24,6 +25,14 @@ public class BlowZone : MonoBehaviour {
         //Debug.Log(collision.transform.name);
         if (collision.transform.CompareTag("Player"))
         {
+            //if (!player)
+            //{
+            //    if (player = collision.gameObject.GetComponent<PlayerController2D>())
+            //    {
+            //        player.inBlowZone = true;
+            //    }
+            //}
+            
             StartCoroutine(displayBlowIcon());
         }
     }

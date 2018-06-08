@@ -16,7 +16,7 @@ public class LookAtObject : MonoBehaviour
         // Set Y the same to make the rotations turret-like:
         direction.y = transform.position.y;
 
-        var rot = Quaternion.LookRotation(direction, Vector3.up);
+        var rot = Quaternion.LookRotation(direction, Vector3.forward);
         transform.rotation = Quaternion.RotateTowards(
                                          transform.rotation,
                                          rot,

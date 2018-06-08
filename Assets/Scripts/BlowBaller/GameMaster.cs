@@ -43,12 +43,6 @@ public class GameMaster : MonoBehaviour
     private int currentScore;
     
 
-
-
-
-
-
-
     public static GameMaster instance;
 
 

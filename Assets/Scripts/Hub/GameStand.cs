@@ -13,17 +13,40 @@ public class GameStand : TappableObject
     public string GameScene;
     public Sprite Thumbnail;
     [Range(1, 15)] public int MaxDailyPlayCount;
+    public GameStand PreviousGame;
 
     public Popup ClosedPopup;
     public Popup LockedPopup;
-    private PlayCountPersistor playCount;
+    public PlayCountPersistor playCount;
+
+
+    private void Awake()
+    {
+        playCount = new PlayCountPersistor(Name);
+    }
 
     // Use this for initialization
     void Start()
     {
-        InitialiseTrigger();
-        playCount = new PlayCountPersistor(Name);
+        InitialiseTrigger();        
+
         ShowPopup(ClosedPopup, false);
+        
+        if (PreviousGame == null)
+        {
+            IsUnlocked = true;
+        }
+        else
+        {
+            if (PreviousGame.playCount.GetTotalPlayCount() > 1)
+            {
+                IsUnlocked = true;
+            }
+            else
+            {
+                IsUnlocked = false;
+            }     
+        }
 
         if (playCount.GetPlayCount() <= MaxDailyPlayCount)
         {

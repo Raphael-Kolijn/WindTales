@@ -52,6 +52,8 @@ namespace UnityStandardAssets.Vehicles.Car
         public Text snelheid;
 
         public GameObject boost;
+        private Transform target;
+        public GameObject[] waypoints;
 
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
@@ -83,7 +85,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void FixedUpdate()
         {
-            snelheid.text = "Force: " + m_Rigidbody.velocity.x.ToString();
+            
         }
 
         private void GearChanging()
@@ -382,8 +384,58 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("collision ");
-            Debug.Log(collision.gameObject.name);
+            
+            if (collision.gameObject.name == "mais")
+            {
+                PlaceBackOnRoad();
+            }
+;
+          
+        }
+
+        private void PlaceBackOnRoad()
+        {
+            float shortestDistance = Mathf.Infinity;
+            GameObject nearestWaypoint = null;
+
+            foreach (GameObject wayPoint in waypoints)
+            {
+                float distance = Vector3.Distance(transform.position, wayPoint.transform.position);
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestWaypoint = wayPoint;
+                }
+            }
+
+            if (nearestWaypoint != null)
+            {
+                target = nearestWaypoint.transform;
+            }
+            else
+            {
+                target = null;
+            }
+
+            transform.position = target.position;
+            transform.eulerAngles = new Vector3(0, 0, 0);
+          //  Vector3 dir = target.position - transform.position;
+           // transform.Translate(dir.normalized * 10f * Time.deltaTime, Space.World);
+        }
+
+        private void Update()
+        {
+            waypoints = new GameObject[WayPoint.wayPoints.Length];
+
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                waypoints[i] = WayPoint.wayPoints[i].gameObject;
+            }
+
+            if (target == null)
+            {
+                return;
+            }
         }
 
         private void OnTriggerEnter(Collider other)

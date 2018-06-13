@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/BlowBaller.unity
     guid: a47a69a5b922ca54bae998c34c9d05c7
+  - enabled: 1
+    path: Assets/Scenes/Racing_Game.unity
+    guid: 90e81b2f8283cd54d944e4039bd22f72

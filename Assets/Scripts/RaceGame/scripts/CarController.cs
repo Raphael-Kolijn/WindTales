@@ -52,6 +52,8 @@ namespace UnityStandardAssets.Vehicles.Car
         public Text snelheid;
 
         public GameObject boost;
+        private Transform target;
+        public GameObject[] waypoints;
 
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
@@ -83,7 +85,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void FixedUpdate()
         {
-            snelheid.text = "Force: " + m_Rigidbody.velocity.x.ToString();
+            
         }
 
         private void GearChanging()
@@ -213,8 +215,8 @@ namespace UnityStandardAssets.Vehicles.Car
             switch (m_CarDriveType)
             {
                 case CarDriveType.FourWheelDrive:
-                    thrustTorque = accel * (m_CurrentTorque / 4f);
-                    thrustTorque = 250;
+                  //  thrustTorque = accel * (m_CurrentTorque / 4f);
+                    thrustTorque = 200;
                     Debug.Log(thrustTorque);
                     for (int i = 0; i < 4; i++)
                     {
@@ -380,10 +382,63 @@ namespace UnityStandardAssets.Vehicles.Car
             return false;
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            
+            if (collision.gameObject.name == "mais")
+            {
+                PlaceBackOnRoad();
+            }
+;
+          
+        }
+
+        private void PlaceBackOnRoad()
+        {
+            float shortestDistance = Mathf.Infinity;
+            GameObject nearestWaypoint = null;
+
+            foreach (GameObject wayPoint in waypoints)
+            {
+                float distance = Vector3.Distance(transform.position, wayPoint.transform.position);
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestWaypoint = wayPoint;
+                }
+            }
+
+            if (nearestWaypoint != null)
+            {
+                target = nearestWaypoint.transform;
+            }
+            else
+            {
+                target = null;
+            }
+
+            transform.position = target.position;
+            transform.eulerAngles = new Vector3(0, 0, 0);
+
+        }
+
+        private void Update()
+        {
+            waypoints = new GameObject[WayPoint.wayPoints.Length];
+
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                waypoints[i] = WayPoint.wayPoints[i].gameObject;
+            }
+
+            if (target == null)
+            {
+                return;
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("ich collide");
-            Debug.Log(other.GetComponent<Renderer>().material.name);
             switch (other.gameObject.tag)
             {
                 case "Pick Up":
@@ -418,9 +473,9 @@ namespace UnityStandardAssets.Vehicles.Car
                 }
 
                 //   yield return new WaitForFixedUpdate();
-                yield return new WaitForSeconds(3f);
-                ps.Stop();
-                Debug.Log("stopppp");
+                yield return new WaitForFixedUpdate();
+              //  ps.Stop();
+              //  Debug.Log("stopppp");
             }
 
      

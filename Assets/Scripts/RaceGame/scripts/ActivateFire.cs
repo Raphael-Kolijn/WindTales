@@ -6,28 +6,35 @@ public class ActivateFire : MonoBehaviour {
 
 
     public GameObject rightBoost;
-    public GameObject ps;
-    private ParticleSystem particle;
+    public GameObject leftBoost;
+    public GameObject psLeft;
+    public GameObject psRight;
+    private ParticleSystem particleLeft;
+    private ParticleSystem particleRight;
 
     private void Start()
     {
 
-   
+        
         rightBoost.GetComponent<MeshRenderer>().enabled = false;
+        leftBoost.GetComponent<MeshRenderer>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-     
-        //   particle = ps.GetComponent<ParticleSystem>();
-        //  particle.Play();
-        if (other.gameObject.CompareTag("Player"))
+        Debug.Log("HEH?");
+   
+        particleLeft = psLeft.GetComponent<ParticleSystem>();
+        particleRight = psRight.GetComponent<ParticleSystem>();
+        if (other.gameObject.CompareTag("Speed up"))
         {
+            particleLeft.Play();
+            particleRight.Play();
             Debug.Log("boost activated");
             StartCoroutine(ActivateBoost());
+
         }
-        Debug.Log(rightBoost.GetComponent<MeshRenderer>().enabled);
-    }
+     }
 
     IEnumerator ActivateBoost()
     {
@@ -36,11 +43,16 @@ public class ActivateFire : MonoBehaviour {
         while (paniek)
         {
             rightBoost.GetComponent<MeshRenderer>().enabled = true;
+            leftBoost.GetComponent<MeshRenderer>().enabled = true;
             Debug.Log(rightBoost.GetComponent<MeshRenderer>().enabled);
             yield return new WaitForSecondsRealtime(5f);
 
-            //rightBoost.GetComponent<MeshRenderer>().enabled = false;
+            rightBoost.GetComponent<MeshRenderer>().enabled = false;
+            leftBoost.GetComponent<MeshRenderer>().enabled = false;
+            particleLeft.Stop();
+            particleRight.Stop();
             paniek = false;
+
         }
 
 

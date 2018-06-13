@@ -43,7 +43,6 @@ public class PlayCountPersistor
 	public int GetTotalPlayCount()
 	{
 		var playCount = 0;
-		Debug.Log(data.PlayCount.Count);
 		foreach (var i in data.PlayCount)
 		{
 			playCount += i.Value;

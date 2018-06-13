@@ -12,6 +12,9 @@ public class GameMaster : MonoBehaviour
     private int difficulty;
     private int minimumValue;
     private int highestValueReached;
+    [Header("Reset Settings")]
+    [SerializeField]
+    private float resetSec;
     [Header("Basket settings")]
     [SerializeField]
     private GameObject basket;
@@ -29,18 +32,16 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private Slider slider;
     [SerializeField]
+    private int ruisValue;
+    [SerializeField]
     private GameObject minimumValueArrow;
     [SerializeField]
     private float arrowSpeed;
     [Header("Controller settings")]
     [SerializeField]
     private DeviceManager.DeviceType deviceType;
-
-
-
-
-
-
+    private int currentScore;
+    
 
     public static GameMaster instance;
 
@@ -99,6 +100,10 @@ public class GameMaster : MonoBehaviour
         return basketStartPosition;
     }
 
+    public void scorePlusPlus()
+    {
+        currentScore++;
+    }
     private bool VectorCompare(Vector3 a, Vector3 b)
     {
         if (Mathf.Round(a.x) == Mathf.Round(b.x)
@@ -110,11 +115,11 @@ public class GameMaster : MonoBehaviour
         return false;
     }
 
-    public void setMinimumValue(int score)
+    public void setMinimumValue()
     {
-        if (score > 0)
+        if (currentScore > 0)
         {
-            minimumValue = minimumValueStart + (difficulty * score);
+            minimumValue = minimumValueStart + (difficulty * currentScore);
             minimumValueArrow.GetComponent<minimumValueArrow>().changePosition(slider, minimumValue);
             
         }
@@ -127,24 +132,47 @@ public class GameMaster : MonoBehaviour
         basket.GetComponent<Basket>().Reset();
     }
 
+    public void setBasketSpeed()
+    {
+        if (currentScore <= 0)
+        {
+            basketSpeed = 0;
+        }
+        else
+        {
+            basketSpeed = 30 + (10 * currentScore);
+        }
+
+    }
+
+    public float getResetSec()
+    {
+        return resetSec;
+    }
+
     public void updateSlider()
     {
         if (VectorCompare(ball.transform.position, ball.GetComponent<BallManager>().getStartPosition()) == true)
         {
-            slider.value = (float)System.Math.Round(DeviceManager.Instance.FlowLMin, 1);
-            if (slider.value >= highestValueReached)
+            slider.value = (float)System.Math.Round(DeviceManager.Instance.FlowLMin, 1) - ((float)System.Math.Round(DeviceManager.Instance.FlowLMin, 1) * 2);
+            Debug.Log("slider: " + slider.value);
+            if (slider.value > ruisValue)
             {
-                highestValueReached = (int)slider.value;
-                if (highestValueReached >= minimumValue)
+                if (slider.value >= highestValueReached)
                 {
-                    Debug.Log("raak");
-                    ball.GetComponent<BallManager>().ShootBall(0);
+                    highestValueReached = (int)slider.value;
+                    if (highestValueReached >= minimumValue)
+                    {
+                        Debug.Log("raak");
+                        ball.GetComponent<BallManager>().ShootBall(0);
+                    }
                 }
-            }
-            else if (slider.value < highestValueReached)
-            {
-                Debug.Log("mis");
-                ball.GetComponent<BallManager>().ShootBall(-20);
+                else if (slider.value < highestValueReached)
+                {
+
+                    Debug.Log("mis");
+                    ball.GetComponent<BallManager>().ShootBall(-20);
+                }
             }
 
         }

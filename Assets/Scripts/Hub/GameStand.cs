@@ -19,6 +19,8 @@ public class GameStand : TappableObject
     public Popup LockedPopup;
     public PlayCountPersistor playCount;
 
+    public LevelChanger LevelChanger;
+
 
     private void Awake()
     {
@@ -80,9 +82,9 @@ public class GameStand : TappableObject
         if (playCount.GetPlayCount() <= MaxDailyPlayCount)
         {
             try
-            {
+            {               
                 playCount.IncreasePlayCount();
-                SceneManager.LoadScene(GameScene);
+                LevelChanger.FadeToLevel(GameScene);
             }
             catch (Exception e)
             {

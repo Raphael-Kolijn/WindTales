@@ -111,7 +111,9 @@ public class GameStand : TappableObject
     {
         if (IsOpen && IsUnlocked)
         {
+            AudioManager.PlaySound("MenuOpen");
             _uiInstance.GetComponent<GameStandUi>().SetInfo(this);
+            _uiInstance.GetComponent<GameStandUi>().AudioManager = AudioManager;
             _uiInstance.SetActive(true);
         }
         else if (!IsUnlocked)

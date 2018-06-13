@@ -1238,6 +1238,7 @@ MonoBehaviour:
   _enterRadius: 5.3
   _ui: {fileID: 1655926165498892, guid: 347c2007d2f971f44a71587965633566, type: 2}
   _uiInstance: {fileID: 0}
+  AudioManager: {fileID: 0}
   IsUnlocked: 0
   IsOpen: 0
   Name: Rocket Game
@@ -2030,6 +2031,55 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: a1a7509b54bd43f419a62ac8f42155fc, type: 2}
   m_PrefabInternal: {fileID: 309688540}
+--- !u!1 &311822385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 311822387}
+  - component: {fileID: 311822386}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &311822386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311822385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51c450952ed66d49b00b8a1e0793043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: ee78e97893eb85d4ab4b5f9338c9236c, type: 3}
+    source: {fileID: 0}
+  - name: MenuOpen
+    clip: {fileID: 8300000, guid: 4d8d1fa1ebb84734aa66a5ccbf385c09, type: 3}
+    source: {fileID: 0}
+  mixerGroup: {fileID: 243339657761712728, guid: 7dfa844d6f9f45f499f638c57f3c04e9,
+    type: 2}
+--- !u!4 &311822387
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311822385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 210.51933, y: 55.32271, z: 148.48152}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &314315184 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400006, guid: 3313859500bf5d748b9006e0923960bb, type: 2}
@@ -2506,6 +2556,7 @@ MonoBehaviour:
   _enterRadius: 5
   _ui: {fileID: 1655926165498892, guid: 347c2007d2f971f44a71587965633566, type: 2}
   _uiInstance: {fileID: 0}
+  AudioManager: {fileID: 0}
   IsUnlocked: 1
   IsOpen: 0
   Name: SideScroller
@@ -15367,8 +15418,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243845292966001192, guid: 7dfa844d6f9f45f499f638c57f3c04e9,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 3e118fd6cdc7216409d85126bbdfc340, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: a784c8f3b58c5b24a9d1dd9d8945030f, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -15515,6 +15566,7 @@ MonoBehaviour:
   _enterRadius: 10.85
   _ui: {fileID: 1420381294455722, guid: 272cf48edce4d8a468582061c96ed432, type: 2}
   _uiInstance: {fileID: 0}
+  AudioManager: {fileID: 0}
   Items:
   - {fileID: 1038317575}
   - {fileID: 1215074952}
@@ -16366,6 +16418,7 @@ MonoBehaviour:
   _enterRadius: 6.8
   _ui: {fileID: 1655926165498892, guid: 347c2007d2f971f44a71587965633566, type: 2}
   _uiInstance: {fileID: 0}
+  AudioManager: {fileID: 311822386}
   IsUnlocked: 0
   IsOpen: 0
   Name: Race Game
@@ -20078,6 +20131,7 @@ MonoBehaviour:
   _enterRadius: 5
   _ui: {fileID: 1655926165498892, guid: 347c2007d2f971f44a71587965633566, type: 2}
   _uiInstance: {fileID: 0}
+  AudioManager: {fileID: 0}
   IsUnlocked: 0
   IsOpen: 0
   Name: BlowBaller

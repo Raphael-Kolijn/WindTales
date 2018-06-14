@@ -6,7 +6,7 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerController2DRocket : MonoBehaviour {
 
     [SerializeField]
-    private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.   
+    public float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.   
    
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.

@@ -8777,7 +8777,7 @@ MonoBehaviour:
   ruisValue: 10
   minimumValueArrow: {fileID: 1010054778}
   arrowSpeed: 1
-  deviceType: 1
+  deviceType: 3
   SettingsActiveOnStart: 0
   panel: {fileID: 1825709145}
 --- !u!4 &1997077182

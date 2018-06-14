@@ -758,7 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be60c90ef7085ad47959aeb40632046e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deviceType: 1
+  deviceType: 3
   flowRate: 0
   inhaleThreshold: 0
 --- !u!58 &1170948419

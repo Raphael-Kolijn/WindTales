@@ -53,6 +53,7 @@ public class CoinSpawner : MonoBehaviour
         newPosition.y = Rocket.transform.position.y + 20f;
         newCoin = Instantiate(Coin);
         newCoin.transform.position = newPosition;
+        newCoin.layer = 9;
 
         coins.Add(newCoin);
     }

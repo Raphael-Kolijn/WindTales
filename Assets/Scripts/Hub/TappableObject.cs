@@ -7,10 +7,9 @@ public abstract class TappableObject : MonoBehaviour
 
 	// Trigger when player comes close to the object
 	private CapsuleCollider _enterTrigger;	
-	[SerializeField] [Range(1,20)] public float _enterRadius;
+	[SerializeField] [Range(1,20)] private float _enterRadius;
 	[SerializeField] private GameObject _ui;
 	[HideInInspector] public GameObject _uiInstance = null;
-	public HubAudioManager AudioManager;
 	
 	// Use this for initialization
 	void Start ()

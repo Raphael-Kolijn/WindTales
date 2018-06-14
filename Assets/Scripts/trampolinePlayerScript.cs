@@ -15,7 +15,6 @@ public class trampolinePlayerScript : MonoBehaviour
     public Text highScoreText;
     private Rigidbody rb;
     private bool ended;
-    public AudioManager am;
 
 
     // Use this for initialization
@@ -46,8 +45,6 @@ public class trampolinePlayerScript : MonoBehaviour
         if (ended)
         {
             rb.velocity = Vector3.zero;
-            am.stopMusic();
-            am.playEndSound();
             scoreText.text = "Your score: " + System.Math.Round(transform.position.y).ToString();
             score = (int)System.Math.Round(transform.position.y);
             if (score > HighScore)

@@ -14,6 +14,6 @@ public class buttonScript : MonoBehaviour {
     // Try again
     public void restart(string scene)
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(0);
     }
 }

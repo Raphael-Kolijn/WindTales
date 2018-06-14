@@ -52,8 +52,6 @@ public class jumpScript : MonoBehaviour
     public Text boostText;
     // Text to show the launch strength
     public Text launchText;
-    // Audiomanager for sound
-    public AudioManager am;
     // The gamemanager controls the UI among other things
     public gameManagerScript gm;
     [Header("Difficulty - max 10")]
@@ -132,7 +130,6 @@ public class jumpScript : MonoBehaviour
         inhalePhase = false;
         started = false;
         endText.text = "Finished!";
-        am.stopWind();
         ended = true;
         player.velocity.Set(0, 0, 0);
         player.AddTorque(player.position);
@@ -155,7 +152,6 @@ public class jumpScript : MonoBehaviour
             if (flowRate < -10 && spring.transform.position.y > targetForGoingDown.position.y)
             {
                 float step = springSpeedDown * Time.deltaTime;
-                am.playSpringTick();
                 transform.position = Vector3.MoveTowards(transform.position, targetForGoingDown.position, step);
             }
             if (flowRate > -5 && exhalePhaseStarted == false)
@@ -192,8 +188,6 @@ public class jumpScript : MonoBehaviour
     // The initial launch
     private void launchPlayer()
     {
-        am.playLaunchSound();
-        am.startWind();
         player.AddForce(transform.up * launchSpeed / 2, ForceMode.Impulse);
     }
 }

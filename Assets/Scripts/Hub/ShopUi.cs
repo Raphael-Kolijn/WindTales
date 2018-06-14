@@ -15,7 +15,6 @@ public class ShopUi : MonoBehaviour
 	private int _currentPage = 1;
 	private int _itemCounter = 0;
 	private int _itemPerPage = 3;
-	public HubAudioManager AudioManager;
 
 	public void Add(ShopItemUi item)
 	{
@@ -46,7 +45,6 @@ public class ShopUi : MonoBehaviour
 			return;
 		}
 		
-		AudioManager.PlaySound("ButtonSwoosh");
 		_currentPage++;
 		LoadPage(_currentPage);
 		SetPageNumber();
@@ -59,7 +57,6 @@ public class ShopUi : MonoBehaviour
 			return;
 		}
 		
-		AudioManager.PlaySound("ButtonSwoosh");
 		_currentPage--;
 		LoadPage(_currentPage);		
 		SetPageNumber();
@@ -104,18 +101,5 @@ public class ShopUi : MonoBehaviour
 	public void SetCoinText(int amount)
 	{
 		CoinText.text = "x" + amount;
-	}
-	
-	public void PlayAudio(string name)
-	{
-		AudioManager.PlaySound(name);
-	}
-
-	public void ResetItems()
-	{
-		foreach (var shopItemUi in items)
-		{
-			shopItemUi.GetItem().ResetLock();
-		}
 	}
 }

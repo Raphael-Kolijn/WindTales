@@ -51,7 +51,6 @@ public class FieldOfView : MonoBehaviour
         GameObject tmin = null;  
         float minDist = Mathf.Infinity;
         Vector3 currentpos = transform.position;
-        Debug.Log(hitCoins.Length);
         foreach(Collider2D t in hitCoins)
         {
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEditor.SceneManagement;
     
 
 public class MagnetOrbit : MonoBehaviour
@@ -21,6 +21,7 @@ public class MagnetOrbit : MonoBehaviour
     bool isPressedRight = false;
     float rotateSpeed = 100;
     Transform test;
+    public FieldOfView fov;
 
     void Awake()
     {
@@ -29,6 +30,7 @@ public class MagnetOrbit : MonoBehaviour
     void Start()
     {
         test = transform.parent;
+        fov = GetComponent<FieldOfView>();
         //target = GameObject.Find("target");
     }
 
@@ -43,5 +45,10 @@ public class MagnetOrbit : MonoBehaviour
     {
         transform.RotateAround(test.position, new Vector3(0, 0, whichWay), rotateSpeed * Time.deltaTime); // (1 is left) (-1 is right)
        // transform.LookAt(target.transform.position); //Gives nullreferenceexception but still works?
+    }
+
+    public void ReturnToHub()
+    {
+        EditorSceneManager.LoadScene(0);
     }
 }

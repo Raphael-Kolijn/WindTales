@@ -13,45 +13,17 @@ public class GameStand : TappableObject
     public string GameScene;
     public Sprite Thumbnail;
     [Range(1, 15)] public int MaxDailyPlayCount;
-    public GameStand PreviousGame;
 
     public Popup ClosedPopup;
     public Popup LockedPopup;
-    public PlayCountPersistor playCount;
-
-    public LevelChanger LevelChanger;
-
-    public ParticleSystem Particles;
-
-
-    private void Awake()
-    {
-        playCount = new PlayCountPersistor(Name);
-        Particles.Stop();
-    }
+    private PlayCountPersistor playCount;
 
     // Use this for initialization
     void Start()
     {
-        InitialiseTrigger();        
-
+        InitialiseTrigger();
+        playCount = new PlayCountPersistor(Name);
         ShowPopup(ClosedPopup, false);
-        
-        if (PreviousGame == null)
-        {
-            IsUnlocked = true;
-        }
-        else
-        {
-            if (PreviousGame.playCount.GetTotalPlayCount() >= 1)
-            {
-                IsUnlocked = true;
-            }
-            else
-            {
-                IsUnlocked = false;
-            }     
-        }
 
         if (playCount.GetPlayCount() <= MaxDailyPlayCount)
         {
@@ -68,12 +40,10 @@ public class GameStand : TappableObject
             if (IsOpen)
             {
                 ShowPopup(ClosedPopup, false);
-                Particles.Play();
             }
             else
             {
                 ShowPopup(ClosedPopup, true);
-                Particles.Stop();
             }
         }
         else
@@ -87,9 +57,9 @@ public class GameStand : TappableObject
         if (playCount.GetPlayCount() <= MaxDailyPlayCount)
         {
             try
-            {               
+            {
                 playCount.IncreasePlayCount();
-                LevelChanger.FadeToLevel(GameScene);
+                SceneManager.LoadScene(GameScene);
             }
             catch (Exception e)
             {
@@ -118,9 +88,7 @@ public class GameStand : TappableObject
     {
         if (IsOpen && IsUnlocked)
         {
-            AudioManager.PlaySound("MenuOpen");
             _uiInstance.GetComponent<GameStandUi>().SetInfo(this);
-            _uiInstance.GetComponent<GameStandUi>().AudioManager = AudioManager;
             _uiInstance.SetActive(true);
         }
         else if (!IsUnlocked)

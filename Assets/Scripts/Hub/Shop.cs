@@ -14,16 +14,12 @@ public class Shop : TappableObject
 
 	public override void OpenUi()
 	{
-		AudioManager.PlaySound("MenuOpen");
-		
 		_uiInstance.GetComponent<ShopUi>().ClearShop();
-		_uiInstance.GetComponent<ShopUi>().AudioManager = AudioManager;
 		_uiInstance.SetActive(true);
 		foreach (var shopItem in Items)
 		{
 			ShopItemUi itemUi = Instantiate(ShopItemUi);
 			itemUi.SetData(shopItem);
-			itemUi.AudioManager = AudioManager;
 			itemUi.CoinManager = CoinManager;
 			itemUi.shopUi = _uiInstance.GetComponent<ShopUi>();
 			

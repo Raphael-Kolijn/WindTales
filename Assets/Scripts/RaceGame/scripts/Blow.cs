@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Blow : MonoBehaviour {
 
     public Image blowIcon;
-   
     
 
     private void Start()
@@ -28,7 +27,6 @@ public class Blow : MonoBehaviour {
         bool paniek = true;
         while (paniek)
         {
-            
             blowIcon.enabled = true;
             yield return new WaitForSecondsRealtime(3f);
             blowIcon.enabled = false;

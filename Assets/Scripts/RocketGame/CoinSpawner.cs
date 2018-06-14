@@ -7,11 +7,11 @@ public class CoinSpawner : MonoBehaviour
     public GameObject Coin;
     public GameObject Rocket;
     public int CoinSpawnRate = 150;
-    public bool MaySpawn = true;
 
     List<GameObject> coins = new List<GameObject>();
     GameObject newCoin;
     Vector3 newPosition;
+    bool MaySpawn = true;
 
 
     void Start()
@@ -22,10 +22,16 @@ public class CoinSpawner : MonoBehaviour
 
 	void Update ()
     {
-        if (Random.Range(0, CoinSpawnRate) == 1 && MaySpawn)
+        if (Random.Range(0, CoinSpawnRate) == 1)
+        {
+            DeleteCoins();
+            MaySpawn = true;
+        }
+
+        if (MaySpawn)
         {
             SpawnCoin();
-            DeleteCoins();
+            MaySpawn = false;
         }
     }
 
@@ -47,7 +53,6 @@ public class CoinSpawner : MonoBehaviour
         newPosition.y = Rocket.transform.position.y + 20f;
         newCoin = Instantiate(Coin);
         newCoin.transform.position = newPosition;
-        newCoin.layer = 9;
 
         coins.Add(newCoin);
     }

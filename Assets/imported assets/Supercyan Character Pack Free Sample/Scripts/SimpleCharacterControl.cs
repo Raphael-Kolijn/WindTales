@@ -222,10 +222,13 @@ public class SimpleCharacterControl : MonoBehaviour
                     {
                         m_target = hit.transform.position;
 
+                        Debug.Log("Currently at: " + hit.transform.name);
+
                         Collider[] colliders = Physics.OverlapSphere(transform.position, 2);
 
                         foreach (var collider1 in colliders)
                         {
+                            Debug.Log(collider1.name);
                             if (collider1.name.Equals(hit.transform.name))
                             {
                                 m_target = new Vector3(0, 0, 0);

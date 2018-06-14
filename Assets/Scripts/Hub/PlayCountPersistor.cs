@@ -30,25 +30,13 @@ public class PlayCountPersistor
 	}
 	
 	public int GetPlayCount()
-	{		
-		int playCount;
+	{		int playCount;
 		if (data.PlayCount.TryGetValue(DateTime.Today, out playCount))
 		{
 			return playCount;
 		}
 
 		return 0;		
-	}
-
-	public int GetTotalPlayCount()
-	{
-		var playCount = 0;
-		foreach (var i in data.PlayCount)
-		{
-			playCount += i.Value;
-		}
-
-		return playCount;
 	}
 
 	private void Save()
@@ -85,7 +73,7 @@ public class PlayCountPersistor
 		} 
 		catch (IOException e)
 		{
-			data = new SaveData(name);
+			this.data = new SaveData(name);
 			Debug.Log("No file found. Creating new save object");
 		}
 	}

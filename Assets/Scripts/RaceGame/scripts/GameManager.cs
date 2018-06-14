@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour {
     {
         RaceEnded = true;
         gameOverUI.SetActive(true);
+        Debug.Log("WOHOOOO");
         CalculateMoney();
         RaceTime.text = time.ToString();
         Money.text = collectedMoney.ToString();

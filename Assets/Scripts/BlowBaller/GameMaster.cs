@@ -188,7 +188,6 @@ public class GameMaster : MonoBehaviour
         if (VectorCompare(ball.transform.position, ball.GetComponent<BallManager>().getStartPosition()) == true)
         {
             slider.value = (float)System.Math.Round(DeviceManager.Instance.FlowLMin, 1) - ((float)System.Math.Round(DeviceManager.Instance.FlowLMin, 1) * 2);
-            Debug.Log("slider: " + slider.value);
             if (slider.value > ruisValue)
             {
                 if (slider.value >= highestValueReached)
@@ -196,14 +195,11 @@ public class GameMaster : MonoBehaviour
                     highestValueReached = (int)slider.value;
                     if (highestValueReached >= minimumValue)
                     {
-                        Debug.Log("raak");
                         ball.GetComponent<BallManager>().ShootBall(0);
                     }
                 }
                 else if (slider.value < highestValueReached)
                 {
-
-                    Debug.Log("mis");
                     ball.GetComponent<BallManager>().ShootBall(-20);
                 }
             }

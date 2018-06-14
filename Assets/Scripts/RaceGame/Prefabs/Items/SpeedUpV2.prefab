@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114949238016051634}
   - component: {fileID: 114936686182596246}
   m_Layer: 0
-  m_Name: AtomBall
+  m_Name: SpeedUpV2
   m_TagString: Speed up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

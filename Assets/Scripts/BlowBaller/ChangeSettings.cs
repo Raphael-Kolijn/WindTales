@@ -11,16 +11,30 @@ public class ChangeSettings : MonoBehaviour
 
     public void changeStartValue()
     {
-        str = input.text;
-        input.text = MakeDigitsOnly(str);
-        GameMaster.instance.setMinimumValueStart(Convert.ToInt32(str));
+        try
+        {
+            str = input.text;
+            input.text = MakeDigitsOnly(str);
+            GameMaster.instance.setMinimumValueStart(Convert.ToInt32(str));
+        }
+        catch (Exception)
+        {         
+        }
+ 
     }
 
     public void changeBasketSpeed()
     {
-        str = input.text;
-        input.text = MakeDigitsOnly(str);
-        GameMaster.instance.setBasketSpeed(Convert.ToInt32(str));
+        try
+        {
+            str = input.text;
+            input.text = MakeDigitsOnly(str);
+            GameMaster.instance.setBasketSpeed(Convert.ToInt32(str));
+        }
+        catch (Exception)
+        {
+        }
+
     }
     private string MakeDigitsOnly(string str)
     {

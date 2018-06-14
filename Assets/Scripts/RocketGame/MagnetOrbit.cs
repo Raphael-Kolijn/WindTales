@@ -21,7 +21,6 @@ public class MagnetOrbit : MonoBehaviour
     bool isPressedRight = false;
     float rotateSpeed = 100;
     Transform test;
-    public FieldOfView fov;
 
     void Awake()
     {
@@ -30,7 +29,6 @@ public class MagnetOrbit : MonoBehaviour
     void Start()
     {
         test = transform.parent;
-        fov = GetComponent<FieldOfView>();
         //target = GameObject.Find("target");
     }
 

@@ -17,6 +17,10 @@ public class minimumValueArrow : MonoBehaviour
     {
         RectTransform rt = (RectTransform)slider.transform;
         float i = rt.rect.width / (slider.maxValue + 1);
-        transform.localPosition = new Vector3(startPosition.x + (i * minimumValue) - 10, transform.localPosition.y, transform.localPosition.z);
+        if ((startPosition.x + ( i* minimumValue)) - startPosition.x <= 250)
+        {
+            transform.localPosition = new Vector3(startPosition.x + (i * minimumValue) - 10, transform.localPosition.y, transform.localPosition.z);
+        }
+
     }
 }

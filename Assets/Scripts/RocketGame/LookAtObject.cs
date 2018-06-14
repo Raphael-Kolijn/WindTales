@@ -14,6 +14,7 @@ public class LookAtObject : MonoBehaviour
         if (Target != null)
         {
             transform.LookAt(Target.transform, Vector3.forward);
+            transform.Rotate(0, 90, 0);
         }
         /*
         var direction = Target.transform.position - transform.position;

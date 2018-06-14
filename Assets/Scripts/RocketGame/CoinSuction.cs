@@ -7,11 +7,16 @@ public class CoinSuction : MonoBehaviour
     public CoinManager coinManager;
     public GameObject coin;
     public float SuctionSpeed = 0.3f;
+    public AudioClip CoinCollectSound;
 
     FieldOfView fieldOfView;
     float speed = 2f;
 
-
+    void Start()
+    {
+        GetComponent<AudioSource>().playOnAwake = true;
+        GetComponent<AudioSource>().clip = CoinCollectSound;   
+    }
     void Update()
     {
         fieldOfView = GetComponent<FieldOfView>();
@@ -45,6 +50,7 @@ public class CoinSuction : MonoBehaviour
         {
             speed = 2f;
             coinManager.AddCoin(coin);
+            GetComponent<AudioSource>().Play();
         }
     }
 }

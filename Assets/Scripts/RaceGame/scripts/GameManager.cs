@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour {
     public Text Money;
 
     public CoinScript coinScript;
+    public AudioClip win;
+    public AudioSource winMusic;
+
 
 	// Use this for initialization
 	void Start () {
@@ -58,10 +61,21 @@ public class GameManager : MonoBehaviour {
         RaceTime.text = time.ToString();
         Money.text = collectedMoney.ToString();
         coinScript.AddCoins(collectedMoney);
+
+        StartCoroutine(PlayWinMusic(2));
+       
     }
 
     private void CalculateMoney()
     {
         collectedMoney = 500 - (int)time; 
+    }
+    IEnumerator PlayWinMusic(int times)
+    {
+        for (int i = 0; i < times; i++)
+        {
+            winMusic.Play();
+            yield return new WaitForSeconds(win.length);
+        }
     }
 }

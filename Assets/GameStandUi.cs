@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class GameStandUi : MonoBehaviour
 	public Text Title;
 	public Image Thumbnail;
 	public GameStand game;
+	public HubAudioManager AudioManager;
 
 	public void SetInfo(GameStand game)
 	{
@@ -20,5 +22,10 @@ public class GameStandUi : MonoBehaviour
 	public void Play()
 	{
 		game.StartGame();
+	}
+
+	public void PlaySound(String name)
+	{
+		AudioManager.PlaySound(name);
 	}
 }

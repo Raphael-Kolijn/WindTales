@@ -66,4 +66,10 @@ public class CoinScript : MonoBehaviour
 	{
 		return _mCoinTotal;
 	}
+
+	public void ResetCoins()
+	{
+		PlayerPrefs.SetInt(Cointotal, 0);
+		CoinChangeEvent.Invoke();
+	}	
 }

@@ -51,7 +51,9 @@ namespace UnityStandardAssets.Vehicles.Car
         public int difficulty;
         public Text snelheid;
 
-      
+        public GameObject boost;
+        private Transform target;
+        public GameObject[] waypoints;
 
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
@@ -62,10 +64,15 @@ namespace UnityStandardAssets.Vehicles.Car
         public float AccelInput { get; private set; }
         public ReadBlowInput input;
         public GameManager manager;
+        public ParticleSystem ps;
+        public AudioClip itemPickup;
+        public AudioClip win;
+      
 
         // Use this for initialization
         private void Start()
         {
+   
             m_WheelMeshLocalRotations = new Quaternion[4];
             for (int i = 0; i < 4; i++)
             {
@@ -81,7 +88,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void FixedUpdate()
         {
-            snelheid.text = "Force: " + m_Rigidbody.velocity.x.ToString();
+            
         }
 
         private void GearChanging()
@@ -211,9 +218,9 @@ namespace UnityStandardAssets.Vehicles.Car
             switch (m_CarDriveType)
             {
                 case CarDriveType.FourWheelDrive:
-                    thrustTorque = accel * (m_CurrentTorque / 4f);
-                    thrustTorque = 250;
-                    Debug.Log(thrustTorque);
+                  //  thrustTorque = accel * (m_CurrentTorque / 4f);
+                    thrustTorque = 200;
+
                     for (int i = 0; i < 4; i++)
                     {
                         m_WheelColliders[i].motorTorque = thrustTorque;
@@ -378,30 +385,87 @@ namespace UnityStandardAssets.Vehicles.Car
             return false;
         }
 
-        private void OnTriggerEnter(Collider other)
-        {  
+        private void OnCollisionEnter(Collision collision)
+        {
+            
+            if (collision.gameObject.name == "mais")
+            {
+                PlaceBackOnRoad();
+            }
+;
+          
+        }
 
-            switch(other.gameObject.tag)
+        private void PlaceBackOnRoad()
+        {
+            float shortestDistance = Mathf.Infinity;
+            GameObject nearestWaypoint = null;
+
+            foreach (GameObject wayPoint in waypoints)
+            {
+                float distance = Vector3.Distance(transform.position, wayPoint.transform.position);
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestWaypoint = wayPoint;
+                }
+            }
+
+            if (nearestWaypoint != null)
+            {
+                target = nearestWaypoint.transform;
+            }
+            else
+            {
+                target = null;
+            }
+
+            transform.position = target.position;
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            StopDrive();
+
+        }
+
+        private void Update()
+        {
+            waypoints = new GameObject[WayPoint.wayPoints.Length];
+
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                waypoints[i] = WayPoint.wayPoints[i].gameObject;
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            switch (other.gameObject.tag)
             {
                 case "Pick Up":
-                    other.GetComponent<Renderer>().enabled = false;
+                    // other.GetComponent<Renderer>().enabled = false;
+                   // Destroy(other);
                     StartCoroutine(WaitForActivation());
                     break;
                 case "Speed up":
-                    other.GetComponent<Renderer>().enabled = false;
+                    //other.GetComponent<Renderer>().enabled = false;
                     StartCoroutine(WaitForActivation());
+                    other.gameObject.SetActive(false);
                     break;
                 case "Finish":
+                    // AudioSource.PlayClipAtPoint(win, transform.position);
+                    
                     manager.EndGame();
                     break;
                 default:
                     Debug.Log("default");
                     break;
             }
+
         }
 
     IEnumerator WaitForActivation()
         {
+            AudioSource.PlayClipAtPoint(itemPickup, transform.position);
+            ps.Play();
             bool active = true;
             while(active)
             {
@@ -411,8 +475,11 @@ namespace UnityStandardAssets.Vehicles.Car
                     m_Rigidbody.velocity += forceToAdd;
                     active = false;
                 }
+
                 yield return new WaitForFixedUpdate();
             }
+
+     
         }
 
         public void StopDrive()

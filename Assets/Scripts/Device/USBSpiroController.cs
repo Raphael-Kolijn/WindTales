@@ -13,7 +13,7 @@ using System;
 public class USBSpiroController : SpiroController
 {
 
-    private string portName = "COM17";
+    private string portName = "COM10";
     private SerialPort port;
     private Thread myThread;
 
@@ -30,7 +30,7 @@ public class USBSpiroController : SpiroController
     {
         Debug.Log("Connecting USB Controller");
         //SerialPort p = new SerialPort("\\\\.\\COM17", 9600);
-        portName = PlayerPrefs.GetString("////.//", "COM17");
+        portName = PlayerPrefs.GetString("portName", "COM10");
         DisconnectDevice();
         //stop if we are already connected or if the port is unavailable
         if ((port != null && port.IsOpen) || !PortIsAvailable())
@@ -100,7 +100,7 @@ public class USBSpiroController : SpiroController
     {
         while (myThread.IsAlive)
         {
-            Debug.Log("Thread alive");
+           // Debug.Log("Thread alive");
             if (port != null && port.IsOpen)
             {
 
@@ -109,7 +109,7 @@ public class USBSpiroController : SpiroController
                     string indata = port.ReadLine();
                     string[] data = indata.Split(new[] { ';' });
 
-                    Debug.Log(indata);
+                   // Debug.Log(indata);
 
                     try
                     {

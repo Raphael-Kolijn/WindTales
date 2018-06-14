@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65784598580043698}
   - component: {fileID: 23047936767249586}
   - component: {fileID: 114865015172852864}
-  - component: {fileID: 114808252141092912}
+  - component: {fileID: 114294310698088674}
   m_Layer: 0
   m_Name: SpeedUp
   m_TagString: Speed up
@@ -97,7 +97,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114808252141092912
+--- !u!114 &114294310698088674
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -105,13 +105,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1908802581069294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc2af7f7a2176e4b8e69b7f8a7e9868, type: 3}
+  m_Script: {fileID: 11500000, guid: 50771466c837ddf46ac57eb56742deae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 0
-  itemName: 
-  speed: 50
-  carControl: {fileID: 0}
+  mainSlider: {fileID: 0}
+  input: {fileID: 0}
 --- !u!114 &114865015172852864
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -12,4 +12,33 @@ public class slider : MonoBehaviour {
     {
         mainSlider.value = (int)input.getFlow();
     }
+
+    private void Start()
+    {
+        mainSlider.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("NAME ==" + other.name);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log( "nu slidaerre back");
+            mainSlider.gameObject.SetActive(true);
+            StartCoroutine(DisplaySlider());
+        }
+    }
+
+    IEnumerator DisplaySlider()
+    {
+        bool active = true;
+        while (active)
+        {
+
+            yield return new WaitForSecondsRealtime(3f);
+            mainSlider.gameObject.SetActive(false);
+            active = false;
+        }
+
+    }
 }

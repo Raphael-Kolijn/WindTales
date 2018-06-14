@@ -14,13 +14,14 @@ public class ReadBlowInput : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         CalculateFlow();
-      //  Debug.Log("flowrate = " + flowRate);
+     
 	}
 
     void CalculateFlow()
     {
         flowRate = DeviceManager.Instance.FlowLMin;
         flowRate = System.Math.Round(flowRate, 1);
+        flowRate *= -1;
     }
 
     public double getFlow()

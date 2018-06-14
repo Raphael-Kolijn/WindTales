@@ -13,7 +13,7 @@ public class TrampCoin : MonoBehaviour
     {
         coinManager.AddCoins(1);   
         int coinAmount = coinManager.GetCoinTotal();
-        coins.text = "Coins: " + coinAmount.ToString();
+        coins.text = coinAmount.ToString();
         am.playPickupSound();
         Destroy(this.gameObject);
     }

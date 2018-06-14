@@ -1242,7 +1242,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   useExternalController: 0
-  deviceType: 1
+  deviceType: 3
   blowthreshold: 10
   inBlowZone: 0
 --- !u!1 &1219563245

@@ -2695,7 +2695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b688f4dd231434985b4625541a345f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deviceType: 1
+  deviceType: 3
   blowthreshold: 20
   spring: {fileID: 631862050}
   player: {fileID: 177575412}

@@ -30,6 +30,13 @@ public class ShopItem : MonoBehaviour
 		gameObject.SetActive(_isUnlocked);
 	}
 
+	public void ResetLock()
+	{
+		PlayerPrefs.SetInt(ItemName, 0);
+		_isUnlocked = false;
+		gameObject.SetActive(_isUnlocked);
+	}
+
 	public int GetCosts()
 	{
 		return _costs;

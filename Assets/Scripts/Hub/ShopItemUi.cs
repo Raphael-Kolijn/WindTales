@@ -47,4 +47,9 @@ public class ShopItemUi : MonoBehaviour
 		}
 		
 	}
+
+	public ShopItem GetItem()
+	{
+		return _myItem;
+	}
 }

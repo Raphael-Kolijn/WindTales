@@ -67,7 +67,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public ParticleSystem ps;
         public AudioClip itemPickup;
         public AudioClip win;
-        public CarAudio stopAudio;
+      
 
         // Use this for initialization
         private void Start()
@@ -434,11 +434,6 @@ namespace UnityStandardAssets.Vehicles.Car
             {
                 waypoints[i] = WayPoint.wayPoints[i].gameObject;
             }
-
-            if (target == null)
-            {
-                return;
-            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -455,7 +450,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     break;
                 case "Finish":
                     // AudioSource.PlayClipAtPoint(win, transform.position);
-                    stopAudio.StopSound();
+                    
                     manager.EndGame();
                     break;
                 default:
@@ -479,10 +474,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     active = false;
                 }
 
-                //   yield return new WaitForFixedUpdate();
                 yield return new WaitForFixedUpdate();
-              //  ps.Stop();
-              //  Debug.Log("stopppp");
             }
 
      

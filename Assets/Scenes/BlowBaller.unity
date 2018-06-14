@@ -7185,7 +7185,7 @@ MonoBehaviour:
   ruisValue: 10
   minimumValueArrow: {fileID: 1010054778}
   arrowSpeed: 1
-  deviceType: 3
+  deviceType: 1
 --- !u!4 &1997077182
 Transform:
   m_ObjectHideFlags: 0

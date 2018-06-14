@@ -50,7 +50,7 @@ public class CoinSpawner : MonoBehaviour
     void SpawnCoin()
     {
         newPosition.x = Random.Range(-24f, 24f);
-        newPosition.y = Rocket.transform.position.y + 30f;
+        newPosition.y = Rocket.transform.position.y + 20f;
         newCoin = Instantiate(Coin);
         newCoin.transform.position = newPosition;
 

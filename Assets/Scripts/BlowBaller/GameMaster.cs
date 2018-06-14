@@ -117,11 +117,10 @@ public class GameMaster : MonoBehaviour
 
     public void setMinimumValue()
     {
-        if (currentScore > 0)
+        if (currentScore > 0 && minimumValueStart + (difficulty * currentScore) <= slider.maxValue)
         {
             minimumValue = minimumValueStart + (difficulty * currentScore);
             minimumValueArrow.GetComponent<minimumValueArrow>().changePosition(slider, minimumValue);
-            
         }
     }
 

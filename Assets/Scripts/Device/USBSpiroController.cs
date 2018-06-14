@@ -35,7 +35,7 @@ public class USBSpiroController : SpiroController
     {
         Debug.Log("Connecting USB Controller");
         //SerialPort p = new SerialPort("\\\\.\\COM17", 9600);
-        portName = PlayerPrefs.GetString("portname", portName);
+        portName = PlayerPrefs.GetString("portName", portName);
         DisconnectDevice();
         //stop if we are already connected or if the port is unavailable
         if ((port != null && port.IsOpen) || !PortIsAvailable())

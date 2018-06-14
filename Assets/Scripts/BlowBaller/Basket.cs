@@ -24,12 +24,12 @@ public class Basket : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.x >= 200)
+        if (transform.position.x >= 158)
         {
             goRight = false;
             goLeft = true;
         }
-        else if (transform.position.x <= -120)
+        else if (transform.position.x <= -84)
         {
             goLeft = false;
             goRight = true;

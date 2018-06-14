@@ -19,10 +19,15 @@ public class GameStand : TappableObject
     public Popup LockedPopup;
     public PlayCountPersistor playCount;
 
+    public LevelChanger LevelChanger;
+
+    public ParticleSystem Particles;
+
 
     private void Awake()
     {
         playCount = new PlayCountPersistor(Name);
+        Particles.Stop();
     }
 
     // Use this for initialization
@@ -63,10 +68,12 @@ public class GameStand : TappableObject
             if (IsOpen)
             {
                 ShowPopup(ClosedPopup, false);
+                Particles.Play();
             }
             else
             {
                 ShowPopup(ClosedPopup, true);
+                Particles.Stop();
             }
         }
         else
@@ -80,9 +87,9 @@ public class GameStand : TappableObject
         if (playCount.GetPlayCount() <= MaxDailyPlayCount)
         {
             try
-            {
+            {               
                 playCount.IncreasePlayCount();
-                SceneManager.LoadScene(GameScene);
+                LevelChanger.FadeToLevel(GameScene);
             }
             catch (Exception e)
             {
@@ -111,7 +118,9 @@ public class GameStand : TappableObject
     {
         if (IsOpen && IsUnlocked)
         {
+            AudioManager.PlaySound("MenuOpen");
             _uiInstance.GetComponent<GameStandUi>().SetInfo(this);
+            _uiInstance.GetComponent<GameStandUi>().AudioManager = AudioManager;
             _uiInstance.SetActive(true);
         }
         else if (!IsUnlocked)

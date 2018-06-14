@@ -8,7 +8,11 @@ public class BlowZone : MonoBehaviour {
 
     public Image blowIcon;
     private BoxCollider2D col;
-    PlayerController2D player;
+    static PlayerController2D player;
+
+    public float speed;
+
+    bool playerHasEnteredBlowZone = false;
 
     private void Start()
     {
@@ -20,6 +24,23 @@ public class BlowZone : MonoBehaviour {
         blowIcon.enabled = false;
     }
 
+    //private void FixedUpdate()
+    //{
+    //    if (playerHasEnteredBlowZone)
+    //    {
+    //        Vector2 target = new Vector2(transform.position.x, player.transform.position.y);
+    //        if (Vector2.Distance(player.transform.position, target)<0.05f)
+    //        {
+    //            player.m_Anim.SetFloat("Speed", Mathf.Abs(speed));
+    //        }
+    //        else
+    //        {
+    //            Vector2 velocity = player.m_Rigidbody2D.velocity;
+    //            player.transform.position = Vector2.SmoothDamp(player.transform.position, target, ref velocity, speed, player.m_MaxSpeed, Time.fixedDeltaTime);
+    //        }
+    //    }
+    //}
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log(collision.transform.name);
@@ -29,10 +50,11 @@ public class BlowZone : MonoBehaviour {
             //{
             //    if (player = collision.gameObject.GetComponent<PlayerController2D>())
             //    {
-            //        player.inBlowZone = true;
+            //        playerHasEnteredBlowZone = true;
+            //        player.enabled = false;
             //    }
             //}
-            
+
             StartCoroutine(displayBlowIcon());
         }
     }

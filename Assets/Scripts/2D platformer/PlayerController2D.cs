@@ -8,8 +8,7 @@ public class PlayerController2D : MonoBehaviour
 
 
 
-    [SerializeField]
-    private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
+    public float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
     [SerializeField]
     [Range(1, 2)]
     private float m_JumpSpeedMultiplier = 1.5f;
@@ -23,11 +22,15 @@ public class PlayerController2D : MonoBehaviour
     private bool m_Grounded;            // Whether or not the player is grounded.
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
     const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
-    private Animator m_Anim;            // Reference to the player's animator component.
-    private Rigidbody2D m_Rigidbody2D;
+    [HideInInspector]
+    public Animator m_Anim;            // Reference to the player's animator component.
+    [HideInInspector]
+    public Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
     private bool m_Jump;
+
+
 
     [Header("gameplay options")]
     public bool useExternalController = false;
@@ -39,7 +42,6 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField]
     [Tooltip("The amount which the player needs to blow in order to jump")]
     private double blowthreshold = 10f;
-    public bool inBlowZone;
 
     private void Awake()
     {
@@ -72,15 +74,18 @@ public class PlayerController2D : MonoBehaviour
                     flowRate *= -1;
                 }
             }
-
-            if (CrossPlatformInputManager.GetButton("Jump"))
-            {
-                flowRate = 199;
-            }
             else
             {
-                flowRate = 0;
+                if (CrossPlatformInputManager.GetButton("Jump"))
+                {
+                    flowRate = 199;
+                }
+                else
+                {
+                    flowRate = 0;
+                }
             }
+
 
             if (m_Grounded && flowRate >= blowthreshold)
             {
@@ -120,11 +125,7 @@ public class PlayerController2D : MonoBehaviour
         m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
         // Move the character
-        //if (inBlowZone)
-        //{
-
-        //}
-        /*else*/ if (m_Grounded)
+        if (m_Grounded)
         {
             m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
         }

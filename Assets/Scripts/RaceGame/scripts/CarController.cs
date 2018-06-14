@@ -421,6 +421,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
             transform.position = target.position;
             transform.eulerAngles = new Vector3(0, 0, 0);
+            StopDrive();
 
         }
 

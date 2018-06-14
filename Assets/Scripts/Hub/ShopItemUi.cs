@@ -12,6 +12,7 @@ public class ShopItemUi : MonoBehaviour
 	private ShopItem _myItem;
 	public CoinScript CoinManager;
 	public ShopUi shopUi;
+	public HubAudioManager AudioManager;
 
 	public void SetData(ShopItem item)
 	{
@@ -37,10 +38,12 @@ public class ShopItemUi : MonoBehaviour
 			BuyButton.interactable = false;
 			_myItem.Unlock();
 			shopUi.SetCoinText(CoinManager.GetCoinTotal());
+			AudioManager.PlaySound("Buy");
 		}
 		else
 		{
 			// Play sound or some shit.
+			AudioManager.PlaySound("BuyError");
 		}
 		
 	}

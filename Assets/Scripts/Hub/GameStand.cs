@@ -21,10 +21,13 @@ public class GameStand : TappableObject
 
     public LevelChanger LevelChanger;
 
+    public ParticleSystem Particles;
+
 
     private void Awake()
     {
         playCount = new PlayCountPersistor(Name);
+        Particles.Stop();
     }
 
     // Use this for initialization
@@ -65,10 +68,12 @@ public class GameStand : TappableObject
             if (IsOpen)
             {
                 ShowPopup(ClosedPopup, false);
+                Particles.Play();
             }
             else
             {
                 ShowPopup(ClosedPopup, true);
+                Particles.Stop();
             }
         }
         else

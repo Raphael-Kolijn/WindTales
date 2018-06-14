@@ -5,17 +5,42 @@ using UnityEngine.UI;
 
 public class CoinManager : MonoBehaviour
 {
-    public float coins;
+    private int coins;
     public Text text;
 
     public void AddCoin(GameObject coin)
     {
         coins++;
-        if (coin)
+
+        Destroy(coin);
+
+        UpdateText();
+    }
+
+    public int GetCoins()
+    {
+        return coins;
+    }
+
+    private void UpdateText()
+    {
+        if (coins > 999)
         {
-            Destroy(coin);
+            text.text = "x" + coins.ToString();
         }
-        text.text = coins.ToString();
+        else if (coins > 99)
+        {
+            text.text = "x0" + coins.ToString();
+        }
+        else if (coins > 9)
+        {
+            text.text = "x00" + coins.ToString();
+        }
+        else if (coins >= 0)
+        {
+            text.text = "x000" + coins.ToString();
+        }
+
     }
 
 

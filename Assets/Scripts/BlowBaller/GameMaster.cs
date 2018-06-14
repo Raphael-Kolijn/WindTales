@@ -9,7 +9,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private int minimumValueStart;
     [SerializeField]
-    private int difficulty;
+    private float difficulty;
     private int minimumValue;
     private int highestValueReached;
     [Header("Reset Settings")]
@@ -117,11 +117,10 @@ public class GameMaster : MonoBehaviour
 
     public void setMinimumValue()
     {
-        if (currentScore > 0)
+        if (currentScore > 0 && minimumValueStart + (difficulty * currentScore) <= slider.maxValue)
         {
-            minimumValue = minimumValueStart + (difficulty * currentScore);
+            minimumValue = (int) (minimumValueStart + (difficulty * currentScore));
             minimumValueArrow.GetComponent<minimumValueArrow>().changePosition(slider, minimumValue);
-            
         }
     }
 
@@ -143,6 +142,11 @@ public class GameMaster : MonoBehaviour
             basketSpeed = 30 + (10 * currentScore);
         }
 
+    }
+
+    public void setDifficulty(float value)
+    {
+        difficulty = value;
     }
 
     public float getResetSec()

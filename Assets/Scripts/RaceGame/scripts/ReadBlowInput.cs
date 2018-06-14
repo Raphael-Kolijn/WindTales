@@ -21,6 +21,8 @@ public class ReadBlowInput : MonoBehaviour {
     {
         flowRate = DeviceManager.Instance.FlowLMin;
         flowRate = System.Math.Round(flowRate, 1);
+        flowRate *= -1;
+        Debug.Log(flowRate);
     }
 
     public double getFlow()

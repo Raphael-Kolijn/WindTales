@@ -67,6 +67,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public ParticleSystem ps;
         public AudioClip itemPickup;
         public AudioClip win;
+        public CarAudio stopAudio;
 
         // Use this for initialization
         private void Start()
@@ -453,7 +454,8 @@ namespace UnityStandardAssets.Vehicles.Car
                     StartCoroutine(WaitForActivation());
                     break;
                 case "Finish":
-                   // AudioSource.PlayClipAtPoint(win, transform.position);
+                    // AudioSource.PlayClipAtPoint(win, transform.position);
+                    stopAudio.StopSound();
                     manager.EndGame();
                     break;
                 default:

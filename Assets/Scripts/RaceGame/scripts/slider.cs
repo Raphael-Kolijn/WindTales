@@ -16,7 +16,6 @@ public class slider : MonoBehaviour {
     private void Start()
     {
         mainSlider.gameObject.SetActive(false);
-        Debug.Log("Falasejflefijekf");
     }
 
     private void OnTriggerEnter(Collider other)

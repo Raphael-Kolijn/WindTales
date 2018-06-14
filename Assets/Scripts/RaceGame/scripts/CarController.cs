@@ -65,6 +65,8 @@ namespace UnityStandardAssets.Vehicles.Car
         public ReadBlowInput input;
         public GameManager manager;
         public ParticleSystem ps;
+        public AudioClip itemPickup;
+        public AudioClip win;
 
         // Use this for initialization
         private void Start()
@@ -450,6 +452,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     StartCoroutine(WaitForActivation());
                     break;
                 case "Finish":
+                   // AudioSource.PlayClipAtPoint(win, transform.position);
                     manager.EndGame();
                     break;
                 default:
@@ -461,6 +464,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
     IEnumerator WaitForActivation()
         {
+            AudioSource.PlayClipAtPoint(itemPickup, transform.position);
             ps.Play();
             bool active = true;
             while(active)

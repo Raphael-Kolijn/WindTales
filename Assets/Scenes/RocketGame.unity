@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Coin: {fileID: 197529556}
   Rocket: {fileID: 1649735895}
-  CoinSpawnRate: 150
+  CoinSpawnRate: 10
 --- !u!4 &119699364
 Transform:
   m_ObjectHideFlags: 0
@@ -266,6 +266,72 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &333075747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 333075750}
+  - component: {fileID: 333075749}
+  - component: {fileID: 333075748}
+  m_Layer: 0
+  m_Name: Hub Scripts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &333075748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333075747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478d3bc325f228c48b5a13c0de5a5379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinManager: {fileID: 744164633}
+  coinScript: {fileID: 333075749}
+--- !u!114 &333075749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333075747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00468f8465cfe14bb212a673b16a8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mCoinTotal: 0
+  CoinChangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!4 &333075750
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333075747}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.41491514, y: -0.57244396, z: -17.245506}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &575609206 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114053001271015284, guid: 8b7948c26de6efc4280d3c8543420e9a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1828033137}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &666356968
 Prefab:
   m_ObjectHideFlags: 0
@@ -347,8 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b3ef50655cb2840bb3d8fa7e3673ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coins: 0
-  text: {fileID: 0}
+  text: {fileID: 575609206}
 --- !u!4 &744164634
 Transform:
   m_ObjectHideFlags: 0
@@ -556,46 +621,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2d9505a3e1ed6940b92503f1d99e47d, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &1119262735
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1119262737}
-  - component: {fileID: 1119262736}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1119262736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1119262735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478d3bc325f228c48b5a13c0de5a5379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1119262737
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1119262735}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.63202, y: 34.92755, z: -1.2256413}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1170948410 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: e2d9505a3e1ed6940b92503f1d99e47d, type: 3}
@@ -1152,7 +1177,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1119262736}
+      objectReference: {fileID: 333075748}
     - target: {fileID: 114048732615426086, guid: 8b7948c26de6efc4280d3c8543420e9a,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName

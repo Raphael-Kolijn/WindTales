@@ -9732,7 +9732,10 @@ MonoBehaviour:
   minimumValueArrow: {fileID: 1010054778}
   arrowSpeed: 1
   deviceType: 3
+<<<<<<< HEAD
   portNameForKueffner: COM17
+=======
+>>>>>>> d24f546b39a78bc1e581dafd78f992e30c5e3fb5
   SettingsActiveOnStart: 0
   panel: {fileID: 1825709145}
 --- !u!4 &1997077182

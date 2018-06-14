@@ -43,7 +43,7 @@ public class GameStand : TappableObject
         }
         else
         {
-            if (PreviousGame.playCount.GetTotalPlayCount() > 1)
+            if (PreviousGame.playCount.GetTotalPlayCount() >= 1)
             {
                 IsUnlocked = true;
             }

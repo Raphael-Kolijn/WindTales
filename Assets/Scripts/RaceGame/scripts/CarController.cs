@@ -220,7 +220,7 @@ namespace UnityStandardAssets.Vehicles.Car
                 case CarDriveType.FourWheelDrive:
                   //  thrustTorque = accel * (m_CurrentTorque / 4f);
                     thrustTorque = 200;
-                    Debug.Log(thrustTorque);
+
                     for (int i = 0; i < 4; i++)
                     {
                         m_WheelColliders[i].motorTorque = thrustTorque;
@@ -441,12 +441,14 @@ namespace UnityStandardAssets.Vehicles.Car
             switch (other.gameObject.tag)
             {
                 case "Pick Up":
-                    other.GetComponent<Renderer>().enabled = false;
+                    // other.GetComponent<Renderer>().enabled = false;
+                   // Destroy(other);
                     StartCoroutine(WaitForActivation());
                     break;
                 case "Speed up":
-                    other.GetComponent<Renderer>().enabled = false;
+                    //other.GetComponent<Renderer>().enabled = false;
                     StartCoroutine(WaitForActivation());
+                    other.gameObject.SetActive(false);
                     break;
                 case "Finish":
                     // AudioSource.PlayClipAtPoint(win, transform.position);
@@ -454,7 +456,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     manager.EndGame();
                     break;
                 default:
-                   // Debug.Log("default");
+                    Debug.Log("default");
                     break;
             }
 

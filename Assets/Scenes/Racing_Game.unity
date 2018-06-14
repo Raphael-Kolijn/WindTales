@@ -2761,7 +2761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6599efdfc664a5840a4558f90b8f2347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deviceType: 1
+  deviceType: 3
 --- !u!4 &810349456
 Transform:
   m_ObjectHideFlags: 0

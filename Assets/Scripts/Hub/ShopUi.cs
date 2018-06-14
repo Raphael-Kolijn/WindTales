@@ -110,4 +110,12 @@ public class ShopUi : MonoBehaviour
 	{
 		AudioManager.PlaySound(name);
 	}
+
+	public void ResetItems()
+	{
+		foreach (var shopItemUi in items)
+		{
+			shopItemUi.GetItem().ResetLock();
+		}
+	}
 }

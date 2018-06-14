@@ -2025,6 +2025,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!224 &788605282
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2223,6 +2224,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+=======
+>>>>>>> parent of 92c2fd5... Merge branch 'master' of https://github.com/Raphael-Kolijn/WindTales
 --- !u!114 &810349455
 MonoBehaviour:
   m_ObjectHideFlags: 0

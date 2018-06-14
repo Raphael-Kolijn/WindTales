@@ -5287,11 +5287,15 @@ MonoBehaviour:
   minimumValueArrow: {fileID: 1010054778}
   arrowSpeed: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
   deviceType: 3
 <<<<<<< HEAD
   portNameForKueffner: COM17
 =======
 >>>>>>> d24f546b39a78bc1e581dafd78f992e30c5e3fb5
+=======
+  deviceType: 1
+>>>>>>> parent of 92c2fd5... Merge branch 'master' of https://github.com/Raphael-Kolijn/WindTales
   SettingsActiveOnStart: 0
   panel: {fileID: 1825709145}
 =======

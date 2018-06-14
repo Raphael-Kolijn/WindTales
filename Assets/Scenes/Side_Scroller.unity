@@ -1241,8 +1241,13 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 256
+<<<<<<< HEAD
   useExternalController: 1
   deviceType: 3
+=======
+  useExternalController: 0
+  deviceType: 1
+>>>>>>> parent of 92c2fd5... Merge branch 'master' of https://github.com/Raphael-Kolijn/WindTales
   blowthreshold: 10
 --- !u!1 &1219563245
 GameObject:

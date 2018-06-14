@@ -566,6 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
@@ -590,6 +591,13 @@ MonoBehaviour:
   m_Text: New Text
 --- !u!222 &1182912486
 CanvasRenderer:
+=======
+  deviceType: 1
+  flowRate: 0
+  inhaleThreshold: 0
+--- !u!58 &1170948419
+CircleCollider2D:
+>>>>>>> parent of 92c2fd5... Merge branch 'master' of https://github.com/Raphael-Kolijn/WindTales
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}

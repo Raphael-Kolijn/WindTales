@@ -11,10 +11,9 @@ public class CoinManager : MonoBehaviour
     public void AddCoin(GameObject coin)
     {
         coins++;
-        if (coin)
-        {
-            Destroy(coin);
-        }
+
+        Destroy(coin);
+
         UpdateText();
     }
 

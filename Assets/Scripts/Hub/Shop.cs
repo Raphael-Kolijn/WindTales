@@ -7,7 +7,6 @@ public class Shop : TappableObject
 	public ShopItem[] Items;
 	public ShopItemUi ShopItemUi;
 	public CoinScript CoinManager;
-	public HubAudioManager AudioManager;
 	
 	void Start () {
 		InitialiseTrigger();

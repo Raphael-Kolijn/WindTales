@@ -22,10 +22,12 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
         FLOW_IN,
         FLOW_OUT
     }
+    [SerializeField]
+    public static string portName;
 
     [SerializeField]
     [Tooltip("Type of device to connect to.")]
-    private DeviceType deviceType;
+    public static DeviceType deviceType;
     [SerializeField]
     [Tooltip("If enabled, flow values are written to a text file.")]
     private bool writeDeviceLog = false;
@@ -122,7 +124,7 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
         if (deviceType == DeviceType.KUEFFNER)
         {
             Debug.Log("Ik ben een spiro");
-            spiroController = new USBSpiroController();
+            spiroController = new USBSpiroController(portName);
         }
 
         ConnectSpirometer();
@@ -171,11 +173,11 @@ public class DeviceManager : PersistentSingleton<DeviceManager>
     public void SetDeviceType(DeviceType deviceType)
     {
         //disconnect previous device if the device type has changed
-        if (deviceType != this.deviceType)
+        if (deviceType != DeviceManager.deviceType)
         {
             DisconnectSpirometer();
         }
-        this.deviceType = deviceType;
+        DeviceManager.deviceType = deviceType;
 
     }
 

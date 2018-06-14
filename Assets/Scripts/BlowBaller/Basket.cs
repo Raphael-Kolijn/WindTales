@@ -24,18 +24,28 @@ public class Basket : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.x >= 158)
+        if (GameMaster.instance != null)
         {
-            goRight = false;
-            goLeft = true;
+            if (GameMaster.instance.getMovingBasket())
+            {
+                if (transform.position.x >= 158)
+                {
+                    goRight = false;
+                    goLeft = true;
+                }
+                else if (transform.position.x <= -84)
+                {
+                    goLeft = false;
+                    goRight = true;
+                }
+                if (goRight) transform.Translate(-Vector3.right * GameMaster.instance.getBasketSpeed() * Time.deltaTime);
+                else if (goLeft) transform.Translate(-Vector3.left * GameMaster.instance.getBasketSpeed() * Time.deltaTime);
+            }
+            else if (transform.position != GameMaster.instance.getBasketStartPosition())
+            {
+                Reset();
+            }
         }
-        else if (transform.position.x <= -84)
-        {
-            goLeft = false;
-            goRight = true;
-        }
-        if (goRight) transform.Translate(-Vector3.right * GameMaster.instance.getBasketSpeed() * Time.deltaTime);
-        else if (goLeft) transform.Translate(-Vector3.left * GameMaster.instance.getBasketSpeed() * Time.deltaTime);
     }
 
     public void Reset()

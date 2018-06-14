@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
+
     [Header("Breath Settings")]
     [SerializeField]
     private int minimumValueStart;
@@ -20,6 +21,8 @@ public class GameMaster : MonoBehaviour
     private GameObject basket;
     [SerializeField]
     private float basketSpeed;
+    [SerializeField]
+    private bool movingBasket;
     private Vector3 basketStartPosition;
     [Header("Ball settings")]
     [SerializeField]
@@ -40,6 +43,8 @@ public class GameMaster : MonoBehaviour
     [Header("Controller settings")]
     [SerializeField]
     private DeviceManager.DeviceType deviceType;
+    [SerializeField]
+    private string portNameForKueffner;
     private int currentScore;
     [SerializeField]
     [Header("Settings")]
@@ -61,6 +66,8 @@ public class GameMaster : MonoBehaviour
         {
             instance = this;
         }
+
+        DeviceManager.portName = portNameForKueffner;
     }
 
     void Start()
@@ -98,6 +105,15 @@ public class GameMaster : MonoBehaviour
         return ball;
     }
 
+    public void setMovingBasket(bool val)
+    {
+        movingBasket = val;
+    }
+
+    public bool getMovingBasket()
+    {
+        return movingBasket;
+    }
     public Vector3 getBallThrowSpeed()
     {
         return ballThrowSpeed;

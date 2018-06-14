@@ -13,7 +13,12 @@ using System;
 public class USBSpiroController : SpiroController
 {
 
-    private string portName = "COM13";
+    public USBSpiroController(string port)
+    {
+        portName = port;
+    }
+
+    public string portName = ""; //Controller.instance.getPortName();
     private SerialPort port;
     private Thread myThread;
 
@@ -30,7 +35,7 @@ public class USBSpiroController : SpiroController
     {
         Debug.Log("Connecting USB Controller");
         //SerialPort p = new SerialPort("\\\\.\\COM17", 9600);
-        portName = PlayerPrefs.GetString("portName", "COM13");
+        portName = PlayerPrefs.GetString("portname", portName);
         DisconnectDevice();
         //stop if we are already connected or if the port is unavailable
         if ((port != null && port.IsOpen) || !PortIsAvailable())

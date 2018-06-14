@@ -41,6 +41,11 @@ public class GameMaster : MonoBehaviour
     [SerializeField]
     private DeviceManager.DeviceType deviceType;
     private int currentScore;
+    [SerializeField]
+    [Header("Settings")]
+    private bool SettingsActiveOnStart;
+    [SerializeField]
+    private GameObject panel;
     
 
     public static GameMaster instance;
@@ -60,6 +65,14 @@ public class GameMaster : MonoBehaviour
 
     void Start()
     {
+        if (SettingsActiveOnStart)
+        {
+            panel.SetActive(true);
+        }
+        else
+        {
+            panel.SetActive(false);
+        }
         DeviceManager.Instance.SetDeviceType(deviceType);
         minimumValue = minimumValueStart;
         highestValueReached = 0;
@@ -124,6 +137,14 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+    public void setMinimumValueStart(int value)
+    {
+        if (value > 0)
+        {
+            minimumValueStart = value;
+        }
+    }
+
     public void resetBasket()
     {
         slider.value = 0;
@@ -139,9 +160,17 @@ public class GameMaster : MonoBehaviour
         }
         else
         {
-            basketSpeed = 30 + (10 * currentScore);
+            if (basketSpeed <= 30)
+            {
+                basketSpeed = 30;
+            }
+            basketSpeed += (10 * currentScore);
         }
+    }
 
+    public void setBasketSpeed(int value)
+    {
+        basketSpeed = value;
     }
 
     public void setDifficulty(float value)

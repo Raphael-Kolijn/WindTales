@@ -9,4 +9,10 @@ public class Settings_BB : MonoBehaviour
         panel.SetActive(true);
         GameMaster.instance.getBall().SetActive(false);
     }
+
+    public void CloseSettings()
+    {
+        panel.SetActive(false);
+        GameMaster.instance.getBall().SetActive(true);
+    }
 }

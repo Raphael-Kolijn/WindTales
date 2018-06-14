@@ -10,6 +10,7 @@ public class Basket : MonoBehaviour
     private ParticleSystem coinsystem;
     private bool goRight = true;
     private bool goLeft = false;
+    private bool scored = false;
 
 
     void OnCollisionEnter()
@@ -18,6 +19,7 @@ public class Basket : MonoBehaviour
         coinManager.AddCoins(1);
         coinsystem.Play();
         GetComponent<AudioSource>().Play();
+        scored = true;
     }
 
     void Update()
@@ -38,7 +40,11 @@ public class Basket : MonoBehaviour
 
     public void Reset()
     {
-        GameMaster.instance.setBasketSpeed();
+        if (scored)
+        {
+            GameMaster.instance.setBasketSpeed();
+            scored = false;
+        }
         coinsystem.Stop();
         transform.position = GameMaster.instance.getBasketStartPosition();
         GameMaster.instance.setMinimumValue();

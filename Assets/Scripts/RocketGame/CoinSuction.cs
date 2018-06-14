@@ -7,26 +7,24 @@ public class CoinSuction : MonoBehaviour
     public CoinManager coinManager;
     public GameObject coin;
     public float SuctionSpeed = 0.3f;
-    public AudioClip CoinCollectSound;
+    public AudioManagerRocketGame Audiomanager;
+
 
     FieldOfView fieldOfView;
     float speed = 2f;
 
-    void Start()
-    {
-        GetComponent<AudioSource>().playOnAwake = true;
-        GetComponent<AudioSource>().clip = CoinCollectSound;   
-    }
     void Update()
     {
-        fieldOfView = GetComponent<FieldOfView>();
+        fieldOfView = GetComponentInParent<FieldOfView>();
         if (fieldOfView != null)
         {
             coin = fieldOfView.foundCoin;
+            Debug.Log("foV not null");
         }
         if (coin != null)
         {
             Suction();
+            Debug.Log("Suction should happen");
         }
         else
         {
@@ -41,6 +39,8 @@ public class CoinSuction : MonoBehaviour
             float step = speed * Time.deltaTime;
             coin.transform.position = Vector3.MoveTowards(coin.transform.position, transform.position, step);
             speed = (speed * (1.9f * 1.9f) * (SuctionSpeed)) + 0.1f;
+            Audiomanager.PlayMagnetSound();
+
         }
     }
 
@@ -50,7 +50,7 @@ public class CoinSuction : MonoBehaviour
         {
             speed = 2f;
             coinManager.AddCoin(coin);
-            GetComponent<AudioSource>().Play();
+            Audiomanager.PlayCoinCollect();
         }
     }
 }
